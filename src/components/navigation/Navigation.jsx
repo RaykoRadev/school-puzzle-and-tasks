@@ -1,0 +1,137 @@
+import { useState } from "react";
+import { Link, NavLink } from "react-router";
+
+export default function Navigation() {
+    const [menuOpen, setMenuOpen] = useState(false);
+    // return (
+    //     <header className="sticky inset-0 z-50 bg-transperant backdrop-blur-sm">
+    //         <nav className="mx-auto flex max-w-6xl gap-8 px-6 pb-6 transition-all duration-200 ease-in-out lg:px-12 py-4">
+    //             <div className="relative flex items-center">
+    //                 <Link to="/">
+    //                     <img
+    //                         src="https://www.svgrepo.com/show/499831/target.svg"
+    //                         loading="lazy"
+    //                         style={{ color: "transparent" }}
+    //                         width={32}
+    //                         height={32}
+    //                     />
+    //                 </Link>
+    //             </div>
+    //             <div className="flex-grow" />
+    //             <div className=" items-center justify-center gap-6 md:flex">
+    //                 <NavLink
+    //                     to="/login"
+    //                     className="rounded-md bg-gradient-to-br from-green-600 to-emerald-400 px-3 py-1.5 font-dm text-sm font-medium text-white shadow-md shadow-green-400/50 transition-transform duration-200 ease-in-out hover:scale-[1.03]"
+    //                 >
+    //                     Впиши се ученик
+    //                 </NavLink>
+    //                 <NavLink
+    //                     to="/login"
+    //                     className="rounded-md bg-gradient-to-br from-green-600 to-emerald-400 px-3 py-1.5 font-dm text-sm font-medium text-white shadow-md shadow-green-400/50 transition-transform duration-200 ease-in-out hover:scale-[1.03]"
+    //                 >
+    //                     Впиши се учител
+    //                 </NavLink>
+    //                 {/* <NavLink
+    //                     to="/logout"
+    //                     className="rounded-md bg-gradient-to-br from-green-600 to-emerald-400 px-3 py-1.5 font-dm text-sm font-medium text-white shadow-md shadow-green-400/50 transition-transform duration-200 ease-in-out hover:scale-[1.03]"
+    //                 >
+    //                     Logout
+    //                 </NavLink> */}
+    //             </div>
+    //         </nav>
+    //     </header>
+    // );
+    return (
+        <header className="sticky inset-0 z-50 bg-transparent backdrop-blur-sm">
+            <nav className="mx-auto flex max-w-6xl items-center gap-8 px-6 py-4 lg:px-12">
+                {/* Logo */}
+                <div className="relative flex items-center">
+                    <Link to="/">
+                        <img
+                            src="https://www.svgrepo.com/show/499831/target.svg"
+                            loading="lazy"
+                            width={32}
+                            height={32}
+                            alt="Logo"
+                        />
+                    </Link>
+                </div>
+
+                <div className="flex-grow" />
+
+                {/* Desktop buttons */}
+                <div className="hidden items-center gap-6 md:flex">
+                    <NavLink
+                        to="/login"
+                        className="rounded-md bg-gradient-to-br from-green-600 to-emerald-400 px-3 py-1.5 text-sm font-medium text-white shadow-md transition hover:scale-[1.03]"
+                    >
+                        Впиши се ученик
+                    </NavLink>
+                    <NavLink
+                        to="/admin/login"
+                        className="rounded-md bg-gradient-to-br from-green-600 to-emerald-400 px-3 py-1.5 text-sm font-medium text-white shadow-md transition hover:scale-[1.03]"
+                    >
+                        Впиши се учител
+                    </NavLink>
+                    {/* <NavLink
+    //                     to="/logout"
+    //                     className="rounded-md bg-gradient-to-br from-green-600 to-emerald-400 px-3 py-1.5 font-dm text-sm font-medium text-white shadow-md shadow-green-400/50 transition-transform duration-200 ease-in-out hover:scale-[1.03]"
+    //                 >
+    //                     Logout
+    //                 </NavLink> */}
+                </div>
+
+                {/* Mobile hamburger */}
+                <button
+                    onClick={() => setMenuOpen(!menuOpen)}
+                    className="md:hidden flex items-center justify-center rounded-md p-2 text-gray-700 hover:bg-gray-100"
+                >
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-6 w-6"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                    >
+                        <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d={
+                                menuOpen
+                                    ? "M6 18L18 6M6 6l12 12"
+                                    : "M4 6h16M4 12h16M4 18h16"
+                            }
+                        />
+                    </svg>
+                </button>
+            </nav>
+
+            {/* Mobile dropdown */}
+            {menuOpen && (
+                <div className="md:hidden absolute right-4 top-16 w-48 rounded-xl bg-transperant shadow-lg p-4 space-y-3">
+                    <NavLink
+                        to="/login"
+                        onClick={() => setMenuOpen(false)}
+                        className="block rounded-md bg-gradient-to-br from-green-600 to-emerald-400 px-3 py-2 text-center text-sm font-medium text-white"
+                    >
+                        Впиши се ученик
+                    </NavLink>
+                    <NavLink
+                        to="/login"
+                        onClick={() => setMenuOpen(false)}
+                        className="block rounded-md bg-gradient-to-br from-green-600 to-emerald-400 px-3 py-2 text-center text-sm font-medium text-white"
+                    >
+                        Впиши се учител
+                    </NavLink>
+                    {/* <NavLink
+    //                     to="/logout"
+    //                     className="rounded-md bg-gradient-to-br from-green-600 to-emerald-400 px-3 py-1.5 font-dm text-sm font-medium text-white shadow-md shadow-green-400/50 transition-transform duration-200 ease-in-out hover:scale-[1.03]"
+    //                 >
+    //                     Logout
+    //                 </NavLink> */}
+                </div>
+            )}
+        </header>
+    );
+}
