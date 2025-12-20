@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useResolvedPath } from "react-router";
+import { UserContext } from "../../context/userContext";
 
 const host = import.meta.env.VITE_API_URL;
 
@@ -7,6 +8,7 @@ export default function Login() {
     const [userData, setuserData] = useState({});
     const pathname = useResolvedPath().pathname.split("/");
     const [role, setRole] = useState(pathname[1]);
+    const { setLocalStorageData } = useContext(UserContext);
 
     console.log(pathname[1]);
 
@@ -25,6 +27,7 @@ export default function Login() {
             .then((res) => res.json())
             .then((resData) => {
                 setuserData(resData);
+                setLocalStorageData(resData);
                 console.log(resData);
                 return resData;
             });
