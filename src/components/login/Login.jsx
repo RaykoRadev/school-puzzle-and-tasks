@@ -1,15 +1,14 @@
-import { useEffect, useState } from "react";
-import { useLocation, useResolvedPath } from "react-router";
-import { useParams } from "react-router";
+import { useState } from "react";
+import { useResolvedPath } from "react-router";
 
 const host = import.meta.env.VITE_API_URL;
 
 export default function Login() {
     const [userData, setuserData] = useState({});
-    const [role, setRole] = useState("/student");
-    const pathname = useResolvedPath().pathname;
+    const pathname = useResolvedPath().pathname.split("/");
+    const [role, setRole] = useState(pathname[1]);
 
-    console.log(host + role + "/register");
+    console.log(pathname[1]);
 
     const loginSubmitHandler = (formData) => {
         if (pathname.includes("/admin")) {
@@ -18,7 +17,7 @@ export default function Login() {
         const username = formData.get("username");
         const code = formData.get("code");
 
-        fetch(host + role + "/register", {
+        fetch(host + "/" + role + "/login", {
             method: "POST",
             headers: { "content-type": "application/json" },
             body: JSON.stringify({ username, code }),
