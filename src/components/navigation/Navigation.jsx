@@ -38,7 +38,7 @@ export default function Navigation() {
                 <div className="hidden items-center gap-6 md:flex">
                     {!username && (
                         <NavLink
-                            to="/students/login"
+                            to="/student/login"
                             className="rounded-md bg-gradient-to-br from-green-600 to-emerald-400 px-3 py-1.5 text-sm font-medium text-white shadow-md transition hover:scale-[1.03]"
                         >
                             Впиши се ученик

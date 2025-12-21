@@ -18,7 +18,7 @@ export default function Login() {
         if (pathname.includes("admin")) {
             role = "admin";
         } else {
-            role = "students";
+            role = "student";
         }
         const username = formData.get("username");
         const code = formData.get("code");
