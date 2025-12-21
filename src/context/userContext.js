@@ -4,6 +4,7 @@ export const UserContext = createContext({
     username: "",
     accessToken: "",
     _id: "",
+    role: "",
     setLocalStorageData(data) {},
     removeLocalStorageData() {},
 });
