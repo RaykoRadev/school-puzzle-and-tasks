@@ -1,46 +1,21 @@
-import { useState } from "react";
-import { Link, NavLink } from "react-router";
+import { useContext, useState } from "react";
+import { Link, NavLink, useNavigate } from "react-router";
+import { UserContext } from "../../context/userContext";
+import useRequest from "../../hooks/useRequester";
+import { endPoints, host } from "../../config/constants";
 
 export default function Navigation() {
+    const { role, username, removeLocalStorageData } = useContext(UserContext);
     const [menuOpen, setMenuOpen] = useState(false);
-    // return (
-    //     <header className="sticky inset-0 z-50 bg-transperant backdrop-blur-sm">
-    //         <nav className="mx-auto flex max-w-6xl gap-8 px-6 pb-6 transition-all duration-200 ease-in-out lg:px-12 py-4">
-    //             <div className="relative flex items-center">
-    //                 <Link to="/">
-    //                     <img
-    //                         src="https://www.svgrepo.com/show/499831/target.svg"
-    //                         loading="lazy"
-    //                         style={{ color: "transparent" }}
-    //                         width={32}
-    //                         height={32}
-    //                     />
-    //                 </Link>
-    //             </div>
-    //             <div className="flex-grow" />
-    //             <div className=" items-center justify-center gap-6 md:flex">
-    //                 <NavLink
-    //                     to="/login"
-    //                     className="rounded-md bg-gradient-to-br from-green-600 to-emerald-400 px-3 py-1.5 font-dm text-sm font-medium text-white shadow-md shadow-green-400/50 transition-transform duration-200 ease-in-out hover:scale-[1.03]"
-    //                 >
-    //                     Впиши се ученик
-    //                 </NavLink>
-    //                 <NavLink
-    //                     to="/login"
-    //                     className="rounded-md bg-gradient-to-br from-green-600 to-emerald-400 px-3 py-1.5 font-dm text-sm font-medium text-white shadow-md shadow-green-400/50 transition-transform duration-200 ease-in-out hover:scale-[1.03]"
-    //                 >
-    //                     Впиши се учител
-    //                 </NavLink>
-    //                 {/* <NavLink
-    //                     to="/logout"
-    //                     className="rounded-md bg-gradient-to-br from-green-600 to-emerald-400 px-3 py-1.5 font-dm text-sm font-medium text-white shadow-md shadow-green-400/50 transition-transform duration-200 ease-in-out hover:scale-[1.03]"
-    //                 >
-    //                     Logout
-    //                 </NavLink> */}
-    //             </div>
-    //         </nav>
-    //     </header>
-    // );
+    const { request } = useRequest();
+    const navigate = useNavigate();
+
+    const logoutHandler = async () => {
+        await request(host + "/" + role + endPoints.logout);
+        removeLocalStorageData();
+        navigate("/");
+    };
+
     return (
         <header className="sticky inset-0 z-50 bg-transparent backdrop-blur-sm">
             <nav className="mx-auto flex max-w-6xl items-center gap-8 px-6 py-4 lg:px-12">
@@ -61,24 +36,39 @@ export default function Navigation() {
 
                 {/* Desktop buttons */}
                 <div className="hidden items-center gap-6 md:flex">
-                    <NavLink
-                        to="/login"
-                        className="rounded-md bg-gradient-to-br from-green-600 to-emerald-400 px-3 py-1.5 text-sm font-medium text-white shadow-md transition hover:scale-[1.03]"
-                    >
-                        Впиши се ученик
-                    </NavLink>
-                    <NavLink
-                        to="/admin/login"
-                        className="rounded-md bg-gradient-to-br from-green-600 to-emerald-400 px-3 py-1.5 text-sm font-medium text-white shadow-md transition hover:scale-[1.03]"
-                    >
-                        Впиши се учител
-                    </NavLink>
-                    {/* <NavLink
-    //                     to="/logout"
-    //                     className="rounded-md bg-gradient-to-br from-green-600 to-emerald-400 px-3 py-1.5 font-dm text-sm font-medium text-white shadow-md shadow-green-400/50 transition-transform duration-200 ease-in-out hover:scale-[1.03]"
-    //                 >
-    //                     Logout
-    //                 </NavLink> */}
+                    {!username && (
+                        <NavLink
+                            to="/students/login"
+                            className="rounded-md bg-gradient-to-br from-green-600 to-emerald-400 px-3 py-1.5 text-sm font-medium text-white shadow-md transition hover:scale-[1.03]"
+                        >
+                            Впиши се ученик
+                        </NavLink>
+                    )}
+                    {!username && (
+                        <NavLink
+                            to="/admin/login"
+                            className="rounded-md bg-gradient-to-br from-green-600 to-emerald-400 px-3 py-1.5 text-sm font-medium text-white shadow-md transition hover:scale-[1.03]"
+                        >
+                            Впиши се учител
+                        </NavLink>
+                    )}
+                    {role === "admin" && (
+                        <NavLink
+                            to="/admin/profile"
+                            className="rounded-md bg-gradient-to-br from-green-600 to-emerald-400 px-3 py-1.5 font-dm text-sm font-medium text-white shadow-md shadow-green-400/50 transition-transform duration-200 ease-in-out hover:scale-[1.03]"
+                        >
+                            Profile
+                        </NavLink>
+                    )}
+                    {username && (
+                        <NavLink
+                            to="/logout"
+                            onClick={logoutHandler}
+                            className="rounded-md bg-gradient-to-br from-green-600 to-emerald-400 px-3 py-1.5 font-dm text-sm font-medium text-white shadow-md shadow-green-400/50 transition-transform duration-200 ease-in-out hover:scale-[1.03]"
+                        >
+                            Logout
+                        </NavLink>
+                    )}
                 </div>
 
                 {/* Mobile hamburger */}
@@ -109,33 +99,44 @@ export default function Navigation() {
 
             {/* Mobile dropdown */}
             {menuOpen && (
-                <div className="md:hidden absolute right-4 top-16 w-48 rounded-xl bg-transperant shadow-lg p-4 space-y-3">
-                    <NavLink
-                        to="/login"
-                        onClick={() => setMenuOpen(false)}
-                        className="block rounded-md bg-gradient-to-br from-green-600 to-emerald-400 px-3 py-2 text-center text-sm font-medium text-white"
-                    >
-                        Впиши се ученик
-                    </NavLink>
-                    <NavLink
-                        to="/login"
-                        onClick={() => setMenuOpen(false)}
-                        className="block rounded-md bg-gradient-to-br from-green-600 to-emerald-400 px-3 py-2 text-center text-sm font-medium text-white"
-                    >
-                        Впиши се учител
-                    </NavLink>
-                    {/* <NavLink
-    //                     to="/profile"
-    //                     className="rounded-md bg-gradient-to-br from-green-600 to-emerald-400 px-3 py-1.5 font-dm text-sm font-medium text-white shadow-md shadow-green-400/50 transition-transform duration-200 ease-in-out hover:scale-[1.03]"
-    //                 >
-    //                     Profile
-    //                 </NavLink> */}
-                    {/* <NavLink
-    //                     to="/logout"
-    //                     className="rounded-md bg-gradient-to-br from-green-600 to-emerald-400 px-3 py-1.5 font-dm text-sm font-medium text-white shadow-md shadow-green-400/50 transition-transform duration-200 ease-in-out hover:scale-[1.03]"
-    //                 >
-    //                     Logout
-    //                 </NavLink> */}
+                <div className="md:hidden absolute right-4 top-16 w-min-25 rounded-xl bg-transperant shadow-lg p-4 space-y-3">
+                    {!username && (
+                        <NavLink
+                            to="/student/login"
+                            onClick={() => setMenuOpen(false)}
+                            className="block rounded-md bg-gradient-to-br from-green-600 to-emerald-400 px-3 py-2 text-center text-sm font-medium text-white"
+                        >
+                            Впиши се ученик
+                        </NavLink>
+                    )}
+                    {!username && (
+                        <NavLink
+                            to="/admin/login"
+                            onClick={() => setMenuOpen(false)}
+                            className="block rounded-md bg-gradient-to-br from-green-600 to-emerald-400 px-3 py-2 text-center text-sm font-medium text-white"
+                        >
+                            Впиши се учител
+                        </NavLink>
+                    )}
+                    {role === "admin" ? (
+                        <NavLink
+                            to="/admin/profile"
+                            className="block rounded-md bg-gradient-to-br from-green-600 to-emerald-400 px-3 py-2 text-center text-sm font-medium text-white"
+                        >
+                            Profile
+                        </NavLink>
+                    ) : (
+                        ""
+                    )}
+                    {username && (
+                        <NavLink
+                            to="/logout"
+                            onClick={logoutHandler}
+                            className="block rounded-md bg-gradient-to-br from-green-600 to-emerald-400 px-3 py-2 text-center text-sm font-medium text-white"
+                        >
+                            Logout
+                        </NavLink>
+                    )}
                 </div>
             )}
         </header>
