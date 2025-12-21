@@ -1,36 +1,37 @@
 import { useContext, useState } from "react";
 import { useResolvedPath } from "react-router";
 import { UserContext } from "../../context/userContext";
+import useRequest from "../../hooks/useRequester";
 
 const host = import.meta.env.VITE_API_URL;
 
 export default function Login() {
     const [userData, setuserData] = useState({});
     const pathname = useResolvedPath().pathname.split("/");
-    const [role, setRole] = useState(pathname[1]);
     const { setLocalStorageData } = useContext(UserContext);
+    const { request } = useRequest();
 
+    let role = "";
     console.log(pathname[1]);
 
-    const loginSubmitHandler = (formData) => {
-        if (pathname.includes("/admin")) {
-            setRole("/admin");
+    const loginSubmitHandler = async (formData) => {
+        if (pathname.includes("admin")) {
+            role = "admin";
+        } else {
+            role = "students";
         }
         const username = formData.get("username");
         const code = formData.get("code");
 
-        fetch(host + "/" + role + "/login", {
-            method: "POST",
-            headers: { "content-type": "application/json" },
-            body: JSON.stringify({ username, code }),
-        })
-            .then((res) => res.json())
-            .then((resData) => {
-                setuserData(resData);
-                setLocalStorageData(resData);
-                console.log(resData);
-                return resData;
-            });
+        const result = await request(
+            host + "/" + role + "/login",
+            "POST",
+            { username, code },
+            role
+        );
+
+        setLocalStorageData(result);
+        setuserData(result);
     };
 
     return (
