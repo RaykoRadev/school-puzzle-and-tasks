@@ -46,15 +46,15 @@ export default function Navigation() {
                     )}
                     {!username && (
                         <NavLink
-                            to="/admin/login"
+                            to="/teacher/login"
                             className="rounded-md bg-gradient-to-br from-green-600 to-emerald-400 px-3 py-1.5 text-sm font-medium text-white shadow-md transition hover:scale-[1.03]"
                         >
                             Впиши се учител
                         </NavLink>
                     )}
-                    {role === "admin" && (
+                    {role === "teacher" && (
                         <NavLink
-                            to="/admin/profile"
+                            to="/teacher/profile"
                             className="rounded-md bg-gradient-to-br from-green-600 to-emerald-400 px-3 py-1.5 font-dm text-sm font-medium text-white shadow-md shadow-green-400/50 transition-transform duration-200 ease-in-out hover:scale-[1.03]"
                         >
                             Profile
@@ -111,16 +111,16 @@ export default function Navigation() {
                     )}
                     {!username && (
                         <NavLink
-                            to="/admin/login"
+                            to="/teacher/login"
                             onClick={() => setMenuOpen(false)}
                             className="block rounded-md bg-gradient-to-br from-green-600 to-emerald-400 px-3 py-2 text-center text-sm font-medium text-white"
                         >
                             Впиши се учител
                         </NavLink>
                     )}
-                    {role === "admin" ? (
+                    {role === "teacher" ? (
                         <NavLink
-                            to="/admin/profile"
+                            to="/teacher/profile"
                             className="block rounded-md bg-gradient-to-br from-green-600 to-emerald-400 px-3 py-2 text-center text-sm font-medium text-white"
                         >
                             Profile

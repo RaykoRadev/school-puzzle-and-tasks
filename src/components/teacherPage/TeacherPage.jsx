@@ -1,4 +1,9 @@
-export default function AdminPage() {
+import { useContext } from "react";
+import { Link } from "react-router";
+import { UserContext } from "../../context/userContext";
+
+export default function TeacherPage() {
+    const { username } = useContext(UserContext);
     return (
         <div className="flex min-h-screen bg-gray-100">
             {/* Sidebar */}
@@ -7,30 +12,30 @@ export default function AdminPage() {
                     AdminPanel
                 </div>
                 <nav className="mt-8">
-                    <a
-                        href="#"
+                    <Link
+                        to="#"
                         className="block py-3 px-6 text-gray-700 hover:bg-purple-100"
                     >
                         Dashboard
-                    </a>
-                    <a
-                        href="#"
+                    </Link>
+                    <Link
+                        to="#"
                         className="block py-3 px-6 text-gray-700 hover:bg-purple-100"
                     >
                         Users
-                    </a>
-                    <a
-                        href="#"
+                    </Link>
+                    <Link
+                        to="#"
                         className="block py-3 px-6 text-gray-700 hover:bg-purple-100"
                     >
                         Analytics
-                    </a>
-                    <a
-                        href="#"
+                    </Link>
+                    <Link
+                        to="#"
                         className="block py-3 px-6 text-gray-700 hover:bg-purple-100"
                     >
                         Settings
-                    </a>
+                    </Link>
                 </nav>
             </aside>
             {/* Main Content */}
@@ -46,14 +51,14 @@ export default function AdminPage() {
                             placeholder="Search..."
                             className="px-4 py-2 border rounded-lg"
                         />
-                        <div className="w-10 h-10 rounded-full bg-purple-500 flex items-center justify-center text-white font-bold">
-                            SR
+                        <div className="w-10 h-10 flex items-center justify-center font-bold">
+                            {username}
                         </div>
                     </div>
                 </header>
                 {/* Content */}
                 <main className="p-6 space-y-6">
-                    <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+                    {/* <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
                         <div className="bg-white p-6 rounded-lg shadow-md">
                             <p className="text-sm text-gray-500">Total Users</p>
                             <h2 className="text-3xl font-bold text-purple-700 mt-2">
@@ -80,7 +85,9 @@ export default function AdminPage() {
                                 12
                             </h2>
                         </div>
-                    </div>
+                    </div> */}
+                    {/* 
+                    list of last online students */}
                     <div className="bg-white rounded-lg shadow-md">
                         <div className="p-4 border-b font-bold text-purple-700">
                             User List
@@ -114,35 +121,37 @@ export default function AdminPage() {
                             </tbody>
                         </table>
                     </div>
+
+                    {/* links board  control*/}
+                    <div className="p-4 border-b font-bold text-purple-700">
+                        Controll links
+                    </div>
                     <div className="bg-white p-6 rounded-lg shadow-md grid grid-cols-2 md:grid-cols-4 gap-4">
-                        <button className="bg-purple-600 text-white py-3 rounded-lg shadow hover:bg-purple-700">
-                            Add User
+                        <button className="bg-green-600 text-white py-3 rounded-lg shadow hover:bg-purple-700">
+                            Add Link
                         </button>
                         <button className="bg-blue-600 text-white py-3 rounded-lg shadow hover:bg-blue-700">
-                            Export Data
-                        </button>
-                        <button className="bg-green-600 text-white py-3 rounded-lg shadow hover:bg-green-700">
-                            Generate Report
+                            Edit link
                         </button>
                         <button className="bg-red-600 text-white py-3 rounded-lg shadow hover:bg-red-700">
-                            Delete Records
+                            Delete Link
                         </button>
                     </div>
-                    <div className="bg-white p-6 rounded-lg shadow-md flex items-center gap-6">
-                        <img
-                            src="https://i.pravatar.cc/100"
-                            alt="Profile"
-                            className="w-20 h-20 rounded-full shadow"
-                        />
-                        <div>
-                            <h3 className="text-xl font-bold text-purple-700">
-                                Sophia Ray
-                            </h3>
-                            <p className="text-gray-500">Administrator</p>
-                            <button className="mt-2 bg-purple-600 text-white px-4 py-2 rounded-lg shadow hover:bg-purple-700">
-                                Edit Profile
-                            </button>
-                        </div>
+
+                    {/* student board control */}
+                    <div className="p-4 border-b font-bold text-purple-700">
+                        Controll students
+                    </div>
+                    <div className="bg-white p-6 rounded-lg shadow-md grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <button className="bg-green-600 text-white py-3 rounded-lg shadow hover:bg-purple-700">
+                            Add Student
+                        </button>
+                        <button className="bg-blue-600 text-white py-3 rounded-lg shadow hover:bg-blue-700">
+                            Edit Student
+                        </button>
+                        <button className="bg-red-600 text-white py-3 rounded-lg shadow hover:bg-red-700">
+                            Delete Student
+                        </button>
                     </div>
                     <footer className="bg-white p-4 mt-10 text-center text-sm text-gray-400 border-t">
                         © 2025 AdminPanel. All rights reserved.

@@ -15,8 +15,8 @@ export default function Login() {
     console.log(pathname[1]);
 
     const loginSubmitHandler = async (formData) => {
-        if (pathname.includes("admin")) {
-            role = "admin";
+        if (pathname.includes("teacher")) {
+            role = "teacher";
         } else {
             role = "student";
         }
