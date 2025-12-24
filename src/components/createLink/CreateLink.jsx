@@ -6,8 +6,8 @@ import { endPoints, host } from "../../config/constants";
 //! abort controller probably dosnt work ???????????????????????????????
 
 const initValues = {
-    username: "",
-    code: "",
+    text: "",
+    link: "",
     class: "Choose class",
     subject: "Choose a subject",
 };
@@ -16,21 +16,34 @@ export default function CreateLink() {
     const { _id, accessToken } = useContext(UserContext);
     const [value, setValues] = useState(initValues);
 
-    // todo the requst is working in the responce tab in the broser has asked data, but in the console shows empty array
-    const { data } = useRequest(host + endPoints.getAllDAta, []);
+    const { data, request } = useRequest(host + endPoints.getAllDAta, []);
 
     const changeHandler = (e) => {
         setValues((state) => ({
             ...state,
             [e.target.name]: e.target.value,
         }));
-        console.log(e.target.value);
     };
 
-    const classSubjects = data.filter((el) => el.name === value.class);
+    const classSubjects = data.filter((el) => el.name === value.class)[0];
     console.log(accessToken);
     console.log(classSubjects);
-    console.log("data: ", data);
+
+    const submitHandler = async (formData) => {
+        const text = formData.get("text");
+        const link = formData.get("link");
+        const className = formData.get("class");
+        const subject = formData.get("subject");
+        const sentData = await request(host + endPoints.createLink, "POST", {
+            text,
+            link,
+            class: className,
+            subject,
+            _id,
+            classId: classSubjects.classId,
+        });
+        console.log("response: ", sentData);
+    };
 
     return (
         <>
@@ -39,13 +52,13 @@ export default function CreateLink() {
                     <h2 className="text-2xl font-bold text-gray-200 mb-4">
                         Create Link
                     </h2>
-                    <form className="flex flex-col">
+                    <form action={submitHandler} className="flex flex-col">
                         <input
-                            placeholder="Username"
+                            placeholder="Text"
                             className="bg-gray-700 text-gray-200 border-0 rounded-md p-2 mb-4 focus:bg-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
                             type="text"
-                            name="username"
-                            value={value.username}
+                            name="text"
+                            value={value.text}
                             onChange={changeHandler}
                         />
 
@@ -53,7 +66,7 @@ export default function CreateLink() {
                             placeholder="Link"
                             className="bg-gray-700 text-gray-200 border-0 rounded-md p-2 mb-4 focus:bg-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
                             type="text"
-                            name="Link"
+                            name="link"
                             value={value.link}
                             onChange={changeHandler}
                         />
@@ -77,14 +90,15 @@ export default function CreateLink() {
                             id="gender"
                             name="subject"
                             onChange={changeHandler}
+                            disabled={!value.class}
                         >
-                            {/*todo  first to make controlled form and after selecting class to sort only the subjects included in that class */}
-                            {classSubjects.length === 0 ? (
+                            {/*todo   change the visualization from sub.name to sub.visualisation name */}
+                            {!classSubjects ? (
                                 <option value="">Choose a Class</option>
                             ) : (
-                                classSubjects[0].subjects.map((sub) => (
+                                classSubjects.subjects.map((sub) => (
                                     <option value={sub.name} key={sub._id}>
-                                        {sub.name}
+                                        {sub.visualizationName}
                                     </option>
                                 ))
                             )}

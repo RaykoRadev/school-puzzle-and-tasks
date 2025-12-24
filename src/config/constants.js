@@ -4,4 +4,5 @@ export const endPoints = {
     login: "/login",
     logout: "/logout",
     getAllDAta: "/links/getAllClasses",
+    createLink: "/links/createLink",
 };
