@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { UserContext } from "../../context/userContext";
 import useRequest from "../../hooks/useRequester";
 import { endPoints, host } from "../../config/constants";
+import { useNavigate } from "react-router";
 
 //! abort controller probably dosnt work ???????????????????????????????
 
@@ -15,6 +16,7 @@ const initValues = {
 export default function CreateLink() {
     const { _id, accessToken } = useContext(UserContext);
     const [value, setValues] = useState(initValues);
+    const navigate = useNavigate();
 
     const { data, request } = useRequest(host + endPoints.getAllDAta, []);
 
@@ -25,24 +27,26 @@ export default function CreateLink() {
         }));
     };
 
-    const classSubjects = data.filter((el) => el.name === value.class)[0];
-    console.log(accessToken);
-    console.log(classSubjects);
+    const selectedClassSubject = data.filter(
+        (el) => el.name === value.class
+    )[0];
+    // console.log(accessToken);
 
     const submitHandler = async (formData) => {
         const text = formData.get("text");
         const link = formData.get("link");
         const className = formData.get("class");
         const subject = formData.get("subject");
-        const sentData = await request(host + endPoints.createLink, "POST", {
+        await request(host + endPoints.createLink, "POST", {
             text,
             link,
             class: className,
             subject,
             _id,
-            classId: classSubjects.classId,
+            classId: selectedClassSubject.classId,
         });
-        console.log("response: ", sentData);
+
+        navigate("/teacher/profile");
     };
 
     return (
@@ -92,11 +96,10 @@ export default function CreateLink() {
                             onChange={changeHandler}
                             disabled={!value.class}
                         >
-                            {/*todo   change the visualization from sub.name to sub.visualisation name */}
-                            {!classSubjects ? (
+                            {!selectedClassSubject ? (
                                 <option value="">Choose a Class</option>
                             ) : (
-                                classSubjects.subjects.map((sub) => (
+                                selectedClassSubject.subjects.map((sub) => (
                                     <option value={sub.name} key={sub._id}>
                                         {sub.visualizationName}
                                     </option>
@@ -104,11 +107,8 @@ export default function CreateLink() {
                             )}
                         </select>
 
-                        <button
-                            className="bg-gradient-to-r from-indigo-500 to-blue-500 text-white font-bold py-2 px-4 rounded-md mt-4 hover:bg-indigo-600 hover:to-blue-600 transition ease-in-out duration-150"
-                            // type="submit"
-                        >
-                            Login
+                        <button className="bg-gradient-to-r from-indigo-500 to-blue-500 text-white font-bold py-2 px-4 rounded-md mt-4 hover:bg-indigo-600 hover:to-blue-600 transition ease-in-out duration-150">
+                            Create Link
                         </button>
                     </form>
                 </div>
