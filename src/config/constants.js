@@ -5,4 +5,5 @@ export const endPoints = {
     logout: "/logout",
     getAllDAta: "/links/getAllClasses",
     createLink: "/links/createLink",
+    registerStudent: "/student/register",
 };

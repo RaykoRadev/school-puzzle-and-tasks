@@ -121,7 +121,6 @@ export default function TeacherPage() {
                             </tbody>
                         </table>
                     </div>
-
                     {/* links board  control*/}
                     <div className="p-4 border-b font-bold text-purple-700">
                         Controll links
@@ -146,21 +145,29 @@ export default function TeacherPage() {
                             Delete Link
                         </Link>
                     </div>
-
                     {/* student board control */}
                     <div className="p-4 border-b font-bold text-purple-700">
                         Controll students
                     </div>
-                    <div className="bg-white p-6 rounded-lg shadow-md grid grid-cols-2 md:grid-cols-4 gap-4">
-                        <button className="bg-green-600 text-white py-3 rounded-lg shadow hover:bg-purple-700">
-                            Add Student
-                        </button>
-                        <button className="bg-blue-600 text-white py-3 rounded-lg shadow hover:bg-blue-700">
-                            Edit Student
-                        </button>
-                        <button className="bg-red-600 text-white py-3 rounded-lg shadow hover:bg-red-700">
-                            Delete Student
-                        </button>
+                    <div className="bg-white p-6 rounded-lg shadow-md grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+                        <Link
+                            to="/teacher/create-student"
+                            className="bg-green-600 text-white py-3 rounded-lg shadow hover:bg-purple-700"
+                        >
+                            Add student
+                        </Link>
+                        <Link
+                            to=""
+                            className="bg-blue-600 text-white py-3 rounded-lg shadow hover:bg-blue-700 text-center"
+                        >
+                            Edit student
+                        </Link>
+                        <Link
+                            to=""
+                            className="bg-red-600 text-white py-3 rounded-lg shadow hover:bg-red-700 text-center"
+                        >
+                            Delete student
+                        </Link>
                     </div>
                     <footer className="bg-white p-4 mt-10 text-center text-sm text-gray-400 border-t">
                         © 2025 AdminPanel. All rights reserved.

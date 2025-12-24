@@ -5,6 +5,7 @@ import Home from "./components/home/Home";
 import TeacherPage from "./components/teacherPage/TeacherPage";
 import UserProvider from "./provider/UserProvider";
 import CreateLink from "./components/createLink/CreateLink";
+import CreateStudent from "./components/createStudent/CreateStudent";
 
 function App() {
     return (
@@ -17,6 +18,10 @@ function App() {
                 <Route path="/teacher/login" element={<Login />} />
                 <Route path="/teacher/profile" element={<TeacherPage />} />
                 <Route path="/teacher/create-link" element={<CreateLink />} />
+                <Route
+                    path="/teacher/create-student"
+                    element={<CreateStudent />}
+                />
             </Routes>
         </UserProvider>
     );
