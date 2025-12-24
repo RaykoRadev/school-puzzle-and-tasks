@@ -69,7 +69,7 @@ export default function useRequest(url, initState) {
         controllerRef.current = abortController;
         setLoading(true);
         request(url, "GET", null, "", abortController)
-            .then((res) => res.json())
+            .then((res) => setResult(res))
             .catch((err) => {
                 if (err?.name !== "AbortError") {
                     // showToast(err.message);
