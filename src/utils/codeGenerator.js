@@ -4,7 +4,6 @@ export const generateCode = (passwordLength) => {
 
     //todo to set up more presize after consultation
 
-    charset += "!@#$%^&*()";
     charset += "0123456789";
     charset += "abcdefghijklmnopqrstuvwxyz";
     charset += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
