@@ -72,7 +72,7 @@ export default function useRequest(url, initState) {
             .then((res) => res.json())
             .catch((err) => {
                 if (err?.name !== "AbortError") {
-                    showToast(err.message);
+                    // showToast(err.message);
                 }
             })
             .finally(() => {

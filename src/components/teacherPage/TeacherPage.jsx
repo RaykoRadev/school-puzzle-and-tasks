@@ -126,16 +126,25 @@ export default function TeacherPage() {
                     <div className="p-4 border-b font-bold text-purple-700">
                         Controll links
                     </div>
-                    <div className="bg-white p-6 rounded-lg shadow-md grid grid-cols-2 md:grid-cols-4 gap-4">
-                        <button className="bg-green-600 text-white py-3 rounded-lg shadow hover:bg-purple-700">
+                    <div className="bg-white p-6 rounded-lg shadow-md grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+                        <Link
+                            to="/teacher/create-link"
+                            className="bg-green-600 text-white py-3 rounded-lg shadow hover:bg-purple-700"
+                        >
                             Add Link
-                        </button>
-                        <button className="bg-blue-600 text-white py-3 rounded-lg shadow hover:bg-blue-700">
+                        </Link>
+                        <Link
+                            to=""
+                            className="bg-blue-600 text-white py-3 rounded-lg shadow hover:bg-blue-700 text-center"
+                        >
                             Edit link
-                        </button>
-                        <button className="bg-red-600 text-white py-3 rounded-lg shadow hover:bg-red-700">
+                        </Link>
+                        <Link
+                            to=""
+                            className="bg-red-600 text-white py-3 rounded-lg shadow hover:bg-red-700 text-center"
+                        >
                             Delete Link
-                        </button>
+                        </Link>
                     </div>
 
                     {/* student board control */}
