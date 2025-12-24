@@ -30,7 +30,7 @@ export default function CreateLink() {
     const selectedClassSubject = data.filter(
         (el) => el.name === value.class
     )[0];
-    // console.log(accessToken);
+    console.log(accessToken);
 
     const submitHandler = async (formData) => {
         const text = formData.get("text");
@@ -40,7 +40,7 @@ export default function CreateLink() {
         await request(host + endPoints.createLink, "POST", {
             text,
             link,
-            class: className,
+            // class: className,  // shouldnt be needed
             subject,
             _id,
             classId: selectedClassSubject.classId,

@@ -51,7 +51,7 @@ export default function CreateStudent() {
 
         console.log(code);
         setResult(true);
-        // navigate("/teacher/profile");
+        setValues(initValues);
     };
 
     return (
@@ -98,12 +98,12 @@ export default function CreateStudent() {
                             </h2>
                             <div className="mt-4">
                                 <label className="text-white" htmlFor="title">
-                                    {`Name: ${student.username}`}
+                                    {`Name: ${student?.username}`}
                                 </label>
                             </div>
                             <div className="mt-4 flex flex-row space-x-2">
                                 <label className="text-white" htmlFor="themes">
-                                    {`Code: ${student.code}`}
+                                    {`Code: ${student?.code}`}
                                 </label>
                             </div>
                         </>
