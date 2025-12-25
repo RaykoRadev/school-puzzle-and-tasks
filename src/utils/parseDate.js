@@ -1,12 +1,23 @@
-export default function parseDate(initDate) {
-    // Extract components in UTC (use getHours/getMinutes for local time)
-    const hours = String(initDate.getUTCHours()).padStart(2, "0");
-    const minutes = String(initDate.getUTCMinutes()).padStart(2, "0");
-    const day = String(initDate.getUTCDate()).padStart(2, "0");
-    const month = String(initDate.getUTCMonth() + 1).padStart(2, "0"); // Months are 0-based
-    const year = initDate.getUTCFullYear();
+export default function parseDate(initDates) {
+    let workingArr = initDates;
+    if (workingArr.length === 0) {
+        return ["There is no logs"];
+    } else if (workingArr.length > 10) {
+        workingArr = workingArr.slice(0, 10);
+    }
+    return workingArr.map((s) => {
+        const date = new Date(s.loginAt);
 
-    // Format as "HH:MM DD-MM-YYYY"
-    const formatted = `${hours}:${minutes} ${day}-${month}-${year}`;
-    return formatted;
+        if (isNaN(date.getTime())) {
+            return "There is no logs";
+        }
+
+        const hours = String(date.getUTCHours()).padStart(2, "0");
+        const minutes = String(date.getUTCMinutes()).padStart(2, "0");
+        const day = String(date.getUTCDate()).padStart(2, "0");
+        const month = String(date.getUTCMonth() + 1).padStart(2, "0");
+        const year = date.getUTCFullYear();
+
+        return `${hours}:${minutes} ${day}-${month}-${year}`;
+    });
 }

@@ -9,23 +9,24 @@ export default function StudentRow({
     sessions,
     createdAt,
     expireAt,
+    openModal,
+    closeModal,
 }) {
-    const lastLoginAt = sessions?.[sessions.length - 1]?.loginAt;
+    const parsedDate = parseDate(sessions);
 
-    let parsedDate = "There is no logs";
-
-    if (lastLoginAt) {
-        const date = new Date(lastLoginAt);
-
-        if (!isNaN(date.getTime())) {
-            parsedDate = parseDate(date);
-        }
-    }
+    const modalHandler = () => {};
     return (
         <tr className="border-t">
             <td className="p-4">{username}</td>
             <td className="p-4">{code}</td>
-            <td className="p-4">{parsedDate}</td>
+            <td
+                className="p-4"
+                onClick={() => {
+                    openModal({ sessions: parsedDate });
+                }}
+            >
+                {parsedDate[0]}
+            </td>
             <td className="p-4">{createdAt}</td>
             <td className="p-4">{expireAt}</td>
         </tr>
