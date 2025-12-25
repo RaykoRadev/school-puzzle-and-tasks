@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { useResolvedPath } from "react-router";
+import { useNavigate, useResolvedPath } from "react-router";
 import { UserContext } from "../../context/userContext";
 import useRequest from "../../hooks/useRequester";
 
@@ -10,6 +10,7 @@ export default function Login() {
     const pathname = useResolvedPath().pathname.split("/");
     const { setLocalStorageData } = useContext(UserContext);
     const { request } = useRequest();
+    const navigate = useNavigate();
 
     let role = "";
     console.log(pathname[1]);
@@ -32,6 +33,11 @@ export default function Login() {
 
         setLocalStorageData(result);
         setuserData(result);
+        if (role === "teacher") {
+            navigate("/");
+        } else {
+            // navigate(`/tasks/${result.classId}`)
+        }
     };
 
     return (
