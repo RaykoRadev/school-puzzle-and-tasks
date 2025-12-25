@@ -27,6 +27,14 @@ export default function StudentRow({
             >
                 {parsedDate[0]}
             </td>
+            <td
+                className="p-4"
+                onClick={() => {
+                    openModal({ sessions: parsedDate }); //todo to be replaced with the object that hold the subjects and their visit
+                }}
+            >
+                Click me
+            </td>
             <td className="p-4">{createdAt}</td>
             <td className="p-4">{expireAt}</td>
         </tr>

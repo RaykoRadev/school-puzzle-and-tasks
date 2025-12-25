@@ -5,7 +5,8 @@ export default function LogsModal({ data, onClose }) {
                 <button onClick={onClose} className="absolute top-2 right-2">
                     ✕
                 </button>
-
+                //todo find a way to use it with an Object; maybe with a
+                ternaren operator????
                 <ul className="space-y-2">
                     {data?.sessions.map((date, index) => (
                         <li key={index} className="p-2 bg-gray-100 rounded">

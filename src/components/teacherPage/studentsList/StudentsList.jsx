@@ -28,6 +28,7 @@ export default function StudentsList() {
                         <th className="p-4">Name</th>
                         <th className="p-4">Code</th>
                         <th className="p-4">Last login</th>
+                        <th className="p-4">visited subjects</th>
                         <th className="p-4">Created at:</th>
                         <th className="p-4">Expired at:</th>
                     </tr>
