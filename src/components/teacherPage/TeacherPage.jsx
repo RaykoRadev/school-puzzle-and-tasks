@@ -1,9 +1,22 @@
-import { useContext } from "react";
-import { Link, Outlet } from "react-router";
+import { useContext, useEffect, useState } from "react";
+import { Link, Outlet, useLocation, useParams } from "react-router";
 import { UserContext } from "../../context/userContext";
 
 export default function TeacherPage() {
     const { username } = useContext(UserContext);
+    const [pageTitele, setPageTitle] = useState("Dashboard");
+    const pathname = useLocation().pathname;
+
+    useEffect(() => {
+        if (pathname.includes("students-list")) {
+            setPageTitle("Students List");
+        } else if (pathname.includes("profile")) {
+            setPageTitle("Settings");
+        } else {
+            setPageTitle("Dashboard");
+        }
+    }, [pathname]);
+
     return (
         <div className="flex min-h-screen bg-gray-100">
             {/* Sidebar */}
@@ -43,7 +56,7 @@ export default function TeacherPage() {
                 {/* Top Navbar */}
                 <header className="bg-white shadow-md p-4 flex justify-between items-center">
                     <h1 className="text-xl font-bold text-purple-700">
-                        Dashboard
+                        {pageTitele}
                     </h1>
                     <div className="flex items-center gap-4">
                         <input

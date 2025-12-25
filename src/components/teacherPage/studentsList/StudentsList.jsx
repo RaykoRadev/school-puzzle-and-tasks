@@ -1,4 +1,8 @@
+import { useContext } from "react";
+import { UserContext } from "../../../context/userContext";
+
 export default function StudentsList() {
+    const { _id } = useContext(UserContext);
     return (
         <div className="bg-white rounded-lg shadow-md">
             <div className="p-4 border-b font-bold text-purple-700">
