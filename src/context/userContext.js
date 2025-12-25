@@ -5,6 +5,10 @@ export const UserContext = createContext({
     accessToken: "",
     _id: "",
     role: "",
+    class1: {},
+    class2: {},
+    class3: {},
+    class4: {},
     setLocalStorageData(data) {},
     removeLocalStorageData() {},
 });

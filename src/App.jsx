@@ -9,6 +9,8 @@ import CreateStudent from "./components/createStudent/CreateStudent";
 import Dashboard from "./components/teacherPage/dashboard/Dashboard";
 import StudentsList from "./components/teacherPage/studentsList/StudentsList";
 import Profile from "./components/teacherPage/profile/Profile";
+import Class from "./components/class/Class";
+import LinksList from "./components/class/LinksList";
 
 function App() {
     return (
@@ -29,6 +31,9 @@ function App() {
                     path="/teacher/create-student"
                     element={<CreateStudent />}
                 />
+                <Route path="/links/:className/:classId" element={<Class />}>
+                    <Route path=":subjectId" element={<LinksList />} />
+                </Route>
             </Routes>
         </UserProvider>
     );
