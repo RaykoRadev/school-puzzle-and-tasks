@@ -1,30 +1,17 @@
 import { useContext, useEffect, useState } from "react";
-import { Link, Outlet, useParams } from "react-router";
+import { Link, Outlet, useLocation, useParams } from "react-router";
 import { UserContext } from "../../context/userContext";
+import useRequest from "../../hooks/useRequester";
+import { endPoints, host } from "../../config/constants";
+import visualizeClassName from "../../utils/visualizeClassName";
 
 export default function Class() {
-    const [selectedClass, setSelectedClass] = useState({});
-    const [classesName, setClassName] = useState("");
-    const { username, class1, class2, class3, class4 } =
-        useContext(UserContext);
-    const name = useParams().className;
-    // const classId = useParams().classId;
-
+    const [classData, setClassData] = useState({});
+    const location = useLocation();
+    const { username } = useContext(UserContext);
     useEffect(() => {
-        if (name === "class1") {
-            setClassName("1 Клас");
-            setSelectedClass(class1);
-        } else if (name === "class2") {
-            setClassName("2 Клас");
-            setSelectedClass(class2);
-        } else if (name === "class3") {
-            setClassName("3 Клас");
-            setSelectedClass(class3);
-        } else if (name === "class4") {
-            setClassName("4 Клас");
-            setSelectedClass(class4);
-        }
-    }, [name]);
+        setClassData(location.state);
+    }, []);
 
     return (
         <div className="flex min-h-screen bg-gray-100">
@@ -35,13 +22,13 @@ export default function Class() {
                 </div>
                 <nav className="mt-2">
                     <ul>
-                        {selectedClass.subjects?.map((sub) => (
+                        {classData.subjects?.map((sub) => (
                             <li
                                 key={sub._id}
                                 className="block py-3 px-6 text-gray-700 hover:bg-purple-100"
                             >
                                 <Link
-                                    to={`/links/${name}/${selectedClass._id}/${sub._id}`}
+                                    to={`/links/${classData.name}/${classData.classId}/${sub._id}`}
                                 >
                                     {sub.visualizationName}
                                 </Link>
@@ -55,7 +42,7 @@ export default function Class() {
                 {/* Top Navbar */}
                 <header className="bg-white shadow-md p-4 flex justify-between items-center">
                     <h1 className="text-xl font-bold text-purple-700">
-                        {classesName}
+                        {visualizeClassName(classData.name)}
                     </h1>
                     <div className="flex items-center gap-4">
                         <input
@@ -70,7 +57,7 @@ export default function Class() {
                 </header>
                 {/* Content */}
                 <main className="p-6 space-y-6">
-                    <Outlet context={{ subjects: selectedClass.subjects }} />
+                    <Outlet context={{ subjects: classData.subjects }} />
                     <footer className="bg-white p-4 mt-10 text-center text-sm text-gray-400 border-t">
                         © 2025 All rights reserved.
                     </footer>
