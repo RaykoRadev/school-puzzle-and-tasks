@@ -18,7 +18,7 @@ export default function CreateLink() {
     const [value, setValues] = useState(initValues);
     const navigate = useNavigate();
 
-    const { data, request } = useRequest(host + endPoints.getAllDAta, []);
+    const { data, request } = useRequest(host + endPoints.getAllClasses, []);
 
     const changeHandler = (e) => {
         setValues((state) => ({
@@ -27,7 +27,7 @@ export default function CreateLink() {
         }));
     };
 
-    const selectedClassSubject = data.filter(
+    const selectedClassSubject = data?.filter(
         (el) => el.name === value.class
     )[0];
     console.log(accessToken);
@@ -46,7 +46,7 @@ export default function CreateLink() {
             classId: selectedClassSubject.classId,
         });
 
-        navigate("/teacher/profile");
+        navigate("/teacher/dashboard");
     };
 
     return (
@@ -68,13 +68,15 @@ export default function CreateLink() {
 
                         <input
                             placeholder="Link"
-                            className="bg-gray-700 text-gray-200 border-0 rounded-md p-2 mb-4 focus:bg-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
+                            className="bg-gray-700 text-gray-200 border-0 rounded-md p-2 mb-1 focus:bg-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
                             type="text"
                             name="link"
                             value={value.link}
                             onChange={changeHandler}
                         />
-
+                        <i className="mt-0 mb-4 text-xs text-gray-400 not-italic">
+                            example: https://www.abv.bg
+                        </i>
                         <select
                             className="bg-gray-700 text-gray-200 border-0 rounded-md p-2 mb-4 focus:bg-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
                             id="gender"

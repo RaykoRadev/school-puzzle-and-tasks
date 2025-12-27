@@ -20,7 +20,7 @@ export default function CreateStudent() {
     const [student, setStudent] = useState({});
     const navigate = useNavigate();
 
-    const { data, request } = useRequest(host + endPoints.getAllDAta, []);
+    const { data, request } = useRequest(host + endPoints.getAllClasses, []);
 
     const changeHandler = (e) => {
         setValues((state) => ({
