@@ -31,7 +31,7 @@ function App() {
                     path="/teacher/create-student"
                     element={<CreateStudent />}
                 />
-                <Route path="/links/:className/:classId" element={<Class />}>
+                <Route path="/links/:teacherId/:classId" element={<Class />}>
                     <Route path=":subjectId" element={<LinksList />} />
                 </Route>
             </Routes>
