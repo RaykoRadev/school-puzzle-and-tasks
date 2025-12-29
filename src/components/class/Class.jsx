@@ -42,9 +42,7 @@ export default function Class() {
                                 <Link
                                     to={`/links/${
                                         role === "teacher" ? _id : teacherId
-                                    }/${data?.classes[0].name}/${
-                                        data?.classes[0].classId
-                                    }/${sub._id}`}
+                                    }/${data?.classes[0].classId}/${sub._id}`}
                                 >
                                     {sub.visualizationName}
                                 </Link>

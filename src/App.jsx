@@ -10,7 +10,7 @@ import Dashboard from "./components/teacherPage/dashboard/Dashboard";
 import StudentsList from "./components/teacherPage/studentsList/StudentsList";
 import Profile from "./components/teacherPage/profile/Profile";
 import Class from "./components/class/Class";
-import LinksList from "./components/class/LinksList";
+import LinksList from "./components/class/linksList/LinksList";
 
 function App() {
     return (
