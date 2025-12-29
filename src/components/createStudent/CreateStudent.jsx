@@ -4,8 +4,7 @@ import useRequest from "../../hooks/useRequester";
 import { endPoints, host } from "../../config/constants";
 import { useNavigate } from "react-router";
 import { generateCode } from "../../utils/codeGenerator";
-
-//! abort controller probably dosnt work ???????????????????????????????
+import { useMutation, useQuery } from "@tanstack/react-query";
 
 const initValues = {
     username: "",
@@ -20,7 +19,38 @@ export default function CreateStudent() {
     const [student, setStudent] = useState({});
     const navigate = useNavigate();
 
-    const { data, request } = useRequest(host + endPoints.getAllClasses, []);
+    // const { data, request } = useRequest(host + endPoints.getAllClasses, []);
+    const { data } = useQuery({
+        queryKey: ["classInfo"],
+        queryFn: async () => {
+            return fetch(host + endPoints.getAllClasses + "/" + _id, {
+                headers: { "X-Authorization": accessToken },
+            }).then((res) => res.json());
+        },
+    });
+
+    const { mutate } = useMutation({
+        mutationFn: async (data) => {
+            const res = await fetch(host + endPoints.registerStudent, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-Authorization": accessToken,
+                },
+                body: JSON.stringify(data),
+            });
+
+            if (!res.ok) {
+                throw new Error("Student registration failed");
+            }
+
+            return res.json();
+        },
+        onSuccess: (result) => {
+            setStudent(result);
+            setResult(true);
+        },
+    });
 
     const changeHandler = (e) => {
         setValues((state) => ({
@@ -29,28 +59,22 @@ export default function CreateStudent() {
         }));
     };
 
-    const selectedClassId = data.filter((el) => el.name === value.class)[0];
+    const selectedClassId = data?.filter((el) => el.name === value.class)[0];
 
     const submitHandler = async (formData) => {
         const code = generateCode(6);
 
         const username = formData.get("username");
 
-        const newStudent = await request(
-            host + endPoints.registerStudent,
-            "POST",
-            {
-                username,
-                code,
-                teacherId: _id,
-                classId: selectedClassId?.classId,
-            }
-        );
+        const newStudentData = {
+            username,
+            code,
+            teacherId: _id,
+            classId: selectedClassId?.classId,
+        };
 
-        setStudent(newStudent);
+        mutate(newStudentData);
 
-        console.log(code);
-        setResult(true);
         setValues(initValues);
     };
 
