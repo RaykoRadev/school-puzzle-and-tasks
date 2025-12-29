@@ -1,17 +1,29 @@
-import { useContext, useEffect, useState } from "react";
-import { Link, Outlet, useLocation, useParams } from "react-router";
+import { useContext, useState } from "react";
+import { Link, Outlet, useParams } from "react-router";
 import { UserContext } from "../../context/userContext";
-import useRequest from "../../hooks/useRequester";
 import { endPoints, host } from "../../config/constants";
 import visualizeClassName from "../../utils/visualizeClassName";
+import { useQuery } from "@tanstack/react-query";
 
 export default function Class() {
-    const [classData, setClassData] = useState({});
-    const location = useLocation();
-    const { username } = useContext(UserContext);
-    useEffect(() => {
-        setClassData(location.state);
-    }, []);
+    // const [classData, setClassData] = useState({});
+    const { username, role, _id, teacherId, accessToken } =
+        useContext(UserContext);
+    const classId = useParams().classId;
+
+    const variablId = teacherId !== undefined ? teacherId : _id;
+
+    //? Probably there is a way to be avoided the request using cash or something like that
+
+    const { data, isError, isPending } = useQuery({
+        queryKey: ["singleClass"],
+        queryFn: async () => {
+            return fetch(
+                host + endPoints.getOneClass + "/" + variablId + "/" + classId,
+                { headers: { "X-Authorization": accessToken } }
+            ).then((res) => res.json());
+        },
+    });
 
     return (
         <div className="flex min-h-screen bg-gray-100">
@@ -22,13 +34,17 @@ export default function Class() {
                 </div>
                 <nav className="mt-2">
                     <ul>
-                        {classData.subjects?.map((sub) => (
+                        {data?.classes[0].subjects?.map((sub) => (
                             <li
                                 key={sub._id}
                                 className="block py-3 px-6 text-gray-700 hover:bg-purple-100"
                             >
                                 <Link
-                                    to={`/links/${classData.name}/${classData.classId}/${sub._id}`}
+                                    to={`/links/${
+                                        role === "teacher" ? _id : teacherId
+                                    }/${data?.classes[0].name}/${
+                                        data?.classes[0].classId
+                                    }/${sub._id}`}
                                 >
                                     {sub.visualizationName}
                                 </Link>
@@ -42,7 +58,7 @@ export default function Class() {
                 {/* Top Navbar */}
                 <header className="bg-white shadow-md p-4 flex justify-between items-center">
                     <h1 className="text-xl font-bold text-purple-700">
-                        {visualizeClassName(classData.name)}
+                        {visualizeClassName(data?.classes[0].name)}
                     </h1>
                     <div className="flex items-center gap-4">
                         <input
@@ -57,7 +73,7 @@ export default function Class() {
                 </header>
                 {/* Content */}
                 <main className="p-6 space-y-6">
-                    <Outlet context={{ subjects: classData.subjects }} />
+                    <Outlet context={{ subjects: data?.classes[0].subjects }} />
                     <footer className="bg-white p-4 mt-10 text-center text-sm text-gray-400 border-t">
                         © 2025 All rights reserved.
                     </footer>
