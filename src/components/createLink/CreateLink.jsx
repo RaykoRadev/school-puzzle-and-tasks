@@ -1,10 +1,8 @@
 import { useContext, useState } from "react";
 import { UserContext } from "../../context/userContext";
-import useRequest from "../../hooks/useRequester";
 import { endPoints, host } from "../../config/constants";
 import { useNavigate } from "react-router";
-
-//! abort controller probably dosnt work ???????????????????????????????
+import { useMutation, useQuery } from "@tanstack/react-query";
 
 const initValues = {
     text: "",
@@ -18,7 +16,35 @@ export default function CreateLink() {
     const [value, setValues] = useState(initValues);
     const navigate = useNavigate();
 
-    const { data, request } = useRequest(host + endPoints.getAllClasses, []);
+    const { data } = useQuery({
+        queryKey: ["classInfo"],
+        queryFn: async () => {
+            const res = await fetch(
+                host + endPoints.getAllClasses + "/" + _id,
+                {
+                    headers: { "X-Authorization": accessToken },
+                }
+            );
+            return res.json();
+        },
+    });
+
+    const { mutate } = useMutation({
+        mutationFn: async (data) => {
+            const res = await fetch(host + endPoints.createLink, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-Authorization": accessToken,
+                },
+                body: JSON.stringify(data),
+            });
+            return res.json();
+        },
+        onSuccess: () => {
+            navigate("/teacher/dashboard");
+        },
+    });
 
     const changeHandler = (e) => {
         setValues((state) => ({
@@ -37,16 +63,17 @@ export default function CreateLink() {
         const link = formData.get("link");
         const className = formData.get("class");
         const subject = formData.get("subject");
-        await request(host + endPoints.createLink, "POST", {
+
+        const linkData = {
             text,
             link,
             // class: className,  // shouldnt be needed
             subject,
             _id,
             classId: selectedClassSubject.classId,
-        });
+        };
 
-        navigate("/teacher/dashboard");
+        mutate(linkData);
     };
 
     return (
