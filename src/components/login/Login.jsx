@@ -2,6 +2,8 @@ import { useContext, useState } from "react";
 import { useNavigate, useResolvedPath } from "react-router";
 import { UserContext } from "../../context/userContext";
 import useRequest from "../../hooks/useRequester";
+import { endPoints } from "../../config/constants";
+import { useMutation, useQuery } from "@tanstack/react-query";
 
 const host = import.meta.env.VITE_API_URL;
 
@@ -15,6 +17,23 @@ export default function Login() {
     let role = "";
     console.log(pathname[1]);
 
+    const { mutate, isError, isPending, data } = useMutation({
+        queryKey: [`${role}Login`],
+        mutationFn: ({ username, code }) =>
+            fetch(host + "/" + role + "/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ username, code }),
+            }).then((res) => res.json()),
+        onSuccess: (result) => {
+            setLocalStorageData(result);
+            setuserData(result);
+            console.log(result);
+        },
+    });
+
     const loginSubmitHandler = async (formData) => {
         if (pathname.includes("teacher")) {
             role = "teacher";
@@ -24,20 +43,15 @@ export default function Login() {
         const username = formData.get("username");
         const code = formData.get("code");
 
-        const result = await request(
-            host + "/" + role + "/login",
-            "POST",
-            { username, code },
-            role
-        );
+        mutate({ username, code });
 
-        setLocalStorageData(result);
-        setuserData(result);
         if (role === "teacher") {
-            navigate("/");
-        } else {
-            // navigate(`/tasks/${result.classId}`)
+            return navigate("/");
         }
+
+        console.log("teacherId: ", userData.teacherId);
+
+        navigate(`/links/${userData.teacherId}/${userData.classId}`);
     };
 
     return (
