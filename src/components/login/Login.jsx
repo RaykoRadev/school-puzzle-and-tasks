@@ -16,8 +16,13 @@ export default function Login() {
 
     let role = "";
     console.log(pathname[1]);
+    if (pathname.includes("teacher")) {
+        role = "teacher";
+    } else {
+        role = "student";
+    }
 
-    const { mutate, isError, isPending, data } = useMutation({
+    const { mutate, isError, isPending } = useMutation({
         queryKey: [`${role}Login`],
         mutationFn: ({ username, code }) =>
             fetch(host + "/" + role + "/login", {
@@ -31,27 +36,21 @@ export default function Login() {
             setLocalStorageData(result);
             setuserData(result);
             console.log(result);
+            if (role === "teacher") {
+                return navigate("/");
+            }
+
+            console.log("teacherId: ", result.teacherId);
+
+            navigate(`/links/${result.teacherId}/${result.classId}`);
         },
     });
 
     const loginSubmitHandler = async (formData) => {
-        if (pathname.includes("teacher")) {
-            role = "teacher";
-        } else {
-            role = "student";
-        }
         const username = formData.get("username");
         const code = formData.get("code");
 
         mutate({ username, code });
-
-        if (role === "teacher") {
-            return navigate("/");
-        }
-
-        console.log("teacherId: ", userData.teacherId);
-
-        navigate(`/links/${userData.teacherId}/${userData.classId}`);
     };
 
     return (
