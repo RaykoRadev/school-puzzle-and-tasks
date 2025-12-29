@@ -13,25 +13,30 @@ export default function Home() {
 
     const { data, isError, isPending } = useQuery({
         queryKey: ["classInfo", role],
-        queryFn: () => {
-            if (role === "teacher") {
-                return fetch(host + endPoints.getAllClasses + "/" + _id, {
-                    headers: { "X-Authorization": accessToken },
-                }).then((res) => res.json());
-            } else if (role === "student") {
-                return fetch(
-                    host +
-                        endPoints.getOneClass +
-                        "/" +
-                        teacherId +
-                        "/" +
-                        classId,
-                    {
-                        headers: { "X-Authorization": accessToken },
-                    }
-                ).then((res) => res.json());
-            }
+        queryFn: async () => {
+            return fetch(host + endPoints.getAllClasses + "/" + _id, {
+                headers: { "X-Authorization": accessToken },
+            }).then((res) => res.json());
         },
+        // queryFn: () => {
+        //     if (role === "teacher") {
+        //         return fetch(host + endPoints.getAllClasses + "/" + _id, {
+        //             headers: { "X-Authorization": accessToken },
+        //         }).then((res) => res.json());
+        //     } else if (role === "student") {
+        //         return fetch(
+        //             host +
+        //                 endPoints.getOneClass +
+        //                 "/" +
+        //                 teacherId +
+        //                 "/" +
+        //                 classId,
+        //             {
+        //                 headers: { "X-Authorization": accessToken },
+        //             }
+        //         ).then((res) => res.json());
+        //     }
+        // },
         enabled: !!role,
     });
 
@@ -40,6 +45,9 @@ export default function Home() {
     return (
         <>
             {/* source: https://redpixelthemes.com/ */}
+            {role === "student" && (
+                <Link to={`/links/${teacherId}/${classId}`}>click</Link>
+            )}
             {role !== "teacher" && (
                 <h1 className="text-white">Welcom to our site!!!</h1>
             )}
