@@ -11,27 +11,25 @@ export default function LinksList() {
     }
 
     return (
-        <div className="flex flex-wrap lg:w-4/5 sm:mx-auto sm:mb-2 -mx-2 p-4">
-            <div className="p-2 sm:w-1/2 w-full">
+        <div className="py-4 mx-auto lg:max-w-6xl md:max-w-4xl max-w-xl">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 sm:gap-6 gap-4">
                 {subject.links.map((link) => (
                     <div
                         key={link.text}
-                        className="bg-gray-100 rounded flex p-4 h-full items-center"
+                        className="bg-gray-100 rounded-lg group overflow-hidden relative
+             lg:hover:before:bg-black before:absolute before:inset-0
+             before:opacity-20 before:transition-all before:pointer-events-none"
                     >
-                        <a href={link.link} target="_blank">
-                            <svg
-                                fill="none"
-                                stroke="currentColor"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={3}
-                                className="text-indigo-500 w-6 h-6 flex-shrink-0 mr-4"
-                                viewBox="0 0 24 24"
-                            >
-                                <path d="M22 11.08V12a10 10 0 11-5.93-9.14" />
-                                <path d="M22 4L12 14.01l-3-3" />
-                            </svg>
-                            <span className="font-medium">{link.text}</span>
+                        <a
+                            href={link.link}
+                            target="_blank"
+                            className="block w-full p-1"
+                        >
+                            <div className="w-full aspect-[3/1] flex items-center justify-center">
+                                <span className="text-lg font-medium text-center leading-tight">
+                                    {link.text}
+                                </span>
+                            </div>
                         </a>
                     </div>
                 ))}
