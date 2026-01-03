@@ -3,6 +3,9 @@ import { UserContext } from "../../context/userContext";
 import { endPoints, host } from "../../config/constants";
 import { useNavigate } from "react-router";
 import { useMutation, useQuery } from "@tanstack/react-query";
+import { useAllClass } from "../../hooks/useRequestHook";
+import Toasts from "../toasts/Toasts";
+import Spinner from "../spinner/Spinner";
 
 const initValues = {
     text: "",
@@ -16,18 +19,15 @@ export default function CreateLink() {
     const [value, setValues] = useState(initValues);
     const navigate = useNavigate();
 
-    const { data } = useQuery({
-        queryKey: ["classInfo"],
-        queryFn: async () => {
-            const res = await fetch(
-                host + endPoints.getAllClasses + "/" + _id,
-                {
-                    headers: { "X-Authorization": accessToken },
-                }
-            );
-            return res.json();
-        },
-    });
+    const { data, isPending, error } = useAllClass(accessToken, _id);
+
+    if (isPending) {
+        return <Spinner />;
+    }
+
+    if (error) {
+        return <Toasts message={error.message} />;
+    }
 
     const { mutate } = useMutation({
         mutationFn: async (data) => {
