@@ -1,14 +1,24 @@
 import { useContext, useState } from "react";
 import { UserContext } from "../../../context/userContext";
-import useRequest from "../../../hooks/useRequester";
-import { endPoints, host } from "../../../config/constants";
 import StudentRow from "./StudentRow";
 import LogsModal from "./LogsModal";
+import { useStudentsList } from "../../../hooks/useRequestHook";
+import Spinner from "../../spinner/Spinner";
+import Toasts from "../../toasts/Toasts";
 
 export default function StudentsList() {
-    const { _id } = useContext(UserContext);
-    const { data } = useRequest(host + endPoints.getAllStudents, []);
+    const { _id, accessToken } = useContext(UserContext);
     const [modal, setModal] = useState({ open: false, payload: null });
+
+    const { data, isPending, error } = useStudentsList(accessToken);
+
+    if (isPending) {
+        return <Spinner />;
+    }
+
+    if (error) {
+        return <Toasts message={error.message} />;
+    }
 
     const openModal = (payload) => {
         setModal({ open: true, payload });
@@ -34,7 +44,7 @@ export default function StudentsList() {
                     </tr>
                 </thead>
                 <tbody>
-                    {data.map((student) => (
+                    {data?.map((student) => (
                         <StudentRow
                             key={student._id}
                             {...student}
