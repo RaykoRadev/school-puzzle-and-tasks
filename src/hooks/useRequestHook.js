@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { useContext } from "react";
 import { UserContext } from "../context/userContext";
 import { endPoints, host } from "../config/constants";
@@ -40,4 +40,23 @@ export const useAllClass = (accessToken, teacherId) =>
                 accessToken
             ),
         staleTime: 1000 * 60 * 30,
+    });
+
+export const useLogin = (role, setLocalStorageData, navigate) =>
+    useMutation({
+        mutationFn: (data) =>
+            fetchRequest(
+                host + "/" + role + "/login",
+                "POST",
+                null,
+                null,
+                data
+            ),
+        onSuccess: (result) => {
+            setLocalStorageData(result);
+            if (role === "teacher") {
+                return navigate("/");
+            }
+            navigate(`/links/${result.teacherId}/${result.classId}`);
+        },
     });
