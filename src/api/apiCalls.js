@@ -34,7 +34,8 @@ export default async function fetchRequest(
             const errorBody = await res.json();
             if (errorBody.message === "jwt expired") {
                 //? there could be problems with that using a hook
-                // removeLocalStorageData();
+                localStorage.removeItem("user");
+                window.location("/");
             }
             throw new Error(
                 errorBody.message || `Request failed with ${res.status}`

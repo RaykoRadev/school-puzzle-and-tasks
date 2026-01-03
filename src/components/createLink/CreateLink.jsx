@@ -3,7 +3,7 @@ import { UserContext } from "../../context/userContext";
 import { endPoints, host } from "../../config/constants";
 import { useNavigate } from "react-router";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { useAllClass } from "../../hooks/useRequestHook";
+import { useAllClass, useCreateLink } from "../../hooks/useRequestHook";
 import Toasts from "../toasts/Toasts";
 import Spinner from "../spinner/Spinner";
 
@@ -19,7 +19,9 @@ export default function CreateLink() {
     const [value, setValues] = useState(initValues);
     const navigate = useNavigate();
 
-    const { data, isPending, error } = useAllClass(accessToken, _id);
+    const { data, isPending } = useAllClass(accessToken, _id);
+
+    const { mutate, error } = useCreateLink(accessToken, navigate);
 
     if (isPending) {
         return <Spinner />;
@@ -28,23 +30,6 @@ export default function CreateLink() {
     if (error) {
         return <Toasts message={error.message} />;
     }
-
-    const { mutate } = useMutation({
-        mutationFn: async (data) => {
-            const res = await fetch(host + endPoints.createLink, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "X-Authorization": accessToken,
-                },
-                body: JSON.stringify(data),
-            });
-            return res.json();
-        },
-        onSuccess: () => {
-            navigate("/teacher/dashboard");
-        },
-    });
 
     const changeHandler = (e) => {
         setValues((state) => ({
