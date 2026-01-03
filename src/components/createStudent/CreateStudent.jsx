@@ -1,10 +1,12 @@
 import { useContext, useState } from "react";
 import { UserContext } from "../../context/userContext";
-import useRequest from "../../hooks/useRequester";
 import { endPoints, host } from "../../config/constants";
 import { useNavigate } from "react-router";
 import { generateCode } from "../../utils/codeGenerator";
 import { useMutation, useQuery } from "@tanstack/react-query";
+import Spinner from "../spinner/Spinner";
+import Toasts from "../toasts/Toasts";
+import { useAllClass } from "../../hooks/useRequestHook";
 
 const initValues = {
     username: "",
@@ -19,15 +21,9 @@ export default function CreateStudent() {
     const [student, setStudent] = useState({});
     const navigate = useNavigate();
 
-    // const { data, request } = useRequest(host + endPoints.getAllClasses, []);
-    const { data } = useQuery({
-        queryKey: ["classInfo"],
-        queryFn: async () => {
-            return fetch(host + endPoints.getAllClasses + "/" + _id, {
-                headers: { "X-Authorization": accessToken },
-            }).then((res) => res.json());
-        },
-    });
+    const { data, isPending, error } = useAllClass(accessToken, _id);
+
+    // console.log("data: ", data);
 
     const { mutate } = useMutation({
         mutationFn: async (data) => {
@@ -51,6 +47,14 @@ export default function CreateStudent() {
             setResult(true);
         },
     });
+
+    if (isPending) {
+        return <Spinner />;
+    }
+
+    if (error) {
+        return <Toasts message={error.message} />;
+    }
 
     const changeHandler = (e) => {
         setValues((state) => ({
