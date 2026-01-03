@@ -1,46 +1,29 @@
 import { useContext } from "react";
 import { Link } from "react-router";
 import { UserContext } from "../../context/userContext";
-import { endPoints, host } from "../../config/constants";
 import visualizeClassName from "../../utils/visualizeClassName";
-import { useQuery } from "@tanstack/react-query";
+import Spinner from "../spinner/Spinner";
+import Toasts from "../toasts/Toasts";
+import { useAllClass } from "../../hooks/useRequestHook";
 
 export default function Home() {
     const { role, _id, teacherId, classId, accessToken } =
         useContext(UserContext);
 
-    console.log("classId: ", classId);
+    // console.log("classId: ", classId);
 
-    const { data, isError, isPending } = useQuery({
-        queryKey: ["classInfo", role],
-        queryFn: async () => {
-            return fetch(host + endPoints.getAllClasses + "/" + _id, {
-                headers: { "X-Authorization": accessToken },
-            }).then((res) => res.json());
-        },
-        // queryFn: () => {
-        //     if (role === "teacher") {
-        //         return fetch(host + endPoints.getAllClasses + "/" + _id, {
-        //             headers: { "X-Authorization": accessToken },
-        //         }).then((res) => res.json());
-        //     } else if (role === "student") {
-        //         return fetch(
-        //             host +
-        //                 endPoints.getOneClass +
-        //                 "/" +
-        //                 teacherId +
-        //                 "/" +
-        //                 classId,
-        //             {
-        //                 headers: { "X-Authorization": accessToken },
-        //             }
-        //         ).then((res) => res.json());
-        //     }
-        // },
-        enabled: !!role,
-    });
+    //todo if there is no accesstoken to load some greeetings and to not make the request for classes
 
-    console.log("data: ", data);
+    const { data, isPending, error } = useAllClass(accessToken, _id);
+
+    // console.log("data: ", data);
+    if (isPending) {
+        return <Spinner />;
+    }
+
+    if (error) {
+        return <Toasts message={error.message} />;
+    }
 
     return (
         <>
