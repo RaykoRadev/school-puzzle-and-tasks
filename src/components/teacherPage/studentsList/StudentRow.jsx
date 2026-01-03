@@ -1,5 +1,7 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import parseDate from "../../../utils/parseDate";
+import { UserContext } from "../../../context/userContext";
+import visualizeClassName from "../../../utils/visualizeClassName";
 
 export default function StudentRow({
     _id,
@@ -13,12 +15,18 @@ export default function StudentRow({
     closeModal,
 }) {
     const parsedDate = parseDate(sessions);
+    const { classesIds } = useContext(UserContext);
+
+    const studentsClassName = classesIds[classId];
+
+    const nameForVijualize = visualizeClassName(studentsClassName);
 
     const modalHandler = () => {};
     return (
         <tr className="border-t">
             <td className="p-4">{username}</td>
             <td className="p-4">{code}</td>
+            <td className="p-4">{nameForVijualize}</td>
             <td
                 className="p-4"
                 onClick={() => {

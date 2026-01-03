@@ -37,6 +37,7 @@ export default function StudentsList() {
                     <tr>
                         <th className="p-4">Name</th>
                         <th className="p-4">Code</th>
+                        <th className="p-4">Class</th>
                         <th className="p-4">Last login</th>
                         <th className="p-4">visited subjects</th>
                         <th className="p-4">Created at:</th>

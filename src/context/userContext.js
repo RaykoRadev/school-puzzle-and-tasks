@@ -7,10 +7,7 @@ export const UserContext = createContext({
     role: "",
     teacherId: "",
     classId: "",
-    // class1: {},
-    // class2: {},
-    // class3: {},
-    // class4: {},
+    classesIds: {},
     setLocalStorageData(data) {},
     removeLocalStorageData() {},
 });
