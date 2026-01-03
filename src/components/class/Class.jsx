@@ -1,9 +1,10 @@
 import { useContext, useState } from "react";
 import { Link, Outlet, useParams } from "react-router";
 import { UserContext } from "../../context/userContext";
-import { endPoints, host } from "../../config/constants";
 import visualizeClassName from "../../utils/visualizeClassName";
-import { useQuery } from "@tanstack/react-query";
+import { useOneClass } from "../../hooks/useRequestHook";
+import Toasts from "../toasts/Toasts";
+import Spinner from "../spinner/Spinner";
 
 export default function Class() {
     const [isOpen, setIsOpen] = useState(false);
@@ -15,16 +16,20 @@ export default function Class() {
 
     //? Probably there is a way to be avoided the request using cash or something like that
 
-    const { data, isError, isPending } = useQuery({
-        queryKey: ["singleClass", role],
-        queryFn: async () => {
-            return fetch(
-                host + endPoints.getOneClass + "/" + variablId + "/" + classId,
-                { headers: { "X-Authorization": accessToken } }
-            ).then((res) => res.json());
-        },
-        staleTime: role === "teacher" ? 0 : 1000 * 60 * 30, // that should make always new req for a theacher and one req per 30 min for student
-    });
+    const { data, isPending, error } = useOneClass(
+        accessToken,
+        role,
+        variablId,
+        classId
+    );
+
+    if (isPending) {
+        return <Spinner />;
+    }
+
+    if (error) {
+        return <Toasts message={error.message} />;
+    }
 
     return (
         <div className="flex min-h-screen bg-gray-100">
@@ -38,13 +43,9 @@ export default function Class() {
 
             {/* Sidebar */}
             <aside
-                className={`
-        fixed md:static z-30
-        w-64 bg-white shadow-md
-        min-h-screen
-        transform transition-transform duration-300
-        ${isOpen ? "translate-x-0" : "-translate-x-full"}
-        md:translate-x-0
+                className={`fixed md:static z-30 w-64 bg-white shadow-md min-h-screen transform transition-transform duration-300 ${
+                    isOpen ? "translate-x-0" : "-translate-x-full"
+                } md:translate-x-0
     `}
             >
                 <div className="p-6 font-bold text-purple-700 text-2xl">
