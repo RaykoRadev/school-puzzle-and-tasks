@@ -7,8 +7,9 @@ export const endPoints = {
     getAllClasses: "/links/getAllClasses",
     getOneClass: "/links/getOneClass",
 
+    getAllStudents: "/links/getAllStudents",
+
     createLink: "/links/createLink",
 
     registerStudent: "/student/register",
-    getAllStudents: "/links/getAllStudents",
 };

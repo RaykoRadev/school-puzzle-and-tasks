@@ -6,7 +6,7 @@ import { generateCode } from "../../utils/codeGenerator";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import Spinner from "../spinner/Spinner";
 import Toasts from "../toasts/Toasts";
-import { useAllClass } from "../../hooks/useRequestHook";
+import { useAllClass, useCreateStudent } from "../../hooks/useRequestHook";
 
 const initValues = {
     username: "",
@@ -25,28 +25,30 @@ export default function CreateStudent() {
 
     // console.log("data: ", data);
 
-    const { mutate } = useMutation({
-        mutationFn: async (data) => {
-            const res = await fetch(host + endPoints.registerStudent, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "X-Authorization": accessToken,
-                },
-                body: JSON.stringify(data),
-            });
+    // const { mutate } = useMutation({
+    //     mutationFn: async (data) => {
+    //         const res = await fetch(host + endPoints.registerStudent, {
+    //             method: "POST",
+    //             headers: {
+    //                 "Content-Type": "application/json",
+    //                 "X-Authorization": accessToken,
+    //             },
+    //             body: JSON.stringify(data),
+    //         });
 
-            if (!res.ok) {
-                throw new Error("Student registration failed");
-            }
+    //         if (!res.ok) {
+    //             throw new Error("Student registration failed");
+    //         }
 
-            return res.json();
-        },
-        onSuccess: (result) => {
-            setStudent(result);
-            setResult(true);
-        },
-    });
+    //         return res.json();
+    //     },
+    //     onSuccess: (result) => {
+    //         setStudent(result);
+    //         setResult(true);
+    //     },
+    // });
+
+    const { mutate } = useCreateStudent(accessToken, setStudent, setResult);
 
     if (isPending) {
         return <Spinner />;

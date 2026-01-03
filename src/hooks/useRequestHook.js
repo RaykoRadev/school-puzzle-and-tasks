@@ -1,8 +1,9 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useContext } from "react";
 import { UserContext } from "../context/userContext";
 import { endPoints, host } from "../config/constants";
 import fetchRequest from "../api/apiCalls";
+import revertObject from "../utils/revertObject";
 
 export const useStudentsList = (accessToken) =>
     useQuery({
@@ -53,6 +54,9 @@ export const useLogin = (role, setLocalStorageData, navigate) =>
                 data
             ),
         onSuccess: (result) => {
+            const orgClassNameObj = result.classesIds;
+            const reveretedClassNameObj = revertObject(orgClassNameObj);
+            result.classesIds = reveretedClassNameObj;
             setLocalStorageData(result);
             if (role === "teacher") {
                 return navigate("/");
@@ -60,3 +64,41 @@ export const useLogin = (role, setLocalStorageData, navigate) =>
             navigate(`/links/${result.teacherId}/${result.classId}`);
         },
     });
+
+export const useCreateLink = (accessToken, navigate) => {
+    const queryClient = useQueryClient();
+    return useMutation({
+        mutationFn: (data) =>
+            fetchRequest(
+                host + endPoints.createLink,
+                "POST",
+                null,
+                accessToken,
+                data
+            ),
+        onSuccess: () => {
+            navigate("/teacher/dashboard");
+        },
+        onSettled: () =>
+            queryClient.invalidateQueries({ queryKey: ["classInfo"] }),
+    });
+};
+
+export const useCreateStudent = (accessToken, setStudent, setResult) => {
+    const queryClient = useQueryClient();
+    return useMutation({
+        mutationFn: (data) =>
+            fetchRequest(
+                host + endPoints.registerStudent,
+                "POST",
+                null,
+                accessToken,
+                data
+            ),
+        onSuccess: (result) => {
+            setResult(true), setStudent(result);
+        },
+        // onSettled: () =>
+        //     queryClient.invalidateQueries({ queryKey: ["classInfo"] }),
+    });
+};
