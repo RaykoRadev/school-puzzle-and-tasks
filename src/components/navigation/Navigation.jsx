@@ -1,20 +1,20 @@
 import { useContext, useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router";
 import { UserContext } from "../../context/userContext";
-import useRequest from "../../hooks/useRequester";
-import { endPoints, host } from "../../config/constants";
+import { useLogout } from "../../hooks/useRequestHook";
 
 export default function Navigation() {
-    const { role, username, removeLocalStorageData } = useContext(UserContext);
+    const { role, accessToken, username, removeLocalStorageData } =
+        useContext(UserContext);
     const [menuOpen, setMenuOpen] = useState(false);
-    const { request } = useRequest();
     const navigate = useNavigate();
 
-    const logoutHandler = async () => {
-        await request(host + "/" + role + endPoints.logout);
-        removeLocalStorageData();
-        navigate("/");
-    };
+    const { mutate } = useLogout(
+        role,
+        removeLocalStorageData,
+        accessToken,
+        navigate
+    );
 
     return (
         <header className="sticky inset-0 z-50 bg-transparent backdrop-blur-sm">
@@ -62,8 +62,7 @@ export default function Navigation() {
                     )}
                     {username && (
                         <NavLink
-                            to="/logout"
-                            onClick={logoutHandler}
+                            onClick={() => mutate()}
                             className="rounded-md bg-gradient-to-br from-green-600 to-emerald-400 px-3 py-1.5 font-dm text-sm font-medium text-white shadow-md shadow-green-400/50 transition-transform duration-200 ease-in-out hover:scale-[1.03]"
                         >
                             Logout
@@ -130,8 +129,7 @@ export default function Navigation() {
                     )}
                     {username && (
                         <NavLink
-                            to="/logout"
-                            onClick={logoutHandler}
+                            onClick={() => mutate()}
                             className="block rounded-md bg-gradient-to-br from-green-600 to-emerald-400 px-3 py-2 text-center text-sm font-medium text-white"
                         >
                             Logout

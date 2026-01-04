@@ -63,6 +63,26 @@ export const useLogin = (role, setLocalStorageData, navigate) =>
         },
     });
 
+export const useLogout = (
+    role,
+    removeLocalStorageData,
+    accessToken,
+    navigate
+) =>
+    useMutation({
+        mutationFn: () =>
+            fetchRequest(
+                host + "/" + role + endPoints.logout,
+                "GET",
+                null,
+                accessToken
+            ),
+        onSuccess: (result) => {
+            removeLocalStorageData(result);
+            navigate("/");
+        },
+    });
+
 export const useCreateLink = (accessToken, navigate) => {
     const queryClient = useQueryClient();
     return useMutation({
