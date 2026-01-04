@@ -59,7 +59,7 @@ export const useLogin = (role, setLocalStorageData, navigate) =>
             }
             setLocalStorageData(result);
             if (role === "teacher") {
-                return navigate("/");
+                return navigate(`/${result._id}/allClasses`);
             }
             navigate(`/links/${result.teacherId}/${result.classId}`);
         },

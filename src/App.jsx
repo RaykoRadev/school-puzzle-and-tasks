@@ -14,6 +14,7 @@ import LinksList from "./components/class/linksList/LinksList";
 import Spinner from "./components/spinner/Spinner";
 import StudentsProfile from "./components/studentsProfile/StudentsProfile";
 import Toasts from "./components/toasts/Toasts";
+import AllClasses from "./components/allClasses/AllClasses";
 
 function App() {
     return (
@@ -33,6 +34,7 @@ function App() {
                     <Route index element={<Dashboard />} />
                 </Route>
                 <Route path="/teacher/create-link" element={<CreateLink />} />
+                <Route path="/:teacherId/allClasses" element={<AllClasses />} />
                 <Route
                     path="/teacher/create-student"
                     element={<CreateStudent />}
