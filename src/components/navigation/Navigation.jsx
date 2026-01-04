@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router";
 import { UserContext } from "../../context/userContext";
 import { useLogout } from "../../hooks/useRequestHook";
+import { Toaster } from "sonner";
 
 export default function Navigation() {
     const { role, _id, accessToken, username, removeLocalStorageData } =
@@ -145,6 +146,7 @@ export default function Navigation() {
                     )}
                 </div>
             )}
+            <Toaster richColors position="top-right" />
         </header>
     );
 }
