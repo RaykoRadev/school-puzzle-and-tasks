@@ -3,8 +3,8 @@ import { UserContext } from "../../context/userContext";
 import { useNavigate } from "react-router";
 import { generateCode } from "../../utils/codeGenerator";
 import Spinner from "../spinner/Spinner";
-import Toasts from "../toasts/Toasts";
 import { useAllClass, useCreateStudent } from "../../hooks/useRequestHook";
+import { toast } from "sonner";
 
 const initValues = {
     username: "",
@@ -28,7 +28,7 @@ export default function CreateStudent() {
     }
 
     if (error) {
-        // return <Toasts message={error.message} />;
+        return toast.error(error.message);
     }
 
     const changeHandler = (e) => {

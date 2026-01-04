@@ -3,7 +3,6 @@ import { Link } from "react-router";
 import { UserContext } from "../../context/userContext";
 import visualizeClassName from "../../utils/visualizeClassName";
 import Spinner from "../spinner/Spinner";
-import Toasts from "../toasts/Toasts";
 import { useAllClass } from "../../hooks/useRequestHook";
 import { toast } from "sonner";
 

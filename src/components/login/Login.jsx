@@ -3,7 +3,6 @@ import { useNavigate, useResolvedPath } from "react-router";
 import { UserContext } from "../../context/userContext";
 import { useLogin } from "../../hooks/useRequestHook";
 import Spinner from "../spinner/Spinner";
-import Toasts from "../toasts/Toasts";
 
 export default function Login() {
     // const [userData, setuserData] = useState({});
@@ -20,11 +19,7 @@ export default function Login() {
         role = "student";
     }
 
-    const { mutate, isPending, error } = useLogin(
-        role,
-        setLocalStorageData,
-        navigate
-    );
+    const { mutate, isPending } = useLogin(role, setLocalStorageData, navigate);
 
     const loginSubmitHandler = async (formData) => {
         const username = formData.get("username");
@@ -35,10 +30,6 @@ export default function Login() {
 
     if (isPending) {
         return <Spinner />;
-    }
-
-    if (error) {
-        // return <Toasts message={error.message} />;
     }
 
     return (

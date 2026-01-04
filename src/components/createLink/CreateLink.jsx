@@ -1,11 +1,9 @@
 import { useContext, useState } from "react";
 import { UserContext } from "../../context/userContext";
-import { endPoints, host } from "../../config/constants";
 import { useNavigate } from "react-router";
-import { useMutation, useQuery } from "@tanstack/react-query";
 import { useAllClass, useCreateLink } from "../../hooks/useRequestHook";
-// import Toasts from "../toasts/Toasts";
 import Spinner from "../spinner/Spinner";
+import { toast } from "sonner";
 
 const initValues = {
     text: "",
@@ -21,16 +19,16 @@ export default function CreateLink() {
     const [value, setValues] = useState(initValues);
     const navigate = useNavigate();
 
-    const { data, isPending } = useAllClass(accessToken, _id);
+    const { data, isPending, error } = useAllClass(accessToken, _id);
 
-    const { mutate, error } = useCreateLink(accessToken, navigate);
+    const { mutate } = useCreateLink(accessToken, navigate);
 
     if (isPending) {
         return <Spinner />;
     }
 
     if (error) {
-        // return <Toasts message={error.message} />;
+        return toast.error(error.message);
     }
 
     const changeHandler = (e) => {

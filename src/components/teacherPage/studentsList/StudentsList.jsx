@@ -4,7 +4,7 @@ import StudentRow from "./StudentRow";
 import LogsModal from "./LogsModal";
 import { useStudentsList } from "../../../hooks/useRequestHook";
 import Spinner from "../../spinner/Spinner";
-import Toasts from "../../toasts/Toasts";
+import { toast } from "sonner";
 
 export default function StudentsList() {
     const { _id, accessToken } = useContext(UserContext);
@@ -17,7 +17,7 @@ export default function StudentsList() {
     }
 
     if (error) {
-        // return <Toasts message={error.message} />;
+        return toast.error(error.message);
     }
 
     const openModal = (payload) => {

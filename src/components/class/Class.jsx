@@ -3,8 +3,8 @@ import { Link, Outlet, useParams } from "react-router";
 import { UserContext } from "../../context/userContext";
 import visualizeClassName from "../../utils/visualizeClassName";
 import { useOneClass } from "../../hooks/useRequestHook";
-import Toasts from "../toasts/Toasts";
 import Spinner from "../spinner/Spinner";
+import { toast } from "sonner";
 
 export default function Class() {
     const [isOpen, setIsOpen] = useState(false);
@@ -28,7 +28,7 @@ export default function Class() {
     }
 
     if (error) {
-        // return <Toasts message={error.message} />;
+        return toast.error(error.message);
     }
 
     return (
