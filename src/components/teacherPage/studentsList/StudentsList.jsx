@@ -42,6 +42,7 @@ export default function StudentsList() {
                         <th className="p-4">visited subjects</th>
                         <th className="p-4">Created at:</th>
                         <th className="p-4">Expired at:</th>
+                        <th className="p-4">Controls:</th>
                     </tr>
                 </thead>
                 <tbody>
