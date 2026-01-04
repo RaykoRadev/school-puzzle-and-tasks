@@ -4,7 +4,7 @@ import { UserContext } from "../../context/userContext";
 import { useLogout } from "../../hooks/useRequestHook";
 
 export default function Navigation() {
-    const { role, accessToken, username, removeLocalStorageData } =
+    const { role, _id, accessToken, username, removeLocalStorageData } =
         useContext(UserContext);
     const [menuOpen, setMenuOpen] = useState(false);
     const navigate = useNavigate();
@@ -21,15 +21,17 @@ export default function Navigation() {
             <nav className="mx-auto flex max-w-6xl items-center gap-8 px-6 py-4 lg:px-12">
                 {/* Logo */}
                 <div className="relative flex items-center">
-                    <Link to="/">
-                        <img
-                            src="https://www.svgrepo.com/show/499831/target.svg"
-                            loading="lazy"
-                            width={32}
-                            height={32}
-                            alt="Logo"
-                        />
-                    </Link>
+                    {role === "teacher" && (
+                        <Link to={`/${_id}/allClasses`}>
+                            <img
+                                src="https://www.svgrepo.com/show/499831/target.svg"
+                                loading="lazy"
+                                width={32}
+                                height={32}
+                                alt="Logo"
+                            />
+                        </Link>
+                    )}
                 </div>
 
                 <div className="flex-grow" />
@@ -52,14 +54,20 @@ export default function Navigation() {
                             Впиши се учител
                         </NavLink>
                     )}
-                    {role === "teacher" && (
+
+                    {role && (
                         <NavLink
-                            to="/teacher/dashboard"
+                            to={
+                                role === "teacher"
+                                    ? "/teacher/dashboard"
+                                    : "/student-profile"
+                            }
                             className="rounded-md bg-gradient-to-br from-green-600 to-emerald-400 px-3 py-1.5 font-dm text-sm font-medium text-white shadow-md shadow-green-400/50 transition-transform duration-200 ease-in-out hover:scale-[1.03]"
                         >
                             Profile
                         </NavLink>
                     )}
+
                     {username && (
                         <NavLink
                             onClick={() => mutate()}
