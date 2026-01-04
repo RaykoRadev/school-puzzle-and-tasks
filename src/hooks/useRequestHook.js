@@ -2,6 +2,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { endPoints, host } from "../config/constants";
 import fetchRequest from "../api/apiCalls";
 import revertObject from "../utils/revertObject";
+import { toast } from "sonner";
 
 export const useStudentsList = (accessToken) =>
     useQuery({
@@ -52,6 +53,7 @@ export const useLogin = (role, setLocalStorageData, navigate) =>
                 data
             ),
         onSuccess: (result) => {
+            toast.success(`Добре дошъл/а ${result.username}`);
             if (role === "teacher") {
                 const orgClassNameObj = result.classesIds;
                 const reveretedClassNameObj = revertObject(orgClassNameObj);
@@ -62,6 +64,10 @@ export const useLogin = (role, setLocalStorageData, navigate) =>
                 return navigate(`/${result._id}/allClasses`);
             }
             navigate(`/links/${result.teacherId}/${result.classId}`);
+        },
+        onError: (err) => {
+            toast.error("invalid username or code");
+            navigate(`/${role}/login`);
         },
     });
 
@@ -80,6 +86,7 @@ export const useLogout = (
                 accessToken
             ),
         onSuccess: (result) => {
+            toast.success("Успешно отписване!");
             removeLocalStorageData(result);
             navigate("/");
         },
@@ -97,7 +104,11 @@ export const useCreateLink = (accessToken, navigate) => {
                 data
             ),
         onSuccess: () => {
+            toast.success("Успешно създаване на линк!");
             navigate("/teacher/dashboard");
+        },
+        onError: () => {
+            toast.error("Нещо се обърка. Моля пробвайте отново.");
         },
         onSettled: () =>
             queryClient.invalidateQueries({ queryKey: ["classInfo"] }),
@@ -116,7 +127,13 @@ export const useCreateStudent = (accessToken, setStudent, setResult) => {
                 data
             ),
         onSuccess: (result) => {
+            toast.success("Успешно регистриране на ученик!");
             setResult(true), setStudent(result);
+        },
+        onError: (err) => {
+            toast.error(
+                err.message || "Нещо се обърка. Моля пробвайте отново."
+            );
         },
         // onSettled: () =>
         //     queryClient.invalidateQueries({ queryKey: ["classInfo"] }),
