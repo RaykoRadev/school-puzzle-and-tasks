@@ -52,9 +52,11 @@ export const useLogin = (role, setLocalStorageData, navigate) =>
                 data
             ),
         onSuccess: (result) => {
-            const orgClassNameObj = result.classesIds;
-            const reveretedClassNameObj = revertObject(orgClassNameObj);
-            result.classesIds = reveretedClassNameObj;
+            if (role === "teacher") {
+                const orgClassNameObj = result.classesIds;
+                const reveretedClassNameObj = revertObject(orgClassNameObj);
+                result.classesIds = reveretedClassNameObj;
+            }
             setLocalStorageData(result);
             if (role === "teacher") {
                 return navigate("/");
