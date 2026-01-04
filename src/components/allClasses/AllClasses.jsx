@@ -5,6 +5,7 @@ import visualizeClassName from "../../utils/visualizeClassName";
 import Spinner from "../spinner/Spinner";
 import Toasts from "../toasts/Toasts";
 import { useAllClass } from "../../hooks/useRequestHook";
+import { toast } from "sonner";
 
 export default function AllClasses() {
     const { role, _id, teacherId, classId, accessToken } =
@@ -22,7 +23,8 @@ export default function AllClasses() {
     }
 
     if (error) {
-        return <Toasts message={error.message} />;
+        toast.error(error.message);
+        return;
     }
 
     return (

@@ -4,7 +4,7 @@ import { endPoints, host } from "../../config/constants";
 import { useNavigate } from "react-router";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useAllClass, useCreateLink } from "../../hooks/useRequestHook";
-import Toasts from "../toasts/Toasts";
+// import Toasts from "../toasts/Toasts";
 import Spinner from "../spinner/Spinner";
 
 const initValues = {
@@ -13,6 +13,8 @@ const initValues = {
     class: "Choose class",
     subject: "Choose a subject",
 };
+
+//todo proper error handling
 
 export default function CreateLink() {
     const { _id, accessToken } = useContext(UserContext);
@@ -28,7 +30,7 @@ export default function CreateLink() {
     }
 
     if (error) {
-        return <Toasts message={error.message} />;
+        // return <Toasts message={error.message} />;
     }
 
     const changeHandler = (e) => {

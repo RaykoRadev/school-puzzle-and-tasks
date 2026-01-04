@@ -13,7 +13,6 @@ import Class from "./components/class/Class";
 import LinksList from "./components/class/linksList/LinksList";
 import Spinner from "./components/spinner/Spinner";
 import StudentsProfile from "./components/studentsProfile/StudentsProfile";
-import Toasts from "./components/toasts/Toasts";
 import AllClasses from "./components/allClasses/AllClasses";
 
 function App() {
@@ -25,7 +24,6 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/spinner" element={<Spinner />} />
                 <Route path="/student-profile" element={<StudentsProfile />} />
-                <Route path="/Toasts" element={<Toasts />} />
                 <Route path="/student/login" element={<Login />} />
                 <Route path="/teacher/login" element={<Login />} />
                 <Route path="/teacher/dashboard" element={<TeacherPage />}>

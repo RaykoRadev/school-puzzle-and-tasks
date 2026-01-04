@@ -28,7 +28,7 @@ export default function CreateStudent() {
     }
 
     if (error) {
-        return <Toasts message={error.message} />;
+        // return <Toasts message={error.message} />;
     }
 
     const changeHandler = (e) => {

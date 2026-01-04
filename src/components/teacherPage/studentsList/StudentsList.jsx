@@ -17,7 +17,7 @@ export default function StudentsList() {
     }
 
     if (error) {
-        return <Toasts message={error.message} />;
+        // return <Toasts message={error.message} />;
     }
 
     const openModal = (payload) => {

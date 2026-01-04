@@ -38,7 +38,7 @@ export default function Login() {
     }
 
     if (error) {
-        return <Toasts message={error.message} />;
+        // return <Toasts message={error.message} />;
     }
 
     return (

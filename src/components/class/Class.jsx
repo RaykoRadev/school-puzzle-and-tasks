@@ -28,7 +28,7 @@ export default function Class() {
     }
 
     if (error) {
-        return <Toasts message={error.message} />;
+        // return <Toasts message={error.message} />;
     }
 
     return (
