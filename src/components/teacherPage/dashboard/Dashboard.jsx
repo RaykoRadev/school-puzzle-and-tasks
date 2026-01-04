@@ -68,7 +68,7 @@ export default function Dashboard() {
             </div>
             {/* links board  control*/}
             <div className="p-4 border-b font-bold text-purple-700">
-                Controll links
+                Controll links / Забъркай манджа с грозде
             </div>
             <div className="bg-white p-6 rounded-lg shadow-md grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
                 <Link
@@ -78,20 +78,20 @@ export default function Dashboard() {
                     Add Link
                 </Link>
                 <Link
-                    to=""
+                    to="/teacher/create-student"
                     className="bg-blue-600 text-white py-3 rounded-lg shadow hover:bg-blue-700 text-center"
                 >
-                    Edit link
+                    Add Student
                 </Link>
                 <Link
                     to=""
-                    className="bg-red-600 text-white py-3 rounded-lg shadow hover:bg-red-700 text-center"
+                    className="bg-purple-600 text-white py-3 rounded-lg shadow hover:bg-red-700 text-center"
                 >
-                    Delete Link
+                    Upload Avatar
                 </Link>
             </div>
             {/* student board control */}
-            <div className="p-4 border-b font-bold text-purple-700">
+            {/* <div className="p-4 border-b font-bold text-purple-700">
                 Controll students
             </div>
             <div className="bg-white p-6 rounded-lg shadow-md grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
@@ -113,7 +113,7 @@ export default function Dashboard() {
                 >
                     Delete student
                 </Link>
-            </div>
+            </div> */}
         </>
     );
 }
