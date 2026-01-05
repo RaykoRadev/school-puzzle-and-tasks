@@ -14,6 +14,10 @@ import LinksList from "./components/class/linksList/LinksList";
 import Spinner from "./components/spinner/Spinner";
 import StudentsProfile from "./components/studentsProfile/StudentsProfile";
 import AllClasses from "./components/allClasses/AllClasses";
+import IsGuest from "./guards/isGuest/IsGuest";
+import IsAuthenticated from "./guards/isAuthenticated/IsAuthenticated";
+import IsTeacher from "./guards/isTeacher/IsTeacher";
+import IsStudent from "./guards/isStudent/IsStudent";
 
 function App() {
     return (
@@ -23,22 +27,53 @@ function App() {
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/spinner" element={<Spinner />} />
-                <Route path="/student-profile" element={<StudentsProfile />} />
-                <Route path="/student/login" element={<Login />} />
-                <Route path="/teacher/login" element={<Login />} />
-                <Route path="/teacher/dashboard" element={<TeacherPage />}>
-                    <Route path="students-list" element={<StudentsList />} />
-                    <Route path="profile" element={<Profile />} />
-                    <Route index element={<Dashboard />} />
+
+                {/* student */}
+                <Route element={<IsStudent />}>
+                    <Route
+                        path="/student-profile"
+                        element={<StudentsProfile />}
+                    />
                 </Route>
-                <Route path="/teacher/create-link" element={<CreateLink />} />
-                <Route path="/:teacherId/allClasses" element={<AllClasses />} />
-                <Route
-                    path="/teacher/create-student"
-                    element={<CreateStudent />}
-                />
-                <Route path="/links/:teacherId/:classId" element={<Class />}>
-                    <Route path=":subjectId" element={<LinksList />} />
+
+                {/* guests */}
+                <Route element={<IsGuest />}>
+                    <Route path="/student/login" element={<Login />} />
+                    <Route path="/teacher/login" element={<Login />} />
+                </Route>
+
+                {/* teacher */}
+                <Route element={<IsTeacher />}>
+                    <Route path="/teacher/dashboard" element={<TeacherPage />}>
+                        <Route
+                            path="students-list"
+                            element={<StudentsList />}
+                        />
+                        <Route path="profile" element={<Profile />} />
+                        <Route index element={<Dashboard />} />
+                    </Route>
+                    <Route
+                        path="/teacher/create-link"
+                        element={<CreateLink />}
+                    />
+                    <Route
+                        path="/:teacherId/allClasses"
+                        element={<AllClasses />}
+                    />
+                    <Route
+                        path="/teacher/create-student"
+                        element={<CreateStudent />}
+                    />
+                </Route>
+
+                {/* teacher and student */}
+                <Route element={<IsAuthenticated />}>
+                    <Route
+                        path="/links/:teacherId/:classId"
+                        element={<Class />}
+                    >
+                        <Route path=":subjectId" element={<LinksList />} />
+                    </Route>
                 </Route>
             </Routes>
         </UserProvider>
