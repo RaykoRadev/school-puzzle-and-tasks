@@ -32,11 +32,17 @@ export default async function fetchRequest(
 
         if (!res.ok) {
             const errorBody = await res.json();
-            if (errorBody.message === "jwt expired") {
-                //? there could be problems with that using a hook
+
+            if (
+                errorBody.status === 400 &&
+                (err.message == "jwt expired" ||
+                    errorBody.message == "invalid signature")
+            ) {
                 localStorage.removeItem("user");
-                window.location("/");
+
+                window.location.replace = "/";
             }
+
             throw new Error(
                 errorBody.message || `Request failed with ${res.status}`
             );
