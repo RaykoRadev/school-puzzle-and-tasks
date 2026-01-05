@@ -18,7 +18,7 @@ export default function Navigation() {
     );
 
     return (
-        <header className="sticky inset-0 z-50 bg-transparent backdrop-blur-sm">
+        <header className="sticky inset-0 z-50 bg-transparent backdrop-blur-xs">
             <nav className="mx-auto flex max-w-6xl items-center gap-8 px-6 py-4 lg:px-12">
                 {/* Logo */}
                 <div className="relative flex items-center">
