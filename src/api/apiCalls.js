@@ -1,5 +1,8 @@
 import { useContext } from "react";
 import { UserContext } from "../context/userContext";
+import { toast } from "sonner";
+
+let sessionExpiredHandled = false;
 
 export default async function fetchRequest(
     url,
@@ -33,14 +36,19 @@ export default async function fetchRequest(
         if (!res.ok) {
             const errorBody = await res.json();
 
-            if (
-                errorBody.status === 400 &&
-                (err.message == "jwt expired" ||
-                    errorBody.message == "invalid signature")
-            ) {
-                localStorage.removeItem("user");
+            const isSessionExpired =
+                errorBody?.message === "jwt expired" ||
+                errorBody?.message === "invalid signature" ||
+                errorBody?.message === "invalid token";
 
-                window.location.replace = "/";
+            if (isSessionExpired && !sessionExpiredHandled) {
+                sessionExpiredHandled = true;
+
+                localStorage.removeItem("user");
+                window.location.replace("/");
+                toast.error("Изтекла сесия");
+
+                return;
             }
 
             throw new Error(
