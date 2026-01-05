@@ -146,7 +146,11 @@ export default function Navigation() {
                     )}
                 </div>
             )}
-            <Toaster richColors position="top-right" />
+            <Toaster
+                richColors
+                position="top-right"
+                toastOptions={{ style: { width: "fit-content" } }}
+            />
         </header>
     );
 }
