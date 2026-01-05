@@ -5,8 +5,15 @@ import { useLogout } from "../../hooks/useRequestHook";
 import { Toaster } from "sonner";
 
 export default function Navigation() {
-    const { role, _id, accessToken, username, removeLocalStorageData } =
-        useContext(UserContext);
+    const {
+        role,
+        _id,
+        accessToken,
+        username,
+        removeLocalStorageData,
+        teacherId,
+        classId,
+    } = useContext(UserContext);
     const [menuOpen, setMenuOpen] = useState(false);
     const navigate = useNavigate();
 
@@ -24,6 +31,17 @@ export default function Navigation() {
                 <div className="relative flex items-center">
                     {role === "teacher" && (
                         <Link to={`/${_id}/allClasses`}>
+                            <img
+                                src="https://www.svgrepo.com/show/499831/target.svg"
+                                loading="lazy"
+                                width={32}
+                                height={32}
+                                alt="Logo"
+                            />
+                        </Link>
+                    )}
+                    {role === "student" && (
+                        <Link to={`/links/${teacherId}/${classId}`}>
                             <img
                                 src="https://www.svgrepo.com/show/499831/target.svg"
                                 loading="lazy"
