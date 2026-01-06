@@ -5,7 +5,7 @@ import { UserContext } from "../../context/userContext";
 export default function DeleteModal({ onClose, studentId }) {
     const { accessToken, _id } = useContext(UserContext);
 
-    const { mutate } = useDeleteStudent(accessToken, _id, studentId);
+    const { mutate, isPending } = useDeleteStudent(accessToken, _id, studentId);
     return (
         <div className="backdrop" onClick={onClose}>
             <div id="modal">
@@ -52,7 +52,7 @@ export default function DeleteModal({ onClose, studentId }) {
                             <button
                                 onClick={() => mutate()}
                                 type="button"
-                                // disabled={loading}
+                                disabled={isPending}
                                 className="px-4 py-2 rounded-md cursor-pointer text-white text-sm font-medium tracking-wide bg-green-700 hover:bg-green-600 active:bg-green-700"
                             >
                                 Delete
