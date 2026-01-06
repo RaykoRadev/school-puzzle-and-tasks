@@ -5,7 +5,7 @@ import Home from "./components/home/Home";
 import TeacherPage from "./components/teacherPage/TeacherPage";
 import UserProvider from "./provider/UserProvider";
 import CreateLink from "./components/createLink/CreateLink";
-import CreateStudent from "./components/createStudent/CreateStudent";
+import CreateEditStudent from "./components/createEditStudent/CreateEditStudent";
 import Dashboard from "./components/teacherPage/dashboard/Dashboard";
 import StudentsList from "./components/teacherPage/studentsList/StudentsList";
 import Profile from "./components/teacherPage/profile/Profile";
@@ -61,12 +61,16 @@ function App() {
                             element={<CreateLink />}
                         />
                         <Route
+                            path="/:teacherId/:studentId/edit"
+                            element={<CreateEditStudent />}
+                        />
+                        <Route
                             path="/:teacherId/allClasses"
                             element={<AllClasses />}
                         />
                         <Route
                             path="/teacher/create-student"
-                            element={<CreateStudent />}
+                            element={<CreateEditStudent />}
                         />
                     </Route>
 

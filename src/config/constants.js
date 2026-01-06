@@ -12,5 +12,5 @@ export const endPoints = {
     createLink: "/links/createLink",
 
     registerStudent: "/student/register",
-    deleteStudent: "/student",
+    student: "/student",
 };

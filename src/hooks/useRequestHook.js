@@ -3,6 +3,7 @@ import { endPoints, host } from "../config/constants";
 import fetchRequest from "../api/apiCalls";
 import revertObject from "../utils/revertObject";
 import { toast } from "sonner";
+import { Navigate } from "react-router";
 
 export const useStudentsList = (accessToken) =>
     useQuery({
@@ -146,7 +147,7 @@ export const useDeleteStudent = (accessToken, teacherId, studentId) => {
         mutationFn: () => {
             fetchRequest(
                 host +
-                    endPoints.deleteStudent +
+                    endPoints.student +
                     "/" +
                     teacherId +
                     "/" +
@@ -160,6 +161,56 @@ export const useDeleteStudent = (accessToken, teacherId, studentId) => {
         onSuccess: () => {
             // navigate(-1);
             toast.success("Успешно изтрит студент!");
+        },
+        onSettled: () => {
+            queryClient.invalidateQueries({ queryKey: ["studenstList"] });
+        },
+    });
+};
+
+export const useOneStudent = (accessToken, role, teacherId, studentId) =>
+    useQuery({
+        queryKey: ["singleSudent", role, studentId],
+        queryFn: async ({ signal }) =>
+            fetchRequest(
+                host + endPoints.student + "/" + teacherId + "/" + studentId,
+                "GET",
+                signal,
+                accessToken
+            ),
+        enabled: !!studentId,
+        staleTime: role === "teacher" ? 0 : 1000 * 60 * 30, // that should make always new req for a theacher and one req per 30 min for student
+    });
+
+export const useEditStudent = (
+    accessToken,
+    teacherId,
+    studentId,
+    setStudent,
+    setResult,
+    navigate
+) => {
+    const queryClient = useQueryClient();
+    return useMutation({
+        mutationFn: (data) => {
+            fetchRequest(
+                host +
+                    endPoints.student +
+                    "/" +
+                    teacherId +
+                    "/" +
+                    studentId +
+                    "/edit",
+                "PATCH",
+                null,
+                accessToken,
+                data
+            );
+        },
+        onSuccess: (result) => {
+            navigate(-1);
+            toast.success("Успешно променен студент!");
+            setResult(true), setStudent(result);
         },
         onSettled: () => {
             queryClient.invalidateQueries({ queryKey: ["studenstList"] });

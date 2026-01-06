@@ -50,6 +50,7 @@ export default function StudentsList() {
                         <StudentRow
                             key={student._id}
                             {...student}
+                            studentId={student._id}
                             openModal={openModal}
                             closeModal={closeModal}
                         />
