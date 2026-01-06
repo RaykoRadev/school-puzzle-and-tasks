@@ -139,3 +139,30 @@ export const useCreateStudent = (accessToken, setStudent, setResult) => {
         //     queryClient.invalidateQueries({ queryKey: ["classInfo"] }),
     });
 };
+
+export const useDeleteStudent = (accessToken, teacherId, studentId) => {
+    const queryClient = useQueryClient();
+    return useMutation({
+        mutationFn: () => {
+            fetchRequest(
+                host +
+                    endPoints.deleteStudent +
+                    "/" +
+                    teacherId +
+                    "/" +
+                    studentId +
+                    "/delete",
+                "DELETE",
+                null,
+                accessToken
+            );
+        },
+        onSuccess: () => {
+            // navigate(-1);
+            toast.success("Успешно изтрит студент!");
+        },
+        onSettled: () => {
+            queryClient.invalidateQueries({ queryKey: ["studenstList"] });
+        },
+    });
+};
