@@ -32,7 +32,7 @@ export default function Class() {
     }
 
     return (
-        <div className="flex min-h-screen bg-gray-100">
+        <div className="flex flex-1 bg-gray-100">
             {/* Mobile Overlay */}
             {isOpen && (
                 <div
@@ -43,7 +43,7 @@ export default function Class() {
 
             {/* Sidebar */}
             <aside
-                className={`fixed md:static z-30 w-64 bg-white shadow-md min-h-screen transform transition-transform duration-300 ${
+                className={`fixed md:static z-30 w-64 bg-white shadow-md transform transition-transform duration-300 ${
                     isOpen ? "translate-x-0" : "-translate-x-full"
                 } md:translate-x-0
     `}
@@ -106,11 +106,10 @@ export default function Class() {
                 {/* Content */}
                 <main className="p-6 space-y-6 flex-1">
                     <Outlet context={{ subjects: data?.classes[0].subjects }} />
-
-                    <footer className="bg-white p-4 mt-10 text-center text-sm text-gray-400 border-t">
-                        © 2025 All rights reserved.
-                    </footer>
                 </main>
+                <footer className="bg-white p-4 text-center text-sm text-gray-400 border-t">
+                    © 2025 All rights reserved.
+                </footer>
             </div>
         </div>
     );

@@ -19,7 +19,7 @@ export default function TeacherPage() {
     }, [pathname]);
 
     return (
-        <div className="flex min-h-screen bg-gray-100">
+        <div className="flex flex-1 bg-gray-100">
             {/* Mobile Overlay */}
             {isOpen && (
                 <div
@@ -33,7 +33,6 @@ export default function TeacherPage() {
                 className={`
                     fixed md:static z-30
                     w-64 bg-white shadow-md
-                    min-h-screen
                     transform transition-transform duration-300
                     ${isOpen ? "translate-x-0" : "-translate-x-full"}
                     md:translate-x-0

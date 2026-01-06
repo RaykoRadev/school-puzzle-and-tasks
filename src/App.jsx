@@ -22,60 +22,65 @@ import IsStudent from "./guards/isStudent/IsStudent";
 function App() {
     return (
         <UserProvider>
-            <Navigation />
+            <div className="min-h-screen flex flex-col bg-transperant">
+                <Navigation />
 
-            <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/spinner" element={<Spinner />} />
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/spinner" element={<Spinner />} />
 
-                {/* student */}
-                <Route element={<IsStudent />}>
-                    <Route
-                        path="/student-profile"
-                        element={<StudentsProfile />}
-                    />
-                </Route>
-
-                {/* guests */}
-                <Route element={<IsGuest />}>
-                    <Route path="/student/login" element={<Login />} />
-                    <Route path="/teacher/login" element={<Login />} />
-                </Route>
-
-                {/* teacher */}
-                <Route element={<IsTeacher />}>
-                    <Route path="/teacher/dashboard" element={<TeacherPage />}>
+                    {/* student */}
+                    <Route element={<IsStudent />}>
                         <Route
-                            path="students-list"
-                            element={<StudentsList />}
+                            path="/student-profile"
+                            element={<StudentsProfile />}
                         />
-                        <Route path="profile" element={<Profile />} />
-                        <Route index element={<Dashboard />} />
                     </Route>
-                    <Route
-                        path="/teacher/create-link"
-                        element={<CreateLink />}
-                    />
-                    <Route
-                        path="/:teacherId/allClasses"
-                        element={<AllClasses />}
-                    />
-                    <Route
-                        path="/teacher/create-student"
-                        element={<CreateStudent />}
-                    />
-                </Route>
 
-                {/* teacher and student */}
-                <Route element={<IsAuthenticated />}>
-                    <Route
-                        path="/links/:teacherId/:classId"
-                        element={<Class />}
-                    >
-                        <Route path=":subjectId" element={<LinksList />} />
+                    {/* guests */}
+                    <Route element={<IsGuest />}>
+                        <Route path="/student/login" element={<Login />} />
+                        <Route path="/teacher/login" element={<Login />} />
                     </Route>
-                </Route>
-            </Routes>
+
+                    {/* teacher */}
+                    <Route element={<IsTeacher />}>
+                        <Route
+                            path="/teacher/dashboard"
+                            element={<TeacherPage />}
+                        >
+                            <Route
+                                path="students-list"
+                                element={<StudentsList />}
+                            />
+                            <Route path="profile" element={<Profile />} />
+                            <Route index element={<Dashboard />} />
+                        </Route>
+                        <Route
+                            path="/teacher/create-link"
+                            element={<CreateLink />}
+                        />
+                        <Route
+                            path="/:teacherId/allClasses"
+                            element={<AllClasses />}
+                        />
+                        <Route
+                            path="/teacher/create-student"
+                            element={<CreateStudent />}
+                        />
+                    </Route>
+
+                    {/* teacher and student */}
+                    <Route element={<IsAuthenticated />}>
+                        <Route
+                            path="/links/:teacherId/:classId"
+                            element={<Class />}
+                        >
+                            <Route path=":subjectId" element={<LinksList />} />
+                        </Route>
+                    </Route>
+                </Routes>
+            </div>
         </UserProvider>
     );
 }

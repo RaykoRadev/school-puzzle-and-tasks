@@ -36,7 +36,7 @@ export default function AllClasses() {
                 <h1 className="text-white">Welcom to our site!!!</h1>
             )}
             {role === "teacher" && (
-                <div className="container relative z-40 mx-auto h-screen flex items-center justify-center ">
+                <div className="container relative flex-1 z-40 mx-auto h-screen flex items-center justify-center ">
                     <div className="flex flex-wrap justify-center mx-auto lg:w-full md:w-5/6 xl:shadow-small-blue ">
                         {data?.map((oneClass) => (
                             <Link

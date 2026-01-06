@@ -4,7 +4,7 @@ import { UserContext } from "../../context/userContext";
 export default function StudentsProfile() {
     const { username } = useContext(UserContext);
     return (
-        <section className="min-h-screen flex items-center justify-center p-4">
+        <section className="flex-1 flex items-center justify-center p-4">
             <div className="w-full md:w-1/2 md:mx-auto flex flex-col md:flex-row items-center justify-center text-center">
                 <div className="backdrop-blur-md, border-2 border-emerald-400 rounded-lg flex flex-col md:flex-row items-center justify-center p-3">
                     <img
