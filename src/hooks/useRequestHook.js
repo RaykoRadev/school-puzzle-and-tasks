@@ -116,6 +116,35 @@ export const useCreateLink = (accessToken, navigate) => {
     });
 };
 
+export const useDeleteLink = (accessToken, classId, subjectId, linkId) => {
+    const queryClient = useQueryClient();
+    return useMutation({
+        mutationFn: () => {
+            fetchRequest(
+                host +
+                    endPoints.link +
+                    "/" +
+                    classId +
+                    "/" +
+                    subjectId +
+                    "/" +
+                    linkId +
+                    "/delete",
+                "DELETE",
+                null,
+                accessToken
+            );
+        },
+        onSuccess: () => {
+            // navigate(-1);
+            toast.success("Успешно изтрит линк!");
+        },
+        onSettled: () => {
+            queryClient.invalidateQueries({ queryKey: ["singleClass"] });
+        },
+    });
+};
+
 export const useCreateStudent = (accessToken, setStudent, setResult) => {
     const queryClient = useQueryClient();
     return useMutation({

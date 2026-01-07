@@ -10,6 +10,7 @@ export const endPoints = {
     getAllStudents: "/links/getAllStudents",
 
     createLink: "/links/createLink",
+    link: "/links",
 
     registerStudent: "/student/register",
     student: "/student",

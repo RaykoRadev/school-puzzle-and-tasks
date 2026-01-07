@@ -92,7 +92,8 @@ export default function StudentRow({
                         {modal && (
                             <DeleteModal
                                 onClose={deleteModalHandler}
-                                studentId={studentId}
+                                itemId={studentId}
+                                itemType="student"
                             />
                         )}
                     </div>
