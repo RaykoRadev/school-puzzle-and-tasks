@@ -31,9 +31,8 @@ export default function Dashboard() {
                             </h2>
                         </div>
                     </div> */}
-            {/* 
-                    list of last online students */}
-            <div className="bg-white rounded-lg shadow-md">
+            {/* list of last online students */}
+            {/* <div className="bg-white rounded-lg shadow-md">
                 <div className="p-4 border-b font-bold text-purple-700">
                     User List
                 </div>
@@ -65,12 +64,12 @@ export default function Dashboard() {
                         </tr>
                     </tbody>
                 </table>
-            </div>
+            </div> */}
             {/* links board  control*/}
-            <div className="p-4 border-b font-bold text-purple-700">
+            <div className="p-4 border-b font-bold text-green-600">
                 Controll links / Забъркай манджа с грозде
             </div>
-            <div className="bg-white p-6 rounded-lg shadow-md grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+            <div className="bg-orange-200 p-6 rounded-lg shadow-md grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
                 <Link
                     to="/teacher/create-link"
                     className="bg-green-600 text-white py-3 rounded-lg shadow hover:bg-purple-700"
@@ -87,7 +86,7 @@ export default function Dashboard() {
                     to=""
                     className="bg-purple-600 text-white py-3 rounded-lg shadow hover:bg-red-700 text-center"
                 >
-                    Upload Avatar
+                    Edit Profile / Password
                 </Link>
             </div>
             {/* student board control */}

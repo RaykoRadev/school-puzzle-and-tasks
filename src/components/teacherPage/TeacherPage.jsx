@@ -32,13 +32,13 @@ export default function TeacherPage() {
             <aside
                 className={`
                     fixed md:static z-30
-                    w-64 bg-white shadow-md
+                    w-64 bg-orange-100 shadow-md
                     transform transition-transform duration-300
                     ${isOpen ? "translate-x-0" : "-translate-x-full"}
                     md:translate-x-0
                 `}
             >
-                <div className="p-6 font-bold text-purple-700 text-2xl">
+                <div className="p-6 font-bold text-green-600 text-2xl">
                     AdminPanel
                 </div>
 
@@ -46,71 +46,67 @@ export default function TeacherPage() {
                     <Link
                         to="/teacher/dashboard"
                         onClick={() => setIsOpen(false)}
-                        className="block py-3 px-6 text-gray-700 hover:bg-purple-100"
+                        className="block py-3 px-6 text-gray-700 hover:bg-green-100"
                     >
                         Dashboard
                     </Link>
                     <Link
                         to="/teacher/dashboard/students-list"
                         onClick={() => setIsOpen(false)}
-                        className="block py-3 px-6 text-gray-700 hover:bg-purple-100"
+                        className="block py-3 px-6 text-gray-700 hover:bg-green-100"
                     >
                         Users
                     </Link>
-                    <Link
+                    {/* <Link
                         to="#"
                         onClick={() => setIsOpen(false)}
-                        className="block py-3 px-6 text-gray-700 hover:bg-purple-100"
+                        className="block py-3 px-6 text-gray-700 hover:bg-green-100"
                     >
                         Analytics
                     </Link>
                     <Link
                         to="/teacher/dashboard/profile"
                         onClick={() => setIsOpen(false)}
-                        className="block py-3 px-6 text-gray-700 hover:bg-purple-100"
+                        className="block py-3 px-6 text-gray-700 hover:bg-green-100"
                     >
                         Settings
-                    </Link>
+                    </Link> */}
                 </nav>
             </aside>
 
             {/* Main Content */}
             <div className="flex-1 flex flex-col">
                 {/* Top Navbar */}
-                <header className="bg-white shadow-md p-4 flex justify-between items-center">
+                <header className="bg-orange-300 shadow-md p-4 flex justify-between items-center">
                     <div className="flex items-center gap-3">
                         {/* Hamburger for mobile */}
                         <button
                             onClick={() => setIsOpen(true)}
-                            className="md:hidden text-purple-700 text-2xl"
+                            className="md:hidden text-green-600 text-2xl"
                         >
                             ☰
                         </button>
 
-                        <h1 className="text-xl font-bold text-purple-700">
+                        <h1 className="text-xl font-bold text-green-600">
                             {pageTitle}
                         </h1>
                     </div>
 
                     <div className="flex items-center gap-4">
-                        <input
+                        {/* <input
                             type="text"
                             placeholder="Search..."
                             className="hidden sm:block px-4 py-2 border rounded-lg"
-                        />
-                        <div className="w-10 h-10 flex items-center justify-center font-bold">
+                        /> */}
+                        <div className="w-10 h-10 mr-3 flex items-center justify-center font-bold text-green-600 text-lg">
                             {username}
                         </div>
                     </div>
                 </header>
 
                 {/* Content */}
-                <main className="p-6 space-y-6 flex-1">
+                <main className="p-6 space-y-6 flex-1 bg-orange-200">
                     <Outlet />
-
-                    <footer className="bg-white p-4 mt-10 text-center text-sm text-gray-400 border-t">
-                        © 2025 AdminPanel. All rights reserved.
-                    </footer>
                 </main>
             </div>
         </div>

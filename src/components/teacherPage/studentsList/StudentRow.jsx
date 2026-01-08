@@ -16,6 +16,9 @@ export default function StudentRow({
     openModal,
 }) {
     const parsedDate = parseDate(sessions);
+    const parsedCreatedAt = parseDate(createdAt);
+    const parsedExpiredAt = parseDate(expireAt);
+
     const { classesIds, _id } = useContext(UserContext);
     const [modal, setShowModal] = useState(false);
 
@@ -47,8 +50,8 @@ export default function StudentRow({
             >
                 Click me
             </td>
-            <td className="p-4">{createdAt}</td>
-            <td className="p-4">{expireAt}</td>
+            <td className="p-4">{parsedCreatedAt}</td>
+            <td className="p-4">{parsedExpiredAt}</td>
             <td className="p-4">
                 <div className="flex justify-around items-center py-3">
                     <div className="flex gap-2 text-gray-600 duration-200 hover:cursor-pointer">

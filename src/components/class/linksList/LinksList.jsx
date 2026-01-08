@@ -27,7 +27,7 @@ export default function LinksList() {
                 {subject.links.map((link) => (
                     <div
                         key={link._id}
-                        className="bg-gray-100 rounded-lg group overflow-hidden relative lg:hover:before:bg-black before:absolute before:inset-0 before:opacity-20 before:transition-all before:pointer-events-none"
+                        className="bg-orange-200 rounded-lg group overflow-hidden relative lg:hover:before:bg-black before:absolute before:inset-0 before:opacity-20 before:transition-all before:pointer-events-none"
                     >
                         <a
                             href={link.link}

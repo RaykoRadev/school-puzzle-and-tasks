@@ -43,7 +43,7 @@ export default function Class() {
 
             {/* Sidebar */}
             <aside
-                className={`fixed md:static z-30 w-64 bg-white shadow-md transform transition-transform duration-300 ${
+                className={`fixed md:static z-30 w-64 bg-orange-100 shadow-md transform transition-transform duration-300 ${
                     isOpen ? "translate-x-0" : "-translate-x-full"
                 } md:translate-x-0
     `}
@@ -76,7 +76,7 @@ export default function Class() {
             {/* Main Content */}
             <div className="flex-1 flex flex-col">
                 {/* Top Navbar */}
-                <header className="bg-white shadow-md p-4 flex justify-between items-center">
+                <header className="bg-orange-300 shadow-md p-4 flex justify-between items-center">
                     <div className="flex items-center gap-3">
                         {/* Hamburger */}
                         <button
@@ -92,19 +92,16 @@ export default function Class() {
                     </div>
 
                     <div className="flex items-center gap-4">
-                        <div className="w-10 h-10 flex items-center justify-center font-bold text-green-600">
+                        <div className="w-10 h-10 mr-3 flex items-center justify-center font-bold text-green-600 text-lg">
                             {username}
                         </div>
                     </div>
                 </header>
 
                 {/* Content */}
-                <main className="p-6 space-y-6 flex-1">
+                <main className="p-6 space-y-6 flex-1 bg-orange-200">
                     <Outlet context={{ subjects: data?.classes[0].subjects }} />
                 </main>
-                <footer className="bg-white p-4 text-center text-sm text-gray-400 border-t">
-                    © 2025 All rights reserved.
-                </footer>
             </div>
         </div>
     );

@@ -31,9 +31,9 @@ export default function StudentsList() {
     //todo sorting when the conmponent design is finalised
 
     return (
-        <div className="bg-white rounded-lg shadow-md">
+        <div className="bg-orange-200 rounded-lg shadow-md">
             <table className="w-full text-left">
-                <thead className="bg-purple-50">
+                <thead className="bg-orange-100">
                     <tr>
                         <th className="p-4">Name</th>
                         <th className="p-4">Code</th>

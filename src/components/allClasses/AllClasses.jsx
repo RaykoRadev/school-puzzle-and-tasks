@@ -37,12 +37,12 @@ export default function AllClasses() {
             )}
             {role === "teacher" && (
                 <div className="container relative flex-1 z-40 mx-auto h-screen flex items-center justify-center ">
-                    <div className="flex flex-wrap justify-center mx-auto lg:w-full md:w-5/6 xl:shadow-small-blue ">
+                    <div className="flex flex-wrap -m-2 justify-center mx-auto lg:w-full md:w-5/6 xl:shadow-small-blue">
                         {data?.map((oneClass) => (
                             <Link
                                 key={oneClass.classId}
                                 to={`/links/${_id}/${oneClass.classId}`}
-                                className="block w-1/2 py-10 text-center border lg:w-1/2 backdrop-blur-xs"
+                                className="block w-full md:w-[calc(50%-1rem)] m-2 py-10 text-center border bg-orange-200 rounded-lg"
                             >
                                 {/* From Uiverse.io by SmookyDev */}
                                 <div className="m-2 group px-10 py-5 bg-white/10 rounded-lg flex flex-col items-center justify-center gap-2 relative after:absolute after:h-full after:bg-[#abd373] z-20 shadow-lg after:-z-20 after:w-full after:inset-0 after:rounded-lg transition-all duration-300 hover:transition-all hover:duration-300 after:transition-all after:duration-500 after:hover:transition-all after:hover:duration-500 overflow-hidden cursor-pointer after:-translate-y-full after:hover:translate-y-0 [&_p]:delay-200 [&_p]:transition-all">
@@ -50,7 +50,7 @@ export default function AllClasses() {
                                         xmlns="http://www.w3.org/2000/svg"
                                         xmlnsXlink="http://www.w3.org/1999/xlink"
                                         version="1.1"
-                                        className="w-44 card1img aspect-square text-[#abd373] group-hover:bg-gray-800 text-5xl rounded-full p-2 transition-all duration-300 group-hover:transition-all group-hover:duration-300 group-hover:-translate-y-2 mx-auto"
+                                        className="w-44 card1img aspect-square text-[#abd373] group-hover:bg-orange-800 text-5xl rounded-full p-2 transition-all duration-300 group-hover:transition-all group-hover:duration-300 group-hover:-translate-y-2 mx-auto"
                                         viewBox="0 0 256 256"
                                         xmlSpace="preserve"
                                     >
@@ -148,7 +148,7 @@ export default function AllClasses() {
                                             />
                                         </g>
                                     </svg>
-                                    <p className="cardtxt font-semibold text-gray-200 tracking-wider group-hover:text-gray-700 text-xl">
+                                    <p className="cardtxt font-semibold text-green-600 tracking-wider group-hover:text-gray-700 text-xl">
                                         {visualizeClassName(oneClass.name)}
                                     </p>
                                 </div>
