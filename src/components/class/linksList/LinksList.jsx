@@ -41,15 +41,11 @@ export default function LinksList() {
                             </div>
                         </a>
                         {role === "teacher" && (
-                            <div
-                                className="absolute bottom-2 left-0 right-0
-      flex justify-center gap-6
-      opacity-0 pointer-events-none
-      group-hover:opacity-100 group-hover:pointer-events-auto
-      transition-opacity duration-200"
-                            >
+                            <div className="absolute bottom-2 left-0 right-0 flex justify-center gap-6 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-opacity duration-200">
                                 <div className="flex gap-2 text-gray-600 duration-200 hover:cursor-pointer">
-                                    <Link to={``}>
+                                    <Link
+                                        to={`/${classId}/${subjectId}/${link._id}/edit`}
+                                    >
                                         <button className="font-semibold text-sm text-green-700">
                                             <svg
                                                 className="w-5 stroke-green-700 transition-transform hover:scale-110"

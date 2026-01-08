@@ -3,7 +3,6 @@ import { endPoints, host } from "../config/constants";
 import fetchRequest from "../api/apiCalls";
 import revertObject from "../utils/revertObject";
 import { toast } from "sonner";
-import { Navigate } from "react-router";
 
 export const useStudentsList = (accessToken) =>
     useQuery({
@@ -19,7 +18,7 @@ export const useStudentsList = (accessToken) =>
 
 export const useOneClass = (accessToken, role, teacherId, classId) =>
     useQuery({
-        queryKey: ["singleClass", role],
+        queryKey: ["singleClass", role, classId],
         queryFn: async ({ signal }) =>
             fetchRequest(
                 host + endPoints.getOneClass + "/" + teacherId + "/" + classId,
@@ -141,6 +140,66 @@ export const useDeleteLink = (accessToken, classId, subjectId, linkId) => {
         },
         onSettled: () => {
             queryClient.invalidateQueries({ queryKey: ["singleClass"] });
+        },
+    });
+};
+
+export const useOneLink = (accessToken, role, classId, subjectId, linkId) =>
+    useQuery({
+        queryKey: ["singleLink", role, linkId],
+        queryFn: ({ signal }) =>
+            fetchRequest(
+                host +
+                    endPoints.link +
+                    "/getOneLink/" +
+                    classId +
+                    "/" +
+                    subjectId +
+                    "/" +
+                    linkId,
+                "GET",
+                signal,
+                accessToken
+            ),
+        enabled: !!linkId,
+        staleTime: role === "teacher" ? 0 : 1000 * 60 * 30,
+    });
+
+export const useEditLink = (
+    accessToken,
+    role,
+    teacherId,
+    classId,
+    subjectId,
+    linkId,
+    navigate
+) => {
+    const queryClient = useQueryClient();
+    return useMutation({
+        mutationFn: (data) =>
+            fetchRequest(
+                host +
+                    endPoints.link +
+                    "/" +
+                    classId +
+                    "/" +
+                    subjectId +
+                    "/" +
+                    linkId +
+                    "/edit",
+                "PUT",
+                null,
+                accessToken,
+                data
+            ),
+        onSuccess: () => {
+            toast.success("Успешно променен линк!");
+            navigate(`/links/${teacherId}/${classId}/${subjectId}`);
+        },
+        onSettled: () => {
+            queryClient.invalidateQueries({
+                queryKey: ["singleClass", role, classId],
+            });
         },
     });
 };

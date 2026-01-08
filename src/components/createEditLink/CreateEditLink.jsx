@@ -1,7 +1,11 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../context/userContext";
-import { useNavigate } from "react-router";
-import { useAllClass, useCreateLink } from "../../hooks/useRequestHook";
+import { useNavigate, useParams } from "react-router";
+import {
+    useAllClass,
+    useCreateLink,
+    useEditLink,
+} from "../../hooks/useRequestHook";
 import Spinner from "../spinner/Spinner";
 import { toast } from "sonner";
 
@@ -12,16 +16,43 @@ const initValues = {
     subject: "Choose a subject",
 };
 
-//todo proper error handling
-
-export default function CreateLink() {
-    const { _id, accessToken } = useContext(UserContext);
+export default function CreateEditLink() {
+    const { _id, accessToken, role } = useContext(UserContext);
     const [value, setValues] = useState(initValues);
+    const [nameVisual, setNameVisual] = useState("");
     const navigate = useNavigate();
 
     const { data, isPending, error } = useAllClass(accessToken, _id);
+    const { linkId, classId, subjectId } = useParams();
 
-    const { mutate } = useCreateLink(accessToken, navigate);
+    useEffect(() => {
+        if (!linkId) return;
+
+        const classInfo = data?.find((cl) => cl.classId === classId); //{name: 'class1', subjects: Array(7), _id: '695255fd86a4d31dde800416', classId: '695255fd86a4d31dde80041e'}
+        const subjectInfo = classInfo?.subjects.find(
+            (sub) => sub._id === subjectId
+        ); //{name: 'math', links: Array(4), visualizationName: 'Математика', _id: '695255fd86a4d31dde800418'}
+        const linkInfo = subjectInfo?.links.find((link) => link._id === linkId); //{text: 'abv', link: 'https://www.abv.bg/', _id: '695e58e003a854e23e47c238'}
+
+        setNameVisual(subjectInfo?.visualizationName);
+        setValues({
+            text: linkInfo?.text,
+            link: linkInfo?.link,
+            class: classInfo?.name,
+            subject: subjectInfo?.name,
+        });
+    }, [linkId, data]);
+
+    const createMutation = useCreateLink(accessToken, navigate);
+    const editMutatition = useEditLink(
+        accessToken,
+        role,
+        _id,
+        classId,
+        subjectId,
+        linkId,
+        navigate
+    );
 
     if (isPending) {
         return <Spinner />;
@@ -41,7 +72,6 @@ export default function CreateLink() {
     const selectedClassSubject = data?.filter(
         (el) => el.name === value.class
     )[0];
-    console.log(accessToken);
 
     const submitHandler = async (formData) => {
         const text = formData.get("text");
@@ -52,13 +82,16 @@ export default function CreateLink() {
         const linkData = {
             text,
             link,
-            // class: className,  // shouldnt be needed
-            subject,
+            subject: subject || value.subject,
             _id,
             classId: selectedClassSubject.classId,
         };
 
-        mutate(linkData);
+        if (linkId) {
+            editMutatition.mutate(linkData);
+        } else {
+            createMutation.mutate(linkData);
+        }
     };
 
     return (
@@ -76,6 +109,7 @@ export default function CreateLink() {
                             name="text"
                             value={value.text}
                             onChange={changeHandler}
+                            required
                         />
 
                         <input
@@ -85,6 +119,7 @@ export default function CreateLink() {
                             name="link"
                             value={value.link}
                             onChange={changeHandler}
+                            required
                         />
                         <i className="mt-0 mb-4 text-xs text-gray-400 not-italic">
                             example: https://www.abv.bg
@@ -95,6 +130,8 @@ export default function CreateLink() {
                             name="class"
                             value={value.class}
                             onChange={changeHandler}
+                            disabled={linkId}
+                            required
                         >
                             <option value="">Select a class</option>
                             <option value="class1">Class 1</option>
@@ -108,12 +145,18 @@ export default function CreateLink() {
                             id="gender"
                             name="subject"
                             onChange={changeHandler}
-                            disabled={!value.class}
+                            disabled={!value.class || linkId}
+                            required
                         >
-                            {!selectedClassSubject ? (
+                            {linkId && (
+                                <option value={value.subject}>
+                                    {nameVisual}
+                                </option>
+                            )}
+                            {!linkId && !selectedClassSubject ? (
                                 <option value="">Choose a Class</option>
                             ) : (
-                                selectedClassSubject.subjects.map((sub) => (
+                                selectedClassSubject?.subjects.map((sub) => (
                                     <option value={sub.name} key={sub._id}>
                                         {sub.visualizationName}
                                     </option>
@@ -122,7 +165,7 @@ export default function CreateLink() {
                         </select>
 
                         <button className="bg-gradient-to-r from-indigo-500 to-blue-500 text-white font-bold py-2 px-4 rounded-md mt-4 hover:bg-indigo-600 hover:to-blue-600 transition ease-in-out duration-150">
-                            Create Link
+                            {linkId ? "Edit Link" : "Create link"}
                         </button>
                     </form>
                 </div>

@@ -4,7 +4,6 @@ import Navigation from "./components/navigation/Navigation";
 import Home from "./components/home/Home";
 import TeacherPage from "./components/teacherPage/TeacherPage";
 import UserProvider from "./provider/UserProvider";
-import CreateLink from "./components/createLink/CreateLink";
 import CreateEditStudent from "./components/createEditStudent/CreateEditStudent";
 import Dashboard from "./components/teacherPage/dashboard/Dashboard";
 import StudentsList from "./components/teacherPage/studentsList/StudentsList";
@@ -18,6 +17,7 @@ import IsGuest from "./guards/isGuest/IsGuest";
 import IsAuthenticated from "./guards/isAuthenticated/IsAuthenticated";
 import IsTeacher from "./guards/isTeacher/IsTeacher";
 import IsStudent from "./guards/isStudent/IsStudent";
+import CreateEditLink from "./components/createEditLink/CreateEditLink";
 
 function App() {
     return (
@@ -58,7 +58,11 @@ function App() {
                         </Route>
                         <Route
                             path="/teacher/create-link"
-                            element={<CreateLink />}
+                            element={<CreateEditLink />}
+                        />
+                        <Route
+                            path="/:classId/:subjectId/:linkId/edit"
+                            element={<CreateEditLink />}
                         />
                         <Route
                             path="/:teacherId/:studentId/edit"

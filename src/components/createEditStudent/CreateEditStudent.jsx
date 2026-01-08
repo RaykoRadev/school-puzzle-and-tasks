@@ -45,7 +45,7 @@ export default function CreateEditStudent() {
         });
     }, [studentId, oldStudentInfo.data]);
 
-    const createMutauon = useCreateStudent(accessToken, setStudent, setResult);
+    const createMutation = useCreateStudent(accessToken, setStudent, setResult);
     const editMutauon = useEditStudent(
         accessToken,
         _id,
@@ -98,7 +98,7 @@ export default function CreateEditStudent() {
                 classId: selectedClassId?.classId,
             };
 
-            createMutauon.mutate(newStudentData);
+            createMutation.mutate(newStudentData);
         }
 
         setValues(initValues);
