@@ -1,4 +1,8 @@
 export default function parseDate(initDates) {
+    if (typeof initDates == "string") {
+        return parseSingleDate(initDates);
+    }
+
     let workingArr = initDates;
     if (workingArr.length === 0) {
         return ["There is no logs"];
@@ -20,4 +24,18 @@ export default function parseDate(initDates) {
 
         return `${hours}:${minutes} ${day}-${month}-${year}`;
     });
+}
+
+function parseSingleDate(oldDate) {
+    const date = new Date(oldDate);
+
+    if (isNaN(date.getTime())) {
+        return "There is no logs";
+    }
+
+    const day = String(date.getUTCDate()).padStart(2, "0");
+    const month = String(date.getUTCMonth() + 1).padStart(2, "0");
+    const year = date.getUTCFullYear();
+
+    return `${day}-${month}-${year}`;
 }
