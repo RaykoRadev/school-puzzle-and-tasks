@@ -88,6 +88,9 @@ function App() {
                         </Route>
                     </Route>
                 </Routes>
+                <footer className="bg-transperant p-4 text-center text-sm text-gray-700 bg-orange-100 backdrop-blur-md">
+                    © 2025 AdminPanel. All rights reserved.
+                </footer>
             </div>
         </UserProvider>
     );
