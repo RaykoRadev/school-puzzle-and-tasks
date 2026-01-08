@@ -48,7 +48,7 @@ export default function Class() {
                 } md:translate-x-0
     `}
             >
-                <div className="p-6 font-bold text-purple-700 text-2xl">
+                <div className="p-6 font-bold text-green-600 text-2xl">
                     Предмети:
                 </div>
 
@@ -57,7 +57,7 @@ export default function Class() {
                         {data?.classes[0].subjects?.map((sub) => (
                             <li
                                 key={sub._id}
-                                className="py-3 px-6 text-gray-700 hover:bg-purple-100"
+                                className="py-3 px-6 text-gray-700 hover:bg-green-100"
                             >
                                 <Link
                                     onClick={() => setIsOpen(false)}
@@ -81,23 +81,18 @@ export default function Class() {
                         {/* Hamburger */}
                         <button
                             onClick={() => setIsOpen(true)}
-                            className="md:hidden text-purple-700"
+                            className="md:hidden text-green-600"
                         >
                             ☰
                         </button>
 
-                        <h1 className="text-xl font-bold text-purple-700">
+                        <h1 className="text-xl font-bold text-green-600">
                             {visualizeClassName(data?.classes[0].name)}
                         </h1>
                     </div>
 
                     <div className="flex items-center gap-4">
-                        <input
-                            type="text"
-                            placeholder="Search..."
-                            className="hidden sm:block px-4 py-2 border rounded-lg"
-                        />
-                        <div className="w-10 h-10 flex items-center justify-center font-bold">
+                        <div className="w-10 h-10 flex items-center justify-center font-bold text-green-600">
                             {username}
                         </div>
                     </div>
