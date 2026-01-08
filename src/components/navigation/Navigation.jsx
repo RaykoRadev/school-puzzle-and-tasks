@@ -25,30 +25,66 @@ export default function Navigation() {
     );
 
     return (
-        <header className="sticky inset-0 z-50 bg-transparent backdrop-blur-xs">
+        <header className="sticky inset-0 z-50 bg-transparent backdrop-blur-md">
             <nav className="mx-auto flex max-w-6xl items-center gap-8 px-6 py-4 lg:px-12">
                 {/* Logo */}
                 <div className="relative flex items-center">
                     {role === "teacher" && (
                         <Link to={`/${_id}/allClasses`}>
-                            <img
-                                src="https://www.svgrepo.com/show/499831/target.svg"
-                                loading="lazy"
-                                width={32}
-                                height={32}
-                                alt="Logo"
-                            />
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width={28}
+                                height={28}
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="#1bb163"
+                                strokeWidth="1.5"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                className="lucide lucide-notebook-icon lucide-notebook"
+                            >
+                                <path d="M2 6h4" />
+                                <path d="M2 10h4" />
+                                <path d="M2 14h4" />
+                                <path d="M2 18h4" />
+                                <rect
+                                    width={16}
+                                    height={20}
+                                    x={4}
+                                    y={2}
+                                    rx={2}
+                                />
+                                <path d="M16 2v20" />
+                            </svg>
                         </Link>
                     )}
                     {role === "student" && (
                         <Link to={`/links/${teacherId}/${classId}`}>
-                            <img
-                                src="https://www.svgrepo.com/show/499831/target.svg"
-                                loading="lazy"
-                                width={32}
-                                height={32}
-                                alt="Logo"
-                            />
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width={28}
+                                height={28}
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="#1bb163"
+                                strokeWidth="1.5"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                className="lucide lucide-notebook-icon lucide-notebook"
+                            >
+                                <path d="M2 6h4" />
+                                <path d="M2 10h4" />
+                                <path d="M2 14h4" />
+                                <path d="M2 18h4" />
+                                <rect
+                                    width={16}
+                                    height={20}
+                                    x={4}
+                                    y={2}
+                                    rx={2}
+                                />
+                                <path d="M16 2v20" />
+                            </svg>
                         </Link>
                     )}
                 </div>
@@ -144,15 +180,17 @@ export default function Navigation() {
                             Впиши се учител
                         </NavLink>
                     )}
-                    {role === "teacher" ? (
+                    {role && (
                         <NavLink
-                            to="/teacher/dashboard"
+                            to={
+                                role === "teacher"
+                                    ? "/teacher/dashboard"
+                                    : "/student-profile"
+                            }
                             className="block rounded-md bg-gradient-to-br from-green-600 to-emerald-400 px-3 py-2 text-center text-sm font-medium text-white"
                         >
                             Profile
                         </NavLink>
-                    ) : (
-                        ""
                     )}
                     {username && (
                         <NavLink
