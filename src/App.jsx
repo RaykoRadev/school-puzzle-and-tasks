@@ -17,7 +17,7 @@ import IsGuest from "./guards/isGuest/IsGuest";
 import IsAuthenticated from "./guards/isAuthenticated/IsAuthenticated";
 import IsTeacher from "./guards/isTeacher/IsTeacher";
 import IsStudent from "./guards/isStudent/IsStudent";
-import CreateEditLink from "./components/createEditLink/CreateEditLink";
+import CreateEditLink from "./components/createLink/CreateEditLink";
 
 function App() {
     return (
