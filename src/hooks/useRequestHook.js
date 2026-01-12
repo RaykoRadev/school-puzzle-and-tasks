@@ -305,3 +305,11 @@ export const useEditStudent = (
         },
     });
 };
+
+export const useAllAvatars = () =>
+    useQuery({
+        queryKey: ["Avatars"],
+        queryFn: async ({ signal }) =>
+            fetchRequest(host + endPoints.avatars, "GET", signal),
+        staleTime: Infinity,
+    });

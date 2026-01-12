@@ -14,4 +14,5 @@ export const endPoints = {
 
     registerStudent: "/student/register",
     student: "/student",
+    avatars: "/student/getAllAvatars",
 };
