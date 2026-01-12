@@ -16,7 +16,6 @@ export default function AllClasses() {
 
     const { data, isPending, error } = useAllClass(accessToken, _id);
 
-    // console.log("data: ", data);
     if (isPending) {
         return <Spinner />;
     }
