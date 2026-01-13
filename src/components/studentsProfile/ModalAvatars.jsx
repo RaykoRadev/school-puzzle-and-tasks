@@ -13,19 +13,13 @@ export default function ModalAvatars({ onClose }) {
         accessToken,
         role,
         _id,
-        setLocalStorageData,
-        navigate,
-        onClose
+        setLocalStorageData
     );
 
     const avatarHandler = async () => {
         const newAvatar = data.find((av) => av._id === selectedAvatarId);
 
         changeAvatar.mutate({ avatar: newAvatar.imgUrl });
-        // if (changeAvatar.data) {
-        //     setLocalStorageData(changeAvatar.data);
-        // }
-        onClose;
     };
 
     return (
