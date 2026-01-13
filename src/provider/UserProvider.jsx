@@ -14,7 +14,11 @@ export default function UserProvider({ children }) {
 
     return (
         <UserContext.Provider
-            value={{ ...auth, setLocalStorageData, removeLocalStorageData }}
+            value={{
+                ...auth,
+                setLocalStorageData,
+                removeLocalStorageData,
+            }}
         >
             {children}
         </UserContext.Provider>

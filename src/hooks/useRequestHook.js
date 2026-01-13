@@ -1,13 +1,9 @@
-import {
-    Mutation,
-    useMutation,
-    useQuery,
-    useQueryClient,
-} from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { endPoints, host } from "../config/constants";
 import fetchRequest from "../api/apiCalls";
 import revertObject from "../utils/revertObject";
 import { toast } from "sonner";
+import { useUserContext } from "../context/userContext";
 
 export const useStudentsList = (accessToken) =>
     useQuery({
@@ -319,7 +315,14 @@ export const useAllAvatars = () =>
         staleTime: Infinity,
     });
 
-export const useUpdateAvatar = (accessToken, role, studentId) => {
+export const useUpdateAvatar = (
+    accessToken,
+    role,
+    studentId,
+    setLocalStorageData,
+    navigate,
+    onClose
+) => {
     const queryClient = useQueryClient();
     return useMutation({
         mutationFn: (data) =>
@@ -330,12 +333,42 @@ export const useUpdateAvatar = (accessToken, role, studentId) => {
                 accessToken,
                 data
             ),
-        onSuccess: () => {
+        onSuccess: (result) => {
             toast.success("Успешно променен аватар!");
             queryClient.invalidateQueries({
                 queryKey: ["singleSudent", role, studentId],
             });
-            navigate("/student-profile");
+            console.log(result);
+            setLocalStorageData({
+                _id: result._id,
+                accessToken: accessToken,
+                avatar: result.avatar,
+                classId: result.classId,
+                role: result.role,
+                teacherId: result.teacherId,
+                username: result.username,
+            });
+            // navigate("/student-profile");
+        },
+        onSettled: (result) => {
+            onClose;
+            // useUserContext({
+            //     _id: result._id,
+            //     accessToken: accessToken,
+            //     avatar: result.avatar,
+            //     classId: result.classId,
+            //     role: result.role,
+            //     teacherId: result.teacherId,
+            //     username: result.username,
+            // });
         },
     });
 };
+
+// accessToken :  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFsZXgiLCJyb2xlIjoic3R1ZGVudCIsImlkIjoiNjk1MjY4YTc4NmE0ZDMxZGRlODAwNTc5IiwiaWF0IjoxNzY4MzE5NDkwLCJleHAiOjE3NjgzMjY2OTB9.jvIg3hFJ81fLH6HXZXlj7-SDWKpxjBuDOGi3tZjqpGs"
+// avatar :  "https://i.ibb.co/n8wcvn6x/cartoon-character-sticker-with-girl-dance-ballet-1308-60055.avif"
+// classId :  "695255fd86a4d31dde80041e"
+// role: "student"
+// teacherId: "695255fd86a4d31dde800415"
+// username: "alex"
+// _id: "695268a786a4d31dde800579"

@@ -1,17 +1,31 @@
 import { useContext, useState } from "react";
 import { useAllAvatars, useUpdateAvatar } from "../../hooks/useRequestHook";
 import { UserContext } from "../../context/userContext";
+import { useNavigate } from "react-router";
 
 export default function ModalAvatars({ onClose }) {
-    const { _id, accessToken, role } = useContext(UserContext);
+    const { _id, accessToken, role, setLocalStorageData } =
+        useContext(UserContext);
     const [selectedAvatarId, setSelectedAvatarId] = useState("");
+    const navigate = useNavigate();
     const { data } = useAllAvatars();
-    const changeAvatar = useUpdateAvatar(accessToken, role, _id);
+    const changeAvatar = useUpdateAvatar(
+        accessToken,
+        role,
+        _id,
+        setLocalStorageData,
+        navigate,
+        onClose
+    );
 
-    const avatarHandler = () => {
+    const avatarHandler = async () => {
         const newAvatar = data.find((av) => av._id === selectedAvatarId);
 
         changeAvatar.mutate({ avatar: newAvatar.imgUrl });
+        // if (changeAvatar.data) {
+        //     setLocalStorageData(changeAvatar.data);
+        // }
+        onClose;
     };
 
     return (
@@ -42,7 +56,10 @@ export default function ModalAvatars({ onClose }) {
                                     Аватари
                                 </h2>
                                 <button
-                                    onClick={avatarHandler}
+                                    onClick={() => {
+                                        avatarHandler();
+                                        onClose();
+                                    }}
                                     className={`rounded-md px-3 py-1.5 text-sm font-medium text-white shadow-md transition ${
                                         selectedAvatarId
                                             ? "bg-gradient-to-br from-green-600 to-emerald-400 hover:scale-[1.03]"
