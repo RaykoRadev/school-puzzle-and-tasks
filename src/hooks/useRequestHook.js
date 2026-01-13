@@ -1,4 +1,9 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import {
+    Mutation,
+    useMutation,
+    useQuery,
+    useQueryClient,
+} from "@tanstack/react-query";
 import { endPoints, host } from "../config/constants";
 import fetchRequest from "../api/apiCalls";
 import revertObject from "../utils/revertObject";
@@ -313,3 +318,24 @@ export const useAllAvatars = () =>
             fetchRequest(host + endPoints.avatars, "GET", signal),
         staleTime: Infinity,
     });
+
+export const useUpdateAvatar = (accessToken, role, studentId) => {
+    const queryClient = useQueryClient();
+    return useMutation({
+        mutationFn: (data) =>
+            fetchRequest(
+                host + endPoints.editAvatar + "/" + studentId + "/edit",
+                "PATCH",
+                null,
+                accessToken,
+                data
+            ),
+        onSuccess: () => {
+            toast.success("Успешно променен аватар!");
+            queryClient.invalidateQueries({
+                queryKey: ["singleSudent", role, studentId],
+            });
+            navigate("/student-profile");
+        },
+    });
+};

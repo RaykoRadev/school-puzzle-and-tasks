@@ -3,7 +3,7 @@ import { UserContext } from "../../context/userContext";
 import ModalAvatars from "./ModalAvatars";
 
 export default function StudentsProfile() {
-    const { username, avatar } = useContext(UserContext);
+    const { username, avatar, role, _id } = useContext(UserContext);
     const [modal, setShowModal] = useState(false);
 
     const avatarModalHandler = () => {
@@ -38,6 +38,8 @@ export default function StudentsProfile() {
                                 {modal && (
                                     <ModalAvatars
                                         onClose={avatarModalHandler}
+                                        role={role}
+                                        id={_id}
                                     />
                                 )}
                             </div>

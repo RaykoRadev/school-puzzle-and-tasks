@@ -1,15 +1,17 @@
-import { useState } from "react";
-import { useAllAvatars } from "../../hooks/useRequestHook";
+import { useContext, useState } from "react";
+import { useAllAvatars, useUpdateAvatar } from "../../hooks/useRequestHook";
+import { UserContext } from "../../context/userContext";
 
 export default function ModalAvatars({ onClose }) {
+    const { _id, accessToken, role } = useContext(UserContext);
     const [selectedAvatarId, setSelectedAvatarId] = useState("");
     const { data } = useAllAvatars();
+    const changeAvatar = useUpdateAvatar(accessToken, role, _id);
 
     const avatarHandler = () => {
-        console.log(selectedAvatarId);
-        // patch request to update the profile's avatar
+        const newAvatar = data.find((av) => av._id === selectedAvatarId);
 
-        onClose;
+        changeAvatar.mutate({ avatar: newAvatar.imgUrl });
     };
 
     return (
