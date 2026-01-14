@@ -27,7 +27,7 @@ export default function ModalCodeEdit({ onClose }) {
             <div id="modal">
                 <div className="fixed inset-0 p-4 flex flex-wrap justify-center items-center w-full h-full z-[1000] before:fixed before:inset-0 before:w-full before:h-full before:bg-[rgba(0,0,0,0.5)] overflow-auto">
                     <div className="flex flex-col items-center justify-center h-screen ">
-                        <div className="w-full max-w-md bg-gray-800 rounded-lg shadow-md p-6 relative">
+                        <div className="w-full max-w-md bg-orange-300 rounded-lg shadow-md p-6 relative">
                             <svg
                                 onClick={onClose}
                                 id="closeIcon"
@@ -44,7 +44,7 @@ export default function ModalCodeEdit({ onClose }) {
                                     data-original="#000000"
                                 />
                             </svg>
-                            <h2 className="text-2xl font-bold text-gray-200 mb-4">
+                            <h2 className="text-2xl font-bold text-green-600 mb-4">
                                 Edit Code
                             </h2>
                             <form
@@ -53,25 +53,25 @@ export default function ModalCodeEdit({ onClose }) {
                             >
                                 <input
                                     placeholder="Old code"
-                                    className="bg-gray-700 text-gray-200 border-0 rounded-md p-2 mb-4 focus:bg-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
+                                    className="bg-orange-100 text-gray-800 border-0 rounded-md p-2 mb-4 focus:bg-orange-200 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
                                     type="password"
                                     name="oldCode"
                                 />
                                 <input
                                     placeholder="Code"
-                                    className="bg-gray-700 text-gray-200 border-0 rounded-md p-2 mb-4 focus:bg-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
+                                    className="bg-orange-100 text-gray-800 border-0 rounded-md p-2 mb-4 focus:bg-orange-200 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
                                     type="password"
                                     name="code"
                                 />
                                 <input
                                     placeholder="Repeat code"
-                                    className="bg-gray-700 text-gray-200 border-0 rounded-md p-2 mb-4 focus:bg-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
+                                    className="bg-orange-100 text-gray-800 border-0 rounded-md p-2 mb-4 focus:bg-orange-200 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
                                     type="password"
                                     name="repCode"
                                 />
 
                                 <button
-                                    className="bg-gradient-to-r from-indigo-500 to-blue-500 text-white font-bold py-2 px-4 rounded-md mt-4 hover:bg-indigo-600 hover:to-blue-600 transition ease-in-out duration-150"
+                                    className="bg-gradient-to-br from-green-600 to-emerald-400 text-white font-bold py-2 px-4 rounded-md mt-4 hover:bg-green-700 hover:to-emerald-500 transition ease-in-out duration-150"
                                     // type="submit"
                                 >
                                     Edit Code

@@ -97,14 +97,14 @@ export default function CreateEditLink() {
     return (
         <>
             <div className="flex flex-1 flex-col items-center justify-center dark">
-                <div className="w-full max-w-md bg-gray-800 rounded-lg shadow-md p-6">
-                    <h2 className="text-2xl font-bold text-gray-200 mb-4">
+                <div className="w-full max-w-md bg-orange-300 rounded-lg shadow-md p-6">
+                    <h2 className="text-2xl font-bold text-green-600 mb-4">
                         Create Link
                     </h2>
                     <form action={submitHandler} className="flex flex-col">
                         <input
                             placeholder="Text"
-                            className="bg-gray-700 text-gray-200 border-0 rounded-md p-2 mb-4 focus:bg-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
+                            className="bg-orange-100 text-gray-800 border-0 rounded-md p-2 mb-4 focus:bg-orange-200 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
                             type="text"
                             name="text"
                             value={value.text}
@@ -114,18 +114,18 @@ export default function CreateEditLink() {
 
                         <input
                             placeholder="Link"
-                            className="bg-gray-700 text-gray-200 border-0 rounded-md p-2 mb-1 focus:bg-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
+                            className="bg-orange-100 text-gray-800 border-0 rounded-md p-2 mb-1 focus:bg-orange-200 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
                             type="text"
                             name="link"
                             value={value.link}
                             onChange={changeHandler}
                             required
                         />
-                        <i className="mt-0 mb-4 text-xs text-gray-400 not-italic">
+                        <i className="mt-0 mb-4 text-xs text-gray-700 not-italic">
                             example: https://www.abv.bg
                         </i>
                         <select
-                            className="bg-gray-700 text-gray-200 border-0 rounded-md p-2 mb-4 focus:bg-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
+                            className="bg-orange-100 text-gray-800 border-0 rounded-md p-2 mb-4 focus:bg-orange-200 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
                             id="gender"
                             name="class"
                             value={value.class}
@@ -141,7 +141,7 @@ export default function CreateEditLink() {
                         </select>
 
                         <select
-                            className="bg-gray-700 text-gray-200 border-0 rounded-md p-2 mb-4 focus:bg-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
+                            className="bg-orange-100 text-gray-800 border-0 rounded-md p-2 mb-4 focus:bg-orange-200 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
                             id="gender"
                             name="subject"
                             onChange={changeHandler}
@@ -164,7 +164,7 @@ export default function CreateEditLink() {
                             )}
                         </select>
 
-                        <button className="bg-gradient-to-r from-indigo-500 to-blue-500 text-white font-bold py-2 px-4 rounded-md mt-4 hover:bg-indigo-600 hover:to-blue-600 transition ease-in-out duration-150">
+                        <button className="bg-gradient-to-br from-green-600 to-emerald-400 text-white font-bold py-2 px-4 rounded-md mt-4 hover:bg-green-700 hover:to-emerald-500 transition ease-in-out duration-150">
                             {linkId ? "Edit Link" : "Create link"}
                         </button>
                     </form>

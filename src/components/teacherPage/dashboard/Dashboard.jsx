@@ -79,7 +79,7 @@ export default function Dashboard() {
             <div className="bg-orange-200 p-6 rounded-lg shadow-md grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
                 <Link
                     to="/teacher/create-link"
-                    className="bg-green-600 text-white py-3 rounded-lg shadow hover:bg-purple-700"
+                    className="bg-green-600 text-white py-3 rounded-lg shadow hover:bg-green-700"
                 >
                     Add Link
                 </Link>
@@ -93,7 +93,7 @@ export default function Dashboard() {
                     onClick={() => {
                         setModalShow(true);
                     }}
-                    className="bg-purple-600 text-white py-3 rounded-lg shadow hover:bg-red-700 text-center"
+                    className="bg-purple-600 text-white py-3 rounded-lg shadow hover:bg-purple-700 text-center"
                 >
                     Edit Profile / Password
                 </button>

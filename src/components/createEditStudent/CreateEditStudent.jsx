@@ -107,14 +107,14 @@ export default function CreateEditStudent() {
     return (
         <>
             <div className="flex flex-1 flex-col items-center justify-center dark">
-                <div className="w-full max-w-md bg-gray-800 rounded-lg shadow-md p-6">
-                    <h2 className="text-2xl font-bold text-gray-200 mb-4">
+                <div className="w-full max-w-md bg-orange-300 rounded-lg shadow-md p-6">
+                    <h2 className="text-2xl font-bold text-green-600 mb-4">
                         Create Student
                     </h2>
                     <form action={submitHandler} className="flex flex-col">
                         <input
                             placeholder="Username"
-                            className="bg-gray-700 text-gray-200 border-0 rounded-md p-2 mb-4 focus:bg-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
+                            className="bg-orange-100 text-gray-800 border-0 rounded-md p-2 mb-4 focus:bg-orange-200 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
                             type="text"
                             name="username"
                             value={value.username}
@@ -124,7 +124,7 @@ export default function CreateEditStudent() {
                             <div className="flex gap-2 w-full">
                                 <input
                                     placeholder="Code"
-                                    className="flex-1 bg-gray-700 text-gray-200 border-0 rounded-md p-2 mb-4 focus:bg-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
+                                    className="flex-1 bg-orange-100 text-gray-800 border-0 rounded-md p-2 mb-4 focus:bg-orange-200 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
                                     type="text"
                                     name="code"
                                     value={value.code}
@@ -133,14 +133,14 @@ export default function CreateEditStudent() {
                                 <button
                                     type="button"
                                     onClick={generator}
-                                    className="bg-gradient-to-r from-indigo-500 to-blue-500 text-white font-bold py-2 px-4 rounded-md p-2 mb-4 hover:bg-indigo-600 hover:to-blue-600 transition ease-in-out duration-150"
+                                    className="bg-gradient-to-br from-green-600 to-emerald-400 text-white font-bold py-2 px-4 rounded-md p-2 mb-4 hover:bg-green-700 hover:to-emerald-500 transition ease-in-out duration-150"
                                 >
                                     Generate Code
                                 </button>
                             </div>
                         )}
                         <select
-                            className="bg-gray-700 text-gray-200 border-0 rounded-md p-2 mb-4 focus:bg-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
+                            className="bg-orange-100 text-gray-800 border-0 rounded-md p-2 mb-4 focus:bg-orange-200 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
                             id="gender"
                             name="class"
                             value={value.class}
@@ -153,7 +153,7 @@ export default function CreateEditStudent() {
                             <option value="class4">Class 4</option>
                         </select>
 
-                        <button className="bg-gradient-to-r from-indigo-500 to-blue-500 text-white font-bold py-2 px-4 rounded-md mt-4 hover:bg-indigo-600 hover:to-blue-600 transition ease-in-out duration-150">
+                        <button className="bg-gradient-to-br from-green-600 to-emerald-400 text-white font-bold py-2 px-4 rounded-md mt-4 hover:bg-green-700 hover:to-emerald-500 transition ease-in-out duration-150">
                             {studentId ? "Edit student" : "Create student"}
                         </button>
                     </form>
