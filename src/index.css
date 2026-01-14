@@ -1,10 +1,8 @@
 @import "tailwindcss";
 
 #root {
-    /* background-image: url("/red.webp"); */
     background-image: url("/wooden-board.jpg");
-    /* background-image: url("/kids.jpg"); */
-    /* background-image: url("/pensils.jpg"); */
     background-size: cover;
     background-repeat: no-repeat;
+    background-position: center center;
 }

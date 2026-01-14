@@ -74,7 +74,7 @@ export default function Dashboard() {
             </div> */}
             {/* links board  control*/}
             <div className="p-4 border-b font-bold text-green-600">
-                Controll links / Забъркай манджа с грозде
+                Controll links
             </div>
             <div className="bg-orange-200 p-6 rounded-lg shadow-md grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
                 <Link
