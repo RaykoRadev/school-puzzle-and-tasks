@@ -87,7 +87,15 @@ function App() {
                     </Route>
                 </Routes>
                 <footer className="bg-transperant p-4 text-center text-sm text-gray-700 bg-orange-100 backdrop-blur-md">
-                    © 2025 AdminPanel. All rights reserved.
+                    © 2026 All rights reserved. Created by{" "}
+                    <a
+                        href="https://www.facebook.com/christmas898/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        Rayko Radev
+                    </a>
+                    . Contact: rayko_radev@yahoo.com
                 </footer>
             </div>
         </UserProvider>
