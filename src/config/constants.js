@@ -4,6 +4,8 @@ export const endPoints = {
     login: "/login",
     logout: "/logout",
 
+    editCode: "/teacher/edit-profile",
+
     getAllClasses: "/links/getAllClasses",
     getOneClass: "/links/getOneClass",
 
