@@ -52,7 +52,7 @@ function App() {
                                 path="students-list"
                                 element={<StudentsList />}
                             />
-
+                            <Route path="profile" element={<Profile />} />
                             <Route index element={<Dashboard />} />
                         </Route>
                         <Route

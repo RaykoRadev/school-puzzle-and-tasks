@@ -1,6 +1,4 @@
 import { Link } from "react-router";
-import ModalCodeEdit from "../modalCodeEdit/modalCodeEdit";
-import { useState } from "react";
 
 export default function Dashboard() {
     const [modal, setModalShow] = useState(false);
