@@ -1,6 +1,13 @@
 import { Link } from "react-router";
+import ModalCodeEdit from "../modalCodeEdit/modalCodeEdit";
+import { useState } from "react";
 
 export default function Dashboard() {
+    const [modal, setModalShow] = useState(false);
+
+    const closeModal = () => {
+        setModalShow(false);
+    };
     return (
         <>
             {/* <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
@@ -82,13 +89,16 @@ export default function Dashboard() {
                 >
                     Add Student
                 </Link>
-                <Link
-                    to=""
+                <button
+                    onClick={() => {
+                        setModalShow(true);
+                    }}
                     className="bg-purple-600 text-white py-3 rounded-lg shadow hover:bg-red-700 text-center"
                 >
                     Edit Profile / Password
-                </Link>
+                </button>
             </div>
+            {modal && <ModalCodeEdit onClose={closeModal} />}
             {/* student board control */}
             {/* <div className="p-4 border-b font-bold text-purple-700">
                 Controll students

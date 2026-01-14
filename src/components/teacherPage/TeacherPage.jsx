@@ -57,20 +57,6 @@ export default function TeacherPage() {
                     >
                         Users
                     </Link>
-                    {/* <Link
-                        to="#"
-                        onClick={() => setIsOpen(false)}
-                        className="block py-3 px-6 text-gray-700 hover:bg-green-100"
-                    >
-                        Analytics
-                    </Link>
-                    <Link
-                        to="/teacher/dashboard/profile"
-                        onClick={() => setIsOpen(false)}
-                        className="block py-3 px-6 text-gray-700 hover:bg-green-100"
-                    >
-                        Settings
-                    </Link> */}
                 </nav>
             </aside>
 

@@ -7,7 +7,6 @@ import UserProvider from "./provider/UserProvider";
 import CreateEditStudent from "./components/createEditStudent/CreateEditStudent";
 import Dashboard from "./components/teacherPage/dashboard/Dashboard";
 import StudentsList from "./components/teacherPage/studentsList/StudentsList";
-import Profile from "./components/teacherPage/profile/Profile";
 import Class from "./components/class/Class";
 import LinksList from "./components/class/linksList/LinksList";
 import Spinner from "./components/spinner/Spinner";
@@ -53,7 +52,7 @@ function App() {
                                 path="students-list"
                                 element={<StudentsList />}
                             />
-                            <Route path="profile" element={<Profile />} />
+
                             <Route index element={<Dashboard />} />
                         </Route>
                         <Route

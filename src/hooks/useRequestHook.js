@@ -347,3 +347,23 @@ export const useUpdateAvatar = (
         },
     });
 };
+
+export const useCodeEdit = (accessToken, navigate) =>
+    useMutation({
+        mutationFn: (data) =>
+            fetchRequest(
+                host + endPoints.editCode,
+                "PATCH",
+                null,
+                accessToken,
+                data
+            ),
+        onSuccess: () => {
+            toast.success("Кодът е променен успешно!");
+
+            navigate(-1);
+        },
+        onError: (err) => {
+            toast.error(err.message);
+        },
+    });
