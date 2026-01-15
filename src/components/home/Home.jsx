@@ -8,7 +8,7 @@ export default function Home() {
                         style={{
                             fontFamily: '"Comic Sans MS", cursive, sans-serif',
                         }}
-                        className="ml-11 text-slate-900 font-bold leading-tight text-2xl sm:text-3xl md:text-3xl lg:text-5xl"
+                        className="text-slate-900 font-bold leading-tight text-2xl sm:text-3xl md:text-3xl md:ml-11 lg:text-5xl lg:ml-11"
                     >
                         <p>Добре дошли в страничката за</p>
                         <p>успешни деца на г-жа Долапчиева</p>
