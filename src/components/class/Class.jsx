@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { Link, Outlet, useParams } from "react-router";
+import { Link, NavLink, Outlet, useParams } from "react-router";
 import { UserContext } from "../../context/userContext";
 import visualizeClassName from "../../utils/visualizeClassName";
 import { useOneClass } from "../../hooks/useRequestHook";
@@ -57,16 +57,23 @@ export default function Class() {
                         {data?.classes[0].subjects?.map((sub) => (
                             <li
                                 key={sub._id}
-                                className="py-3 px-6 text-gray-700 hover:bg-green-100"
+                                // className="py-3 px-6 text-gray-700 hover:bg-green-100"
                             >
-                                <Link
+                                <NavLink
                                     onClick={() => setIsOpen(false)}
                                     to={`/links/${
                                         role === "teacher" ? _id : teacherId
                                     }/${data?.classes[0].classId}/${sub._id}`}
+                                    className={({ isActive }) =>
+                                        `block py-3 px-6 text-gray-700 hover:bg-green-300 ${
+                                            isActive
+                                                ? "bg-green-200 font-semibold text-green-900"
+                                                : ""
+                                        }`
+                                    }
                                 >
                                     {sub.visualizationName}
-                                </Link>
+                                </NavLink>
                             </li>
                         ))}
                     </ul>
