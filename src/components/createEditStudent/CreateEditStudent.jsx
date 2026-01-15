@@ -161,16 +161,22 @@ export default function CreateEditStudent() {
                     {/* From Uiverse.io by themrsami */}
                     {result && (
                         <>
-                            <h2 className="mt-6 text-white font-bold text-xl">
+                            <h2 className="mt-6 text-green-600 font-bold text-xl">
                                 Student Created:
                             </h2>
                             <div className="mt-4">
-                                <label className="text-white" htmlFor="title">
+                                <label
+                                    className="text-gray-800"
+                                    htmlFor="title"
+                                >
                                     {`Name: ${student?.username}`}
                                 </label>
                             </div>
                             <div className="mt-4 flex flex-row space-x-2">
-                                <label className="text-white" htmlFor="themes">
+                                <label
+                                    className="text-gray-800"
+                                    htmlFor="themes"
+                                >
                                     {`Code: ${student?.code}`}
                                 </label>
                             </div>
