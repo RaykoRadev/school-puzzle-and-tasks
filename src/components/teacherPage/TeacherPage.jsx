@@ -30,13 +30,9 @@ export default function TeacherPage() {
 
             {/* Sidebar */}
             <aside
-                className={`
-                    fixed md:static z-30
-                    w-64 bg-orange-100 shadow-md
-                    transform transition-transform duration-300
-                    ${isOpen ? "translate-x-0" : "-translate-x-full"}
-                    md:translate-x-0
-                `}
+                className={`fixed md:static z-30 top-0 left-0 h-screen w-40 md:w-64 bg-orange-100 shadow-md transform transition-transform duration-300 ${
+                    isOpen ? "translate-x-0" : "-translate-x-full"
+                } md:translate-x-0`}
             >
                 <div className="p-6 font-bold text-green-600 text-2xl">
                     AdminPanel
