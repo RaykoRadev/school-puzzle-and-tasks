@@ -25,7 +25,7 @@ export default function Navigation() {
     );
 
     return (
-        <header className="sticky inset-0 z-50 bg-orange-100 backdrop-blur-md">
+        <header className="sticky top-0 z-50 bg-orange-100 backdrop-blur-md">
             <nav className="mx-auto flex max-w-6xl items-center gap-8 px-6 py-4 lg:px-12">
                 {/* Logo */}
                 <div className="relative flex items-center">
@@ -161,7 +161,7 @@ export default function Navigation() {
 
             {/* Mobile dropdown */}
             {menuOpen && (
-                <div className="md:hidden absolute right-4 top-16 w-min-25 rounded-xl bg-transperant shadow-lg p-4 space-y-3">
+                <div className="md:hidden absolute right-4 top-16 w-min-25 bg-orange-200 rounded-xl shadow-lg p-4 space-y-3">
                     {!username && (
                         <NavLink
                             to="/student/login"

@@ -33,7 +33,9 @@ export default function StudentRow({
         <tr className="border-t">
             <td className="p-4">{username}</td>
             <td className="p-4">{code}</td>
-            <td className="p-4">{nameForVijualize}</td>
+            {/* class */}
+            <td className="p-4 hidden lg:table-cell">{nameForVijualize}</td>
+            {/* last login */}
             <td
                 className="p-4"
                 onClick={() => {
@@ -42,16 +44,16 @@ export default function StudentRow({
             >
                 {parsedDate[0]}
             </td>
-            <td
+            {/* <td
                 className="p-4"
                 onClick={() => {
                     openModal({ sessions: parsedDate }); //todo to be replaced with the object that hold the subjects and their visit
                 }}
             >
                 Click me
-            </td>
-            <td className="p-4">{parsedCreatedAt}</td>
-            <td className="p-4">{parsedExpiredAt}</td>
+            </td> */}
+            <td className="p-4 hidden lg:table-cell">{parsedCreatedAt}</td>
+            <td className="p-4 hidden lg:table-cell">{parsedExpiredAt}</td>
             <td className="p-4">
                 <div className="flex justify-around items-center py-3">
                     <div className="flex gap-2 text-gray-600 duration-200 hover:cursor-pointer">

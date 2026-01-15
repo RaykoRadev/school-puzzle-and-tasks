@@ -32,31 +32,37 @@ export default function StudentsList() {
 
     return (
         <div className="bg-orange-200 rounded-lg shadow-md">
-            <table className="w-full text-left">
-                <thead className="bg-orange-100">
-                    <tr>
-                        <th className="p-4">Name</th>
-                        <th className="p-4">Code</th>
-                        <th className="p-4">Class</th>
-                        <th className="p-4">Last login</th>
-                        <th className="p-4">visited subjects</th>
-                        <th className="p-4">Created at:</th>
-                        <th className="p-4">Expired at:</th>
-                        <th className="p-4">Controls:</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {data?.map((student) => (
-                        <StudentRow
-                            key={student._id}
-                            {...student}
-                            studentId={student._id}
-                            openModal={openModal}
-                            closeModal={closeModal}
-                        />
-                    ))}
-                </tbody>
-            </table>
+            <div className="bg-orange-200 rounded-lg shadow-md overflow-x-auto">
+                <table className="w-full text-left">
+                    <thead className="bg-orange-100">
+                        <tr>
+                            <th className="p-4">Name</th>
+                            <th className="p-4">Code</th>
+                            <th className="p-4 hidden lg:table-cell">Class</th>
+                            <th className="p-4">Last login</th>
+                            {/* <th className="p-4">visited subjects</th> */}
+                            <th className="p-4 hidden lg:table-cell">
+                                Created at:
+                            </th>
+                            <th className="p-4 hidden lg:table-cell">
+                                Expired at:
+                            </th>
+                            <th className="p-4">Controls:</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {data?.map((student) => (
+                            <StudentRow
+                                key={student._id}
+                                {...student}
+                                studentId={student._id}
+                                openModal={openModal}
+                                closeModal={closeModal}
+                            />
+                        ))}
+                    </tbody>
+                </table>
+            </div>
             {modal.open && (
                 <LogsModal onClose={closeModal} data={modal.payload} />
             )}
