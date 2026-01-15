@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { Link, Outlet, useLocation, useParams } from "react-router";
+import { Link, NavLink, Outlet, useLocation, useParams } from "react-router";
 import { UserContext } from "../../context/userContext";
 
 export default function TeacherPage() {
@@ -43,20 +43,33 @@ export default function TeacherPage() {
                 </div>
 
                 <nav className="mt-8">
-                    <Link
+                    <NavLink
                         to="/teacher/dashboard"
                         onClick={() => setIsOpen(false)}
-                        className="block py-3 px-6 text-gray-700 hover:bg-green-100"
+                        end
+                        className={({ isActive }) =>
+                            `block py-3 px-6 text-gray-700 hover:bg-green-300 ${
+                                isActive
+                                    ? "bg-green-200 font-semibold text-green-900"
+                                    : ""
+                            }`
+                        }
                     >
                         Dashboard
-                    </Link>
-                    <Link
+                    </NavLink>
+                    <NavLink
                         to="/teacher/dashboard/students-list"
                         onClick={() => setIsOpen(false)}
-                        className="block py-3 px-6 text-gray-700 hover:bg-green-100"
+                        className={({ isActive }) =>
+                            `block py-3 px-6 text-gray-700 hover:bg-green-300 ${
+                                isActive
+                                    ? "bg-green-200 font-semibold text-green-900"
+                                    : ""
+                            }`
+                        }
                     >
                         Users
-                    </Link>
+                    </NavLink>
                 </nav>
             </aside>
 
