@@ -42,9 +42,8 @@ export default function StudentsList() {
 
     return (
         <>
-            <div className="realtive">
-                <Sorting data={data} sortedData={sortedData} />
-            </div>
+            {/* <div className="realtive"></div> */}
+            <Sorting data={data} sortedData={sortedData} />
             <div className="bg-orange-200 rounded-lg shadow-md">
                 <div className="bg-orange-200 rounded-lg shadow-md overflow-x-auto">
                     <table className="w-full text-left">
