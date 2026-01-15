@@ -187,6 +187,7 @@ export default function Navigation() {
                                     ? "/teacher/dashboard"
                                     : "/student-profile"
                             }
+                            onClick={() => setMenuOpen(false)}
                             className="block rounded-md bg-gradient-to-br from-green-600 to-emerald-400 px-3 py-2 text-center text-sm font-medium text-white"
                         >
                             Profile
@@ -194,7 +195,10 @@ export default function Navigation() {
                     )}
                     {username && (
                         <NavLink
-                            onClick={() => mutate()}
+                            onClick={() => {
+                                mutate();
+                                setMenuOpen(false);
+                            }}
                             className="block rounded-md bg-gradient-to-br from-green-600 to-emerald-400 px-3 py-2 text-center text-sm font-medium text-white"
                         >
                             Logout
