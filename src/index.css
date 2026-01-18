@@ -1,7 +1,8 @@
 @import "tailwindcss";
 
 #root {
-    background-image: url("/wooden-board.jpg");
+    /* background-image: url("/wooden-board.jpg"); */
+    background-image: url("/wooden-board-1.webp");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
