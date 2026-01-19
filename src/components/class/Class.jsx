@@ -5,8 +5,10 @@ import visualizeClassName from "../../utils/visualizeClassName";
 import { useOneClass } from "../../hooks/useRequestHook";
 import Spinner from "../spinner/Spinner";
 import { toast } from "sonner";
+import { useTranslation } from "react-i18next";
 
 export default function Class() {
+    const { t } = useTranslation();
     const [isOpen, setIsOpen] = useState(false);
     const { username, role, _id, teacherId, accessToken } =
         useContext(UserContext);
@@ -20,7 +22,7 @@ export default function Class() {
         accessToken,
         role,
         variablId,
-        classId
+        classId,
     );
 
     if (isPending) {
@@ -49,7 +51,7 @@ export default function Class() {
     `}
             >
                 <div className="p-6 font-bold text-green-600 text-2xl">
-                    Предмети:
+                    {t("subjects")}:
                 </div>
 
                 <nav className="mt-2">
@@ -72,7 +74,8 @@ export default function Class() {
                                         }`
                                     }
                                 >
-                                    {sub.visualizationName}
+                                    {/* {sub.visualizationName} */}
+                                    {t(`${sub.name}`)}
                                 </NavLink>
                             </li>
                         ))}
@@ -94,7 +97,8 @@ export default function Class() {
                         </button>
 
                         <h1 className="text-xl font-bold text-green-600">
-                            {visualizeClassName(data?.classes[0].name)}
+                            {/* {visualizeClassName(data?.classes[0].name)} */}
+                            {t(`${data?.classes[0].name}`)}
                         </h1>
                     </div>
 

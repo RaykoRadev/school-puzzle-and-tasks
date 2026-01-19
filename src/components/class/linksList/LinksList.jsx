@@ -2,17 +2,19 @@ import { useContext, useState } from "react";
 import { Link, useOutletContext, useParams } from "react-router";
 import { UserContext } from "../../../context/userContext";
 import DeleteModal from "../../deleteModal/DeleteModal";
+import { useTranslation } from "react-i18next";
 
 export default function LinksList() {
     const { role } = useContext(UserContext);
     const [modal, setShowModal] = useState(false);
     const { subjects } = useOutletContext();
     const { subjectId, classId } = useParams();
+    const { t } = useTranslation();
 
     const subject = subjects?.find((sub) => sub._id === subjectId);
 
     if (!subject) {
-        return <p className="text-red-500">Subject not found</p>;
+        return <p className="text-red-500">{t("subjectNotFound")}</p>;
     }
 
     const deleteModalHandler = () => {

@@ -8,5 +8,16 @@
     "class1": "1 Class",
     "class2": "2 Class",
     "class3": "3 Class",
-    "class4": "4 Class"
+    "class4": "4 Class",
+    "subjects": "Subject",
+    "bg": "Bulgarian language",
+    "math": "Math",
+    "eng": "English language",
+    "music": "Music",
+    "technology": "Technology",
+    "physicalExercises": "Physical exercises",
+    "rodinoznanie": "Know your country",
+    "human&nature": "Human and nature",
+    "human&society": "Human and society",
+    "subjectNotFound": "Subject not found"
 }
