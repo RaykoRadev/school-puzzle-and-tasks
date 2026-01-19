@@ -42,8 +42,6 @@ export default function StudentsList() {
         setModal({ open: false, payload: null });
     };
 
-    console.log(students);
-
     return (
         <>
             {/* <div className="realtive"></div> */}

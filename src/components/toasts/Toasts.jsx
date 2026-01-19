@@ -1,6 +1,8 @@
 export default function Toasts({ message }) {
     // console.log("the error is: ", error);
 
+    //todo to be deleted, it is not in use
+
     return (
         <div className="space-y-6 grid justify-center mt-4">
             <div

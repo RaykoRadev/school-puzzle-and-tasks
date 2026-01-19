@@ -1,4 +1,6 @@
 export default function visualizeClassName(name) {
+    //todo to be deleted, it is not in use
+
     let className = "";
 
     if (name === "class1") {
