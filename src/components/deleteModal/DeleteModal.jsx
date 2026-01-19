@@ -1,6 +1,7 @@
 import { useDeleteLink, useDeleteStudent } from "../../hooks/useRequestHook";
 import { useContext } from "react";
 import { UserContext } from "../../context/userContext";
+import { useTranslation } from "react-i18next";
 
 export default function DeleteModal({
     onClose,
@@ -10,6 +11,7 @@ export default function DeleteModal({
     subjectId,
 }) {
     const { accessToken, _id } = useContext(UserContext);
+    const { t } = useTranslation();
 
     // const { mutate, isPending } = useDeleteStudent(accessToken, _id, itemId);
     const studentDel = useDeleteStudent(accessToken, _id, itemId);
@@ -57,7 +59,7 @@ export default function DeleteModal({
                             </svg>
                             <div className="mt-6">
                                 <h4 className="text-slate-900 text-lg font-semibold">
-                                    Are you sure you want to delete it?
+                                    {t("rUsure")}
                                 </h4>
                             </div>
                         </div>
