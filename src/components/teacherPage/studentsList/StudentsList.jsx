@@ -6,8 +6,10 @@ import { useStudentsList } from "../../../hooks/useRequestHook";
 import Spinner from "../../spinner/Spinner";
 import { toast } from "sonner";
 import Sorting from "./Sorting";
+import { useTranslation } from "react-i18next";
 
 export default function StudentsList() {
+    const { t } = useTranslation();
     const { accessToken } = useContext(UserContext);
     const [modal, setModal] = useState({ open: false, payload: null });
 
@@ -40,6 +42,8 @@ export default function StudentsList() {
         setModal({ open: false, payload: null });
     };
 
+    console.log(students);
+
     return (
         <>
             {/* <div className="realtive"></div> */}
@@ -49,20 +53,20 @@ export default function StudentsList() {
                     <table className="w-full text-left">
                         <thead className="bg-orange-100">
                             <tr>
-                                <th className="p-4">Name</th>
-                                <th className="p-4">Code</th>
+                                <th className="p-4">{t("name")}</th>
+                                <th className="p-4">{t("code")}</th>
                                 <th className="p-4 hidden lg:table-cell">
-                                    Class
+                                    {t("class")}
                                 </th>
-                                <th className="p-4">Last login</th>
+                                <th className="p-4">{t("lastLogin")}</th>
                                 {/* <th className="p-4">visited subjects</th> */}
                                 <th className="p-4 hidden lg:table-cell">
-                                    Created at:
+                                    {t("createdAt")}
                                 </th>
                                 <th className="p-4 hidden lg:table-cell">
-                                    Expired at:
+                                    {t("expAt")}
                                 </th>
-                                <th className="p-4">Controls:</th>
+                                <th className="p-4">{t("ctrl")}</th>
                             </tr>
                         </thead>
                         <tbody>

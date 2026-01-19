@@ -1,20 +1,22 @@
 import { useContext, useEffect, useState } from "react";
 import { Link, NavLink, Outlet, useLocation, useParams } from "react-router";
 import { UserContext } from "../../context/userContext";
+import { useTranslation } from "react-i18next";
 
 export default function TeacherPage() {
     const { username } = useContext(UserContext);
     const [isOpen, setIsOpen] = useState(false);
-    const [pageTitle, setPageTitle] = useState("Dashboard");
+    const [pageTitle, setPageTitle] = useState("");
+    const { t } = useTranslation();
     const pathname = useLocation().pathname;
 
     useEffect(() => {
         if (pathname.includes("students-list")) {
-            setPageTitle("Students List");
+            setPageTitle(t("studentsList"));
         } else if (pathname.includes("profile")) {
-            setPageTitle("Settings");
+            setPageTitle(t("settings"));
         } else {
-            setPageTitle("Dashboard");
+            setPageTitle(t("dashboard"));
         }
     }, [pathname]);
 
@@ -35,7 +37,7 @@ export default function TeacherPage() {
                 } md:translate-x-0`}
             >
                 <div className="p-6 font-bold text-green-600 text-2xl">
-                    AdminPanel
+                    {t("admPanel")}
                 </div>
 
                 <nav className="mt-8">
@@ -51,7 +53,7 @@ export default function TeacherPage() {
                             }`
                         }
                     >
-                        Dashboard
+                        {t("dashboard")}
                     </NavLink>
                     <NavLink
                         to="/teacher/dashboard/students-list"
@@ -64,7 +66,7 @@ export default function TeacherPage() {
                             }`
                         }
                     >
-                        Users
+                        {t("users")}
                     </NavLink>
                 </nav>
             </aside>

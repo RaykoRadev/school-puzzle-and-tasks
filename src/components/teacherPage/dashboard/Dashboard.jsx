@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { Link } from "react-router";
 import ModalCodeEdit from "../modalCodeEdit/ModalCodeEdit";
+import { useTranslation } from "react-i18next";
 
 export default function Dashboard() {
     const [modal, setModalShow] = useState(false);
+    const { t } = useTranslation();
 
     const closeModal = () => {
         setModalShow(false);
@@ -74,20 +76,20 @@ export default function Dashboard() {
             </div> */}
             {/* links board  control*/}
             <div className="p-4 border-b font-bold text-green-600">
-                Controll links
+                {t("ctrlLinks")}
             </div>
             <div className="bg-orange-200 p-6 rounded-lg shadow-md grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
                 <Link
                     to="/teacher/create-link"
                     className="bg-green-600 text-white py-3 rounded-lg shadow hover:bg-green-700"
                 >
-                    Add Link
+                    {t("addLink")}
                 </Link>
                 <Link
                     to="/teacher/create-student"
                     className="bg-blue-600 text-white py-3 rounded-lg shadow hover:bg-blue-700 text-center"
                 >
-                    Add Student
+                    {t("addstudent")}
                 </Link>
                 <button
                     onClick={() => {
@@ -95,7 +97,7 @@ export default function Dashboard() {
                     }}
                     className="bg-purple-600 text-white py-3 rounded-lg shadow hover:bg-purple-700 text-center"
                 >
-                    Edit Profile / Password
+                    {t("editProfile")}
                 </button>
             </div>
             {modal && <ModalCodeEdit onClose={closeModal} />}

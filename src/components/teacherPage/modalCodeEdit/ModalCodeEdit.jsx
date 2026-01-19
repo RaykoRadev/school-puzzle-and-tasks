@@ -3,11 +3,13 @@ import { useCodeEdit } from "../../../hooks/useRequestHook";
 import { useNavigate } from "react-router";
 import { useContext } from "react";
 import { UserContext } from "../../../context/userContext";
+import { useTranslation } from "react-i18next";
 
 export default function ModalCodeEdit({ onClose }) {
     const { accessToken } = useContext(UserContext);
     const navigate = useNavigate();
     const { mutate, isPending } = useCodeEdit(accessToken, navigate);
+    const { t } = useTranslation();
 
     const submitHandler = async (formData) => {
         const oldCode = formData.get("oldCode");
@@ -45,26 +47,26 @@ export default function ModalCodeEdit({ onClose }) {
                                 />
                             </svg>
                             <h2 className="text-2xl font-bold text-green-600 mb-4">
-                                Edit Code
+                                {t("editCode")}
                             </h2>
                             <form
                                 action={submitHandler}
                                 className="flex flex-col"
                             >
                                 <input
-                                    placeholder="Old code"
+                                    placeholder={t("oldCode")}
                                     className="bg-orange-100 text-gray-800 border-0 rounded-md p-2 mb-4 focus:bg-orange-200 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
                                     type="password"
                                     name="oldCode"
                                 />
                                 <input
-                                    placeholder="Code"
+                                    placeholder={t("code")}
                                     className="bg-orange-100 text-gray-800 border-0 rounded-md p-2 mb-4 focus:bg-orange-200 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
                                     type="password"
                                     name="code"
                                 />
                                 <input
-                                    placeholder="Repeat code"
+                                    placeholder={t("repeatCode")}
                                     className="bg-orange-100 text-gray-800 border-0 rounded-md p-2 mb-4 focus:bg-orange-200 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
                                     type="password"
                                     name="repCode"
@@ -74,7 +76,7 @@ export default function ModalCodeEdit({ onClose }) {
                                     className="bg-gradient-to-br from-green-600 to-emerald-400 text-white font-bold py-2 px-4 rounded-md mt-4 hover:bg-green-700 hover:to-emerald-500 transition ease-in-out duration-150"
                                     // type="submit"
                                 >
-                                    Edit Code
+                                    {t("editCode")}
                                 </button>
                             </form>
                         </div>

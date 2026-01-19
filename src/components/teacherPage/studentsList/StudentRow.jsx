@@ -4,6 +4,7 @@ import { UserContext } from "../../../context/userContext";
 import visualizeClassName from "../../../utils/visualizeClassName";
 import DeleteModal from "../../deleteModal/DeleteModal";
 import { Link } from "react-router";
+import { useTranslation } from "react-i18next";
 
 export default function StudentRow({
     studentId,
@@ -21,6 +22,7 @@ export default function StudentRow({
 
     const { classesIds, _id } = useContext(UserContext);
     const [modal, setShowModal] = useState(false);
+    const { t } = useTranslation();
 
     const studentsClassName = classesIds[classId];
 
@@ -34,7 +36,7 @@ export default function StudentRow({
             <td className="p-4">{username}</td>
             <td className="p-4">{code}</td>
             {/* class */}
-            <td className="p-4 hidden lg:table-cell">{nameForVijualize}</td>
+            <td className="p-4 hidden lg:table-cell">{t(studentsClassName)}</td>
             {/* last login */}
             <td
                 className="p-4"

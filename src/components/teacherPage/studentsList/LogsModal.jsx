@@ -1,9 +1,12 @@
+import { useTranslation } from "react-i18next";
+
 export default function LogsModal({ data, onClose }) {
+    const { t } = useTranslation();
     return (
         <div className="backdrop" onClick={onClose}>
             <div className="fixed inset-0 bg-black/40 flex items-center justify-center">
                 <div className="bg-orange-200 rounded-lg p-4 min-w-[300px] relative">
-                    <h1 className="mb-3 font-bold">Last 10 logs</h1>
+                    <h1 className="mb-3 font-bold">{t("lastLogs")}</h1>
                     <button
                         onClick={onClose}
                         className="absolute top-2 right-2"

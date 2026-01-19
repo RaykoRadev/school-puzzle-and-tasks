@@ -1,4 +1,7 @@
+import { useTranslation } from "react-i18next";
+
 export default function Sorting({ data, sortedData }) {
+    const { t } = useTranslation();
     const filters = {
         category: "",
         sorting: "",
@@ -44,11 +47,11 @@ export default function Sorting({ data, sortedData }) {
                     onChange={handleFilterChange}
                     className="bg-orange-200 mt-1 block w-22 md:w-25 text-center py-2 text-base border focus:outline-none focus:ring--green-700  sm:text-sm rounded-md"
                 >
-                    <option value="">Category:</option>
-                    <option value="username">Name</option>
-                    <option value="sessions">Last loged</option>
-                    <option value="createdAt">Created at</option>
-                    <option value="expiredAt">Expired at</option>
+                    <option value="">{t("category")}</option>
+                    <option value="username">{t("name")}</option>
+                    <option value="sessions">{t("lastLog")}</option>
+                    <option value="createdAt">{t("createdAt")}</option>
+                    <option value="expiredAt">{t("expAt")}</option>
                 </select>
 
                 <select
@@ -57,9 +60,9 @@ export default function Sorting({ data, sortedData }) {
                     onChange={handleFilterChange}
                     className="bg-orange-200 mt-1 block  w-22 md:w-25  text-center py-2 text-base border focus:outline-none focus:ring--green-700  sm:text-sm rounded-md"
                 >
-                    <option value="">Sort by:</option>
-                    <option value="ascending">Ascendig</option>
-                    <option value="descending">Descending</option>
+                    <option value="">{t("sortBy")}</option>
+                    <option value="ascending">{t("acd")}</option>
+                    <option value="descending">{t("desn")}</option>
                 </select>
 
                 <button
@@ -69,7 +72,7 @@ export default function Sorting({ data, sortedData }) {
                     // className="mt-1 block w-full py-2 text-base border border-green-700 text-center focus:outline--green-700 focus:ring--green-700 focus:border--green-700 sm:text-sm rounded-md hover:bg-green-700 hover:text-white"
                     onClick={sortHandler}
                 >
-                    Sort
+                    {t("sort")}
                 </button>
             </div>
         </div>
