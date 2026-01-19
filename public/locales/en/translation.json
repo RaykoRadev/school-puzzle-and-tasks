@@ -1,4 +1,8 @@
 {
     "welcome": "Welcome in the missis Dolapchieva's",
-    "welcome1": "page for smart and succeessful kids"
+    "welcome1": "page for smart and succeessful kids",
+    "loginTeacher": "Login as teacher",
+    "loginStudent": "Login as student",
+    "profile": "Profile",
+    "logout": "Logout"
 }
