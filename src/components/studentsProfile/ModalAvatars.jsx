@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { useAllAvatars, useUpdateAvatar } from "../../hooks/useRequestHook";
 import { UserContext } from "../../context/userContext";
 import { useNavigate } from "react-router";
+import { useTranslation } from "react-i18next";
 
 export default function ModalAvatars({ onClose }) {
     const { _id, accessToken, role, setLocalStorageData } =
@@ -13,8 +14,9 @@ export default function ModalAvatars({ onClose }) {
         accessToken,
         role,
         _id,
-        setLocalStorageData
+        setLocalStorageData,
     );
+    const { t } = useTranslation();
 
     const avatarHandler = async () => {
         const newAvatar = data.find((av) => av._id === selectedAvatarId);
@@ -47,7 +49,7 @@ export default function ModalAvatars({ onClose }) {
                         <div className="p-4 mx-auto lg:max-w-6xl md:max-w-4xl">
                             <div className="flex items-center justify-between mt-4 mb-6 sm:mb-8">
                                 <h2 className="text-2xl sm:text-3xl font-bold text-slate-900">
-                                    Аватари
+                                    {t("avatars")}
                                 </h2>
                                 <button
                                     onClick={() => {
@@ -60,7 +62,7 @@ export default function ModalAvatars({ onClose }) {
                                             : "bg-gray-400 cursor-not-allowed"
                                     } `}
                                 >
-                                    Избери
+                                    {t("pickUp")}
                                 </button>
                             </div>
                             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">

@@ -2,10 +2,12 @@ import { useContext, useState } from "react";
 import { UserContext } from "../../context/userContext";
 import ModalAvatars from "./ModalAvatars";
 import { useNavigate } from "react-router";
+import { useTranslation } from "react-i18next";
 
 export default function StudentsProfile() {
     const { username, avatar, role, _id } = useContext(UserContext);
     const [modal, setShowModal] = useState(false);
+    const { t } = useTranslation();
     const navigate = useNavigate();
 
     const avatarModalHandler = () => {
@@ -51,7 +53,7 @@ export default function StudentsProfile() {
                                     }}
                                     className="rounded-md bg-gradient-to-br from-green-600 to-emerald-400 px-3 py-1.5 font-dm text-sm font-medium text-white shadow-md shadow-green-400/50 transition-transform duration-200 ease-in-out hover:scale-[1.03]"
                                 >
-                                    Смени Аватар
+                                    {t("changeAvatar")}
                                 </button>
                                 {modal && (
                                     <ModalAvatars
