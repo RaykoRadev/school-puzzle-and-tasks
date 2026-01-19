@@ -10,6 +10,7 @@ import {
     useOneStudent,
 } from "../../hooks/useRequestHook";
 import { toast } from "sonner";
+import { useTranslation } from "react-i18next";
 
 const initValues = {
     username: "",
@@ -23,6 +24,7 @@ export default function CreateEditStudent() {
     const [result, setResult] = useState(false);
     const [student, setStudent] = useState({});
     const navigate = useNavigate();
+    const { t } = useTranslation();
 
     const { data, isPending, error } = useAllClass(accessToken, _id);
 
@@ -35,7 +37,7 @@ export default function CreateEditStudent() {
         if (!oldStudentInfo.data) return;
 
         const oldStudent = data?.find(
-            (st) => st.classId === oldStudentInfo?.data?.classId
+            (st) => st.classId === oldStudentInfo?.data?.classId,
         );
 
         setValues({
@@ -52,7 +54,7 @@ export default function CreateEditStudent() {
         studentId,
         setStudent,
         setResult,
-        navigate
+        navigate,
     );
 
     if (isPending) {
@@ -109,11 +111,11 @@ export default function CreateEditStudent() {
             <div className="flex flex-1 flex-col items-center justify-center dark">
                 <div className="w-full max-w-md bg-orange-300 rounded-lg shadow-md p-6">
                     <h2 className="text-2xl font-bold text-green-600 mb-4">
-                        Create Student
+                        {t("createStudent")}
                     </h2>
                     <form action={submitHandler} className="flex flex-col">
                         <input
-                            placeholder="Username"
+                            placeholder={t("studentName")}
                             className="bg-orange-100 text-gray-800 border-0 rounded-md p-2 mb-4 focus:bg-orange-200 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
                             type="text"
                             name="username"
@@ -123,7 +125,7 @@ export default function CreateEditStudent() {
                         {value.code && (
                             <div className="flex gap-2 w-full">
                                 <input
-                                    placeholder="Code"
+                                    placeholder={t("code")}
                                     className="flex-1 bg-orange-100 text-gray-800 border-0 rounded-md p-2 mb-4 focus:bg-orange-200 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
                                     type="text"
                                     name="code"
@@ -135,7 +137,7 @@ export default function CreateEditStudent() {
                                     onClick={generator}
                                     className="bg-gradient-to-br from-green-600 to-emerald-400 text-white font-bold py-2 px-4 rounded-md p-2 mb-4 hover:bg-green-700 hover:to-emerald-500 transition ease-in-out duration-150"
                                 >
-                                    Generate Code
+                                    {t("generateCode")}
                                 </button>
                             </div>
                         )}
@@ -146,15 +148,17 @@ export default function CreateEditStudent() {
                             value={value.class}
                             onChange={changeHandler}
                         >
-                            <option value="">Select a class</option>
-                            <option value="class1">Class 1</option>
-                            <option value="class2">Class 2</option>
-                            <option value="class3">Class 3</option>
-                            <option value="class4">Class 4</option>
+                            <option value="">{t("selectClass")}</option>
+                            <option value="class1">{t("class1")}</option>
+                            <option value="class2">{t("class2")}</option>
+                            <option value="class3">{t("class3")}</option>
+                            <option value="class4">{t("class4")}</option>
                         </select>
 
                         <button className="bg-gradient-to-br from-green-600 to-emerald-400 text-white font-bold py-2 px-4 rounded-md mt-4 hover:bg-green-700 hover:to-emerald-500 transition ease-in-out duration-150">
-                            {studentId ? "Edit student" : "Create student"}
+                            {studentId
+                                ? `${t("editStudent")}`
+                                : `${t("createStudent")}`}
                         </button>
                     </form>
 
@@ -162,7 +166,7 @@ export default function CreateEditStudent() {
                     {result && (
                         <>
                             <h2 className="mt-6 text-green-600 font-bold text-xl">
-                                Student Created:
+                                {t("studentCreated")}:
                             </h2>
                             <div className="mt-4">
                                 <label

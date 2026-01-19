@@ -19,5 +19,12 @@
     "rodinoznanie": "Родинознание",
     "human&nature": "Човекът и природата",
     "human&society": "Човекът и обществото",
-    "subjectNotFound": "Предметът не е намерен"
+    "subjectNotFound": "Предметът не е намерен",
+    "createStudent": "Създай ученик",
+    "generateCode": "Генерирай код",
+    "selectClass": "Избери клас",
+    "editStudent": "Промени ученик",
+    "studentCreated": "Ученикът е създаден",
+    "code": "Код",
+    "studentName": "Име на ученика"
 }
