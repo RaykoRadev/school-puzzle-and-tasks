@@ -16,6 +16,7 @@ export default function Home() {
                         {/* <p>Добре дошли в страничката за</p>
                         <p>успешни деца на г-жа Долапчиева</p> */}
                         <p>{t("welcome")}</p>
+                        <p>{t("welcome1")}</p>
                     </h1>
                 </div>
             </div>
