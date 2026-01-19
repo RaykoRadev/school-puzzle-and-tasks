@@ -5,10 +5,13 @@ import visualizeClassName from "../../utils/visualizeClassName";
 import Spinner from "../spinner/Spinner";
 import { useAllClass } from "../../hooks/useRequestHook";
 import { toast } from "sonner";
+import { useTranslation } from "react-i18next";
 
 export default function AllClasses() {
     const { role, _id, teacherId, classId, accessToken } =
         useContext(UserContext);
+
+    const { t } = useTranslation();
 
     // console.log("classId: ", classId);
 
@@ -148,7 +151,8 @@ export default function AllClasses() {
                                         </g>
                                     </svg>
                                     <p className="cardtxt font-semibold text-green-600 tracking-wider group-hover:text-gray-700 text-xl">
-                                        {visualizeClassName(oneClass.name)}
+                                        {/* {visualizeClassName(oneClass.name)} */}
+                                        {t(`${oneClass.name}`)}
                                     </p>
                                 </div>
                             </Link>

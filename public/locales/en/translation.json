@@ -4,5 +4,9 @@
     "loginTeacher": "Login as teacher",
     "loginStudent": "Login as student",
     "profile": "Profile",
-    "logout": "Logout"
+    "logout": "Logout",
+    "class1": "1 Class",
+    "class2": "2 Class",
+    "class3": "3 Class",
+    "class4": "4 Class"
 }

@@ -4,5 +4,9 @@
     "loginTeacher": "Впиши се учител",
     "loginStudent": "Впиши се ученик",
     "profile": "Профил",
-    "logout": "Отпиши се"
+    "logout": "Отпиши се",
+    "class1": "1 Клас",
+    "class2": "2 Клас",
+    "class3": "3 Клас",
+    "class4": "4 Клас"
 }
