@@ -18,7 +18,7 @@ export default function TeacherPage() {
         } else {
             setPageTitle(t("dashboard"));
         }
-    }, [pathname]);
+    }, [pathname, t]);
 
     return (
         <div className="flex flex-1 bg-gray-100">
