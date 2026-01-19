@@ -8,6 +8,7 @@ import {
 } from "../../hooks/useRequestHook";
 import Spinner from "../spinner/Spinner";
 import { toast } from "sonner";
+import { useTranslation } from "react-i18next";
 
 const initValues = {
     text: "",
@@ -20,6 +21,7 @@ export default function CreateEditLink() {
     const { _id, accessToken, role } = useContext(UserContext);
     const [value, setValues] = useState(initValues);
     const [nameVisual, setNameVisual] = useState("");
+    const { t } = useTranslation();
     const navigate = useNavigate();
 
     const { data, isPending, error } = useAllClass(accessToken, _id);
@@ -30,7 +32,7 @@ export default function CreateEditLink() {
 
         const classInfo = data?.find((cl) => cl.classId === classId); //{name: 'class1', subjects: Array(7), _id: '695255fd86a4d31dde800416', classId: '695255fd86a4d31dde80041e'}
         const subjectInfo = classInfo?.subjects.find(
-            (sub) => sub._id === subjectId
+            (sub) => sub._id === subjectId,
         ); //{name: 'math', links: Array(4), visualizationName: 'Математика', _id: '695255fd86a4d31dde800418'}
         const linkInfo = subjectInfo?.links.find((link) => link._id === linkId); //{text: 'abv', link: 'https://www.abv.bg/', _id: '695e58e003a854e23e47c238'}
 
@@ -51,7 +53,7 @@ export default function CreateEditLink() {
         classId,
         subjectId,
         linkId,
-        navigate
+        navigate,
     );
 
     if (isPending) {
@@ -70,7 +72,7 @@ export default function CreateEditLink() {
     };
 
     const selectedClassSubject = data?.filter(
-        (el) => el.name === value.class
+        (el) => el.name === value.class,
     )[0];
 
     const submitHandler = async (formData) => {
@@ -99,11 +101,11 @@ export default function CreateEditLink() {
             <div className="flex flex-1 flex-col items-center justify-center dark">
                 <div className="w-full max-w-md bg-orange-300 rounded-lg shadow-md p-6">
                     <h2 className="text-2xl font-bold text-green-600 mb-4">
-                        Create Link
+                        {t("createLink")}
                     </h2>
                     <form action={submitHandler} className="flex flex-col">
                         <input
-                            placeholder="Text"
+                            placeholder={t("linkText")}
                             className="bg-orange-100 text-gray-800 border-0 rounded-md p-2 mb-4 focus:bg-orange-200 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
                             type="text"
                             name="text"
@@ -133,11 +135,11 @@ export default function CreateEditLink() {
                             disabled={linkId}
                             required
                         >
-                            <option value="">Select a class</option>
-                            <option value="class1">Class 1</option>
-                            <option value="class2">Class 2</option>
-                            <option value="class3">Class 3</option>
-                            <option value="class4">Class 4</option>
+                            <option value="">{t("selectClass")}</option>
+                            <option value="class1">{t("class1")}</option>
+                            <option value="class2">{t("class2")}</option>
+                            <option value="class3">{t("class3")}</option>
+                            <option value="class4">{t("class4")}</option>
                         </select>
 
                         <select
@@ -154,18 +156,19 @@ export default function CreateEditLink() {
                                 </option>
                             )}
                             {!linkId && !selectedClassSubject ? (
-                                <option value="">Choose a Class</option>
+                                <option value="">{t("chooseSubject")}</option>
                             ) : (
                                 selectedClassSubject?.subjects.map((sub) => (
                                     <option value={sub.name} key={sub._id}>
-                                        {sub.visualizationName}
+                                        {/* {sub.visualizationName} */}
+                                        {t(`${sub.name}`)}
                                     </option>
                                 ))
                             )}
                         </select>
 
                         <button className="bg-gradient-to-br from-green-600 to-emerald-400 text-white font-bold py-2 px-4 rounded-md mt-4 hover:bg-green-700 hover:to-emerald-500 transition ease-in-out duration-150">
-                            {linkId ? "Edit Link" : "Create link"}
+                            {linkId ? `${t("editLink")}` : `${t("createLink")}`}
                         </button>
                     </form>
                 </div>

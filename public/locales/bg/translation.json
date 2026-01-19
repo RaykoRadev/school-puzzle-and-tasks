@@ -26,5 +26,9 @@
     "editStudent": "Промени ученик",
     "studentCreated": "Ученикът е създаден",
     "code": "Код",
-    "studentName": "Име на ученика"
+    "studentName": "Име на ученика",
+    "createLink": "Създай линк",
+    "linkText": "Име на линка",
+    "chooseSubject": "Избери предмет",
+    "editLink": "Промени линк"
 }
