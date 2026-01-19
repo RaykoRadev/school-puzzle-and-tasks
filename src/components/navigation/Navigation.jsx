@@ -3,6 +3,7 @@ import { Link, NavLink, useNavigate } from "react-router";
 import { UserContext } from "../../context/userContext";
 import { useLogout } from "../../hooks/useRequestHook";
 import { Toaster } from "sonner";
+import ChangeLanguage from "./changeLanguage/ChangeLangualge";
 
 export default function Navigation() {
     const {
@@ -21,7 +22,7 @@ export default function Navigation() {
         role,
         removeLocalStorageData,
         accessToken,
-        navigate
+        navigate,
     );
 
     return (
@@ -33,11 +34,11 @@ export default function Navigation() {
                         <Link to={`/${_id}/allClasses`}>
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
-                                width={28}
-                                height={28}
+                                width={30}
+                                height={30}
                                 viewBox="0 0 24 24"
                                 fill="none"
-                                stroke="#1bb163"
+                                stroke="#16a34a"
                                 strokeWidth="1.5"
                                 strokeLinecap="round"
                                 strokeLinejoin="round"
@@ -66,7 +67,7 @@ export default function Navigation() {
                                 height={28}
                                 viewBox="0 0 24 24"
                                 fill="none"
-                                stroke="#1bb163"
+                                stroke="#16a34a"
                                 strokeWidth="1.5"
                                 strokeLinecap="round"
                                 strokeLinejoin="round"
@@ -88,6 +89,7 @@ export default function Navigation() {
                         </Link>
                     )}
                 </div>
+                <ChangeLanguage />
 
                 <div className="flex-grow" />
 
