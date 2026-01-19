@@ -45,7 +45,7 @@ export default function Sorting({ data, sortedData }) {
                     id="category"
                     name="category"
                     onChange={handleFilterChange}
-                    className="bg-orange-200 mt-1 block w-22 md:w-25 text-center py-2 text-base border focus:outline-none focus:ring--green-700  sm:text-sm rounded-md"
+                    className="bg-orange-200 mt-1 block w-26 md:w-30 text-center py-2 text-sm sm:text-base md:text-md rounded-md border border focus:outline-none focus:ring--green-700"
                 >
                     <option value="">{t("category")}</option>
                     <option value="username">{t("name")}</option>
@@ -58,7 +58,7 @@ export default function Sorting({ data, sortedData }) {
                     id="sorting"
                     name="sorting"
                     onChange={handleFilterChange}
-                    className="bg-orange-200 mt-1 block  w-22 md:w-25  text-center py-2 text-base border focus:outline-none focus:ring--green-700  sm:text-sm rounded-md"
+                    className="bg-orange-200 mt-1 block w-26 md:w-30 text-center py-2 text-sm sm:text-base md:text-md rounded-md border border focus:outline-none focus:ring--green-700"
                 >
                     <option value="">{t("sortBy")}</option>
                     <option value="ascending">{t("acd")}</option>
