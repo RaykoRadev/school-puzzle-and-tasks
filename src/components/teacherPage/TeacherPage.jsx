@@ -32,9 +32,7 @@ export default function TeacherPage() {
 
             {/* Sidebar */}
             <aside
-                className={`fixed md:static z-30 top-0 left-0 w-40 md:w-64 bg-orange-100 shadow-md transform transition-transform duration-300 ${
-                    isOpen ? "translate-x-0 h-screen" : "-translate-x-full"
-                } md:translate-x-0`}
+                className={`fixed md:static z-30 top-16 left-0 w-40 md:w-64 bg-orange-100 shadow-md transform transition-transform duration-300 ${isOpen ? "translate-x-0 h-[calc(100vh-4rem)]" : "-translate-x-full"} md:translate-x-0 md:h-auto`}
             >
                 <div className="p-6 font-bold text-green-600 text-2xl">
                     {t("admPanel")}
