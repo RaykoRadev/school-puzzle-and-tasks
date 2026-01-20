@@ -31,7 +31,7 @@ export default function StudentsList() {
     }
 
     if (error) {
-        return toast.error(error.message);
+        return toast.error(t(error.message));
     }
 
     const openModal = (payload) => {

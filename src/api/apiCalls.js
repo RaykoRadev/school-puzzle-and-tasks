@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { UserContext } from "../context/userContext";
 import { toast } from "sonner";
+import i18n from "../i18n";
 
 let sessionExpiredHandled = false;
 
@@ -9,7 +10,7 @@ export default async function fetchRequest(
     method = "GET",
     signal,
     accessToken,
-    data
+    data,
 ) {
     // const { removeLocalStorageData } = useContext(UserContext);
     const options = {
@@ -46,13 +47,13 @@ export default async function fetchRequest(
 
                 localStorage.removeItem("user");
                 window.location.replace("/");
-                toast.error("Изтекла сесия");
+                toast.error(i18n.t("expSession"));
 
                 return;
             }
 
             throw new Error(
-                errorBody.message || `Request failed with ${res.status}`
+                errorBody.message || `Request failed with ${res.status}`,
             );
         }
 

@@ -61,7 +61,7 @@ export default function CreateEditLink() {
     }
 
     if (error) {
-        return toast.error(error.message);
+        return toast.error(t(error.message));
     }
 
     const changeHandler = (e) => {
@@ -161,14 +161,14 @@ export default function CreateEditLink() {
                                 selectedClassSubject?.subjects.map((sub) => (
                                     <option value={sub.name} key={sub._id}>
                                         {/* {sub.visualizationName} */}
-                                        {t(`${sub.name}`)}
+                                        {t(sub.name)}
                                     </option>
                                 ))
                             )}
                         </select>
 
                         <button className="bg-gradient-to-br from-green-600 to-emerald-400 text-white font-bold py-2 px-4 rounded-md mt-4 hover:bg-green-700 hover:to-emerald-500 transition ease-in-out duration-150">
-                            {linkId ? `${t("editLink")}` : `${t("createLink")}`}
+                            {linkId ? t("editLink") : t("createLink")}
                         </button>
                     </form>
                 </div>

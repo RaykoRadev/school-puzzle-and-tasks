@@ -62,7 +62,7 @@ export default function CreateEditStudent() {
     }
 
     if (error) {
-        return toast.error(error.message);
+        return toast.error(t(error.message));
     }
 
     const changeHandler = (e) => {

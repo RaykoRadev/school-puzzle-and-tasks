@@ -30,7 +30,7 @@ export default function Class() {
     }
 
     if (error) {
-        return toast.error(error.message);
+        return toast.error(t(error.message));
     }
 
     return (
@@ -75,7 +75,7 @@ export default function Class() {
                                     }
                                 >
                                     {/* {sub.visualizationName} */}
-                                    {t(`${sub.name}`)}
+                                    {t(sub.name)}
                                 </NavLink>
                             </li>
                         ))}
@@ -98,7 +98,7 @@ export default function Class() {
 
                         <h1 className="text-xl font-bold text-green-600">
                             {/* {visualizeClassName(data?.classes[0].name)} */}
-                            {t(`${data?.classes[0].name}`)}
+                            {t(data?.classes[0].name)}
                         </h1>
                     </div>
 

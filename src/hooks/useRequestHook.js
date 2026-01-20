@@ -3,6 +3,7 @@ import { endPoints, host } from "../config/constants";
 import fetchRequest from "../api/apiCalls";
 import revertObject from "../utils/revertObject";
 import { toast } from "sonner";
+import i18n from "../i18n";
 
 export const useStudentsList = (accessToken) =>
     useQuery({
@@ -12,7 +13,7 @@ export const useStudentsList = (accessToken) =>
                 host + endPoints.getAllStudents,
                 "GET",
                 signal,
-                accessToken
+                accessToken,
             ),
     });
 
@@ -24,7 +25,7 @@ export const useOneClass = (accessToken, role, teacherId, classId) =>
                 host + endPoints.getOneClass + "/" + teacherId + "/" + classId,
                 "GET",
                 signal,
-                accessToken
+                accessToken,
             ),
         staleTime: role === "teacher" ? 0 : 1000 * 60 * 30, // that should make always new req for a theacher and one req per 30 min for student
     });
@@ -37,7 +38,7 @@ export const useAllClass = (accessToken, teacherId) =>
                 host + endPoints.getAllClasses + "/" + teacherId,
                 "GET",
                 signal,
-                accessToken
+                accessToken,
             ),
         staleTime: 1000 * 60 * 30,
     });
@@ -50,10 +51,10 @@ export const useLogin = (role, setLocalStorageData, navigate) =>
                 "POST",
                 null,
                 null,
-                data
+                data,
             ),
         onSuccess: (result) => {
-            toast.success(`Добре дошъл/а ${result.username}`);
+            toast.success(`${i18n.t("toastWelcome")} ${result.username}`);
             if (role === "teacher") {
                 const orgClassNameObj = result.classesIds;
                 const reveretedClassNameObj = revertObject(orgClassNameObj);
@@ -66,7 +67,7 @@ export const useLogin = (role, setLocalStorageData, navigate) =>
             navigate(`/links/${result.teacherId}/${result.classId}`);
         },
         onError: (err) => {
-            toast.error("invalid username or code");
+            toast.error(i18n.t("invalidCredentional"));
             navigate(`/${role}/login`);
         },
     });
@@ -75,7 +76,7 @@ export const useLogout = (
     role,
     removeLocalStorageData,
     accessToken,
-    navigate
+    navigate,
 ) =>
     useMutation({
         mutationFn: () =>
@@ -83,10 +84,10 @@ export const useLogout = (
                 host + "/" + role + endPoints.logout,
                 "GET",
                 null,
-                accessToken
+                accessToken,
             ),
         onSuccess: (result) => {
-            toast.success("Успешно отписване!");
+            toast.success(i18n.t("sucLogout"));
             removeLocalStorageData(result);
             navigate("/");
         },
@@ -101,14 +102,14 @@ export const useCreateLink = (accessToken, navigate) => {
                 "POST",
                 null,
                 accessToken,
-                data
+                data,
             ),
         onSuccess: () => {
-            toast.success("Успешно създаване на линк!");
+            toast.success(i18n.t("sucCreatedLink"));
             navigate("/teacher/dashboard");
         },
         onError: () => {
-            toast.error("Нещо се обърка. Моля пробвайте отново.");
+            toast.error(i18n.t("sthWentWrong"));
         },
         onSettled: () =>
             queryClient.invalidateQueries({ queryKey: ["classInfo"] }),
@@ -131,12 +132,12 @@ export const useDeleteLink = (accessToken, classId, subjectId, linkId) => {
                     "/delete",
                 "DELETE",
                 null,
-                accessToken
+                accessToken,
             );
         },
         onSuccess: () => {
             // navigate(-1);
-            toast.success("Успешно изтрит линк!");
+            toast.success(i18n.t("sucDelLink"));
         },
         onSettled: () => {
             queryClient.invalidateQueries({ queryKey: ["singleClass"] });
@@ -159,7 +160,7 @@ export const useOneLink = (accessToken, role, classId, subjectId, linkId) =>
                     linkId,
                 "GET",
                 signal,
-                accessToken
+                accessToken,
             ),
         enabled: !!linkId,
         staleTime: role === "teacher" ? 0 : 1000 * 60 * 30,
@@ -172,7 +173,7 @@ export const useEditLink = (
     classId,
     subjectId,
     linkId,
-    navigate
+    navigate,
 ) => {
     const queryClient = useQueryClient();
     return useMutation({
@@ -190,10 +191,10 @@ export const useEditLink = (
                 "PUT",
                 null,
                 accessToken,
-                data
+                data,
             ),
         onSuccess: () => {
-            toast.success("Успешно променен линк!");
+            toast.success(i18n.t("sucEditLink"));
             navigate(`/links/${teacherId}/${classId}/${subjectId}`);
         },
         onSettled: () => {
@@ -213,16 +214,14 @@ export const useCreateStudent = (accessToken, setStudent, setResult) => {
                 "POST",
                 null,
                 accessToken,
-                data
+                data,
             ),
         onSuccess: (result) => {
-            toast.success("Успешно регистриране на ученик!");
-            setResult(true), setStudent(result);
+            toast.success(i18n.t("sucRegStudent"));
+            (setResult(true), setStudent(result));
         },
         onError: (err) => {
-            toast.error(
-                err.message || "Нещо се обърка. Моля пробвайте отново."
-            );
+            toast.error(i18n.t(err.message) || i18n.t("sthWentWrong"));
         },
         // onSettled: () =>
         //     queryClient.invalidateQueries({ queryKey: ["classInfo"] }),
@@ -243,12 +242,12 @@ export const useDeleteStudent = (accessToken, teacherId, studentId) => {
                     "/delete",
                 "DELETE",
                 null,
-                accessToken
+                accessToken,
             );
         },
         onSuccess: () => {
             // navigate(-1);
-            toast.success("Успешно изтрит студент!");
+            toast.success(i18n.t("sucDelStudent"));
         },
         onSettled: () => {
             queryClient.invalidateQueries({ queryKey: ["studenstList"] });
@@ -264,7 +263,7 @@ export const useOneStudent = (accessToken, role, teacherId, studentId) =>
                 host + endPoints.student + "/" + teacherId + "/" + studentId,
                 "GET",
                 signal,
-                accessToken
+                accessToken,
             ),
         enabled: !!studentId,
         staleTime: role === "teacher" ? 0 : 1000 * 60 * 30, // that should make always new req for a theacher and one req per 30 min for student
@@ -276,7 +275,7 @@ export const useEditStudent = (
     studentId,
     setStudent,
     setResult,
-    navigate
+    navigate,
 ) => {
     const queryClient = useQueryClient();
     return useMutation({
@@ -292,13 +291,13 @@ export const useEditStudent = (
                 "PATCH",
                 null,
                 accessToken,
-                data
+                data,
             );
         },
         onSuccess: (result) => {
             navigate(-1);
-            toast.success("Успешно променен студент!");
-            setResult(true), setStudent(result);
+            toast.success(i18n.t("sucEditStudent"));
+            (setResult(true), setStudent(result));
         },
         onSettled: () => {
             queryClient.invalidateQueries({ queryKey: ["studenstList"] });
@@ -318,7 +317,7 @@ export const useUpdateAvatar = (
     accessToken,
     role,
     studentId,
-    setLocalStorageData
+    setLocalStorageData,
 ) => {
     const queryClient = useQueryClient();
     return useMutation({
@@ -328,10 +327,10 @@ export const useUpdateAvatar = (
                 "PATCH",
                 null,
                 accessToken,
-                data
+                data,
             ),
         onSuccess: (result) => {
-            toast.success("Успешно променен аватар!");
+            toast.success(i18n.t("sucEditAvatar"));
             queryClient.invalidateQueries({
                 queryKey: ["singleSudent", role, studentId],
             });
@@ -356,14 +355,14 @@ export const useCodeEdit = (accessToken, navigate) =>
                 "PATCH",
                 null,
                 accessToken,
-                data
+                data,
             ),
         onSuccess: () => {
-            toast.success("Кодът е променен успешно!");
+            toast.success(i18n.t.$TFunctionBrand("sucEditCode"));
 
             navigate(-1);
         },
         onError: (err) => {
-            toast.error(err.message);
+            toast.error(i18n.t(err.message));
         },
     });

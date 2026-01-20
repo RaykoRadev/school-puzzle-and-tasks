@@ -24,7 +24,7 @@ export default function AllClasses() {
     }
 
     if (error) {
-        toast.error(error.message);
+        toast.error(t(error.message));
         return;
     }
 

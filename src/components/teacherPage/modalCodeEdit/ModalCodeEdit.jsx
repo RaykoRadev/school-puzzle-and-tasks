@@ -17,7 +17,7 @@ export default function ModalCodeEdit({ onClose }) {
         const repCode = formData.get("repCode");
 
         if (repCode !== code) {
-            toast.error("Codes missmaths!!!");
+            toast.error(t("codeMissmacths"));
             return;
         }
 
