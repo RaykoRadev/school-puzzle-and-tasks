@@ -1,3 +1,5 @@
+import i18n from "../i18n";
+
 export default function parseDate(initDates) {
     if (typeof initDates == "string") {
         return parseSingleDate(initDates);
@@ -5,7 +7,7 @@ export default function parseDate(initDates) {
 
     let workingArr = initDates;
     if (workingArr.length === 0) {
-        return ["There is no logs"];
+        return [i18n.t("noLogs")];
     } else if (workingArr.length > 10) {
         workingArr = workingArr.slice(0, 10);
     }
@@ -13,7 +15,7 @@ export default function parseDate(initDates) {
         const date = new Date(s.loginAt);
 
         if (isNaN(date.getTime())) {
-            return "There is no logs";
+            return i18n.t("noLogs");
         }
 
         const hours = String(date.getUTCHours()).padStart(2, "0");
@@ -30,7 +32,7 @@ function parseSingleDate(oldDate) {
     const date = new Date(oldDate);
 
     if (isNaN(date.getTime())) {
-        return "There is no logs";
+        return i18n.t("noLogs");
     }
 
     const day = String(date.getUTCDate()).padStart(2, "0");

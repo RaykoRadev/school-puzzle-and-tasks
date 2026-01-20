@@ -83,5 +83,6 @@
     "usernameExist": "The username already exists!",
     "invalidUsernameOrPassword": "Invalid username or code!",
     "expSession": "Expired session!",
+    "noLogs": "There is no logs",
     "": ""
 }

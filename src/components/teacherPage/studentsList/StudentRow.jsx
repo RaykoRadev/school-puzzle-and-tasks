@@ -26,7 +26,7 @@ export default function StudentRow({
 
     const studentsClassName = classesIds[classId];
 
-    const nameForVijualize = visualizeClassName(studentsClassName);
+    //todo may be needed to add use effect bcz when the language is change the array with last lods is not refreshed
 
     const deleteModalHandler = () => {
         setShowModal(false);
