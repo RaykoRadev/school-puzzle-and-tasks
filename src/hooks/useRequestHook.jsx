@@ -4,6 +4,7 @@ import fetchRequest from "../api/apiCalls";
 import revertObject from "../utils/revertObject";
 import { toast } from "sonner";
 import i18n from "../i18n";
+import NotFound from "../components/notFound/NotFound";
 
 export const useStudentsList = (accessToken) =>
     useQuery({
@@ -67,8 +68,15 @@ export const useLogin = (role, setLocalStorageData, navigate) =>
             navigate(`/links/${result.teacherId}/${result.classId}`);
         },
         onError: (err) => {
-            toast.error(i18n.t("invalidCredentional"));
-            navigate(`/${role}/login`);
+            if (err.message === "subTeachExpired") {
+                toast.error(i18n.t("subTeachExpired"));
+                // return <NotFound message={"subTeachExpired"} />;
+                // return <Navigate to="*" replace />
+                navigate("*", { state: { message: "subTeachExpired" } });
+            } else {
+                toast.error(i18n.t("invalidCredentional"));
+                navigate(`/${role}/login`);
+            }
         },
     });
 

@@ -6,14 +6,15 @@ import Spinner from "../spinner/Spinner";
 import { useAllClass } from "../../hooks/useRequestHook";
 import { toast } from "sonner";
 import { useTranslation } from "react-i18next";
+import ExpiredSub from "../expiredSub/ExpiredSub";
 
 export default function AllClasses() {
-    const { role, _id, teacherId, classId, accessToken } =
+    const { role, _id, teacherId, classId, accessToken, status } =
         useContext(UserContext);
 
     const { t } = useTranslation();
 
-    // console.log("classId: ", classId);
+    console.log("status: ", status);
 
     //todo if there is no accesstoken to load some greeetings and to not make the request for classes
 
@@ -31,13 +32,14 @@ export default function AllClasses() {
     return (
         <>
             {/* source: https://redpixelthemes.com/ */}
+            {status === "expired" && <ExpiredSub />}
             {role === "student" && (
-                <Link to={`/links/${teacherId}/${classId}`}>click</Link>
+                <Link to={`/links/${teacherId._id}/${classId}`}>click</Link>
             )}
             {role !== "teacher" && (
                 <h1 className="text-white">Welcom to our site!!!</h1>
             )}
-            {role === "teacher" && (
+            {role === "teacher" && status === "active" && (
                 <div className="container relative flex-1 z-40 mx-auto h-screen flex items-center justify-center ">
                     <div className="flex flex-wrap -m-2 justify-center mx-auto lg:w-full md:w-5/6 xl:shadow-small-blue">
                         {data?.map((oneClass) => (

@@ -6,15 +6,16 @@ import { useOneClass } from "../../hooks/useRequestHook";
 import Spinner from "../spinner/Spinner";
 import { toast } from "sonner";
 import { useTranslation } from "react-i18next";
+import ExpiredSub from "../expiredSub/ExpiredSub";
 
 export default function Class() {
     const { t } = useTranslation();
     const [isOpen, setIsOpen] = useState(false);
-    const { username, role, _id, teacherId, accessToken } =
+    const { username, role, _id, teacherId, accessToken, status } =
         useContext(UserContext);
     const classId = useParams().classId;
 
-    const variablId = teacherId !== undefined ? teacherId : _id;
+    const variablId = teacherId !== undefined ? teacherId._id : _id;
 
     //? Probably there is a way to be avoided the request using cash or something like that
 
@@ -64,7 +65,7 @@ export default function Class() {
                                 <NavLink
                                     onClick={() => setIsOpen(false)}
                                     to={`/links/${
-                                        role === "teacher" ? _id : teacherId
+                                        role === "teacher" ? _id : teacherId._id
                                     }/${data?.classes[0].classId}/${sub._id}`}
                                     className={({ isActive }) =>
                                         `block py-3 px-6 text-gray-700 hover:bg-green-300 ${
@@ -111,7 +112,13 @@ export default function Class() {
 
                 {/* Content */}
                 <main className="p-6 space-y-6 flex-1 bg-orange-200">
-                    <Outlet context={{ subjects: data?.classes[0].subjects }} />
+                    {status === "expired" ? (
+                        <ExpiredSub />
+                    ) : (
+                        <Outlet
+                            context={{ subjects: data?.classes[0].subjects }}
+                        />
+                    )}
                 </main>
             </div>
         </div>

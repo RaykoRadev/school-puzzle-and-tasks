@@ -9,6 +9,7 @@ import {
 import Spinner from "../spinner/Spinner";
 import { toast } from "sonner";
 import { useTranslation } from "react-i18next";
+import ExpiredSub from "../expiredSub/ExpiredSub";
 
 const initValues = {
     text: "",
@@ -18,7 +19,7 @@ const initValues = {
 };
 
 export default function CreateEditLink() {
-    const { _id, accessToken, role } = useContext(UserContext);
+    const { _id, accessToken, role, status } = useContext(UserContext);
     const [value, setValues] = useState(initValues);
     const [nameVisual, setNameVisual] = useState("");
     const { t } = useTranslation();
@@ -98,81 +99,94 @@ export default function CreateEditLink() {
 
     return (
         <>
-            <div className="flex flex-1 flex-col items-center justify-center dark">
-                <div className="w-full max-w-md bg-orange-300 rounded-lg shadow-md p-6">
-                    <h2 className="text-2xl font-bold text-green-600 mb-4">
-                        {t("createLink")}
-                    </h2>
-                    <form action={submitHandler} className="flex flex-col">
-                        <input
-                            placeholder={t("linkText")}
-                            className="bg-orange-100 text-gray-800 border-0 rounded-md p-2 mb-4 focus:bg-orange-200 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
-                            type="text"
-                            name="text"
-                            value={value.text}
-                            onChange={changeHandler}
-                            required
-                        />
+            {status === "expired" ? (
+                <ExpiredSub />
+            ) : (
+                <div className="flex flex-1 flex-col items-center justify-center dark">
+                    <div className="w-full max-w-md bg-orange-300 rounded-lg shadow-md p-6">
+                        <h2 className="text-2xl font-bold text-green-600 mb-4">
+                            {t("createLink")}
+                        </h2>
+                        <form action={submitHandler} className="flex flex-col">
+                            <input
+                                placeholder={t("linkText")}
+                                className="bg-orange-100 text-gray-800 border-0 rounded-md p-2 mb-4 focus:bg-orange-200 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
+                                type="text"
+                                name="text"
+                                id="text"
+                                value={value.text}
+                                onChange={changeHandler}
+                                required
+                            />
 
-                        <input
-                            placeholder="Link"
-                            className="bg-orange-100 text-gray-800 border-0 rounded-md p-2 mb-1 focus:bg-orange-200 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
-                            type="text"
-                            name="link"
-                            value={value.link}
-                            onChange={changeHandler}
-                            required
-                        />
-                        <i className="mt-0 mb-4 text-xs text-gray-700 not-italic">
-                            example: https://www.abv.bg
-                        </i>
-                        <select
-                            className="bg-orange-100 text-gray-800 border-0 rounded-md p-2 mb-4 focus:bg-orange-200 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
-                            id="gender"
-                            name="class"
-                            value={value.class}
-                            onChange={changeHandler}
-                            disabled={linkId}
-                            required
-                        >
-                            <option value="">{t("selectClass")}</option>
-                            <option value="class1">{t("class1")}</option>
-                            <option value="class2">{t("class2")}</option>
-                            <option value="class3">{t("class3")}</option>
-                            <option value="class4">{t("class4")}</option>
-                        </select>
+                            <input
+                                placeholder="Link"
+                                className="bg-orange-100 text-gray-800 border-0 rounded-md p-2 mb-1 focus:bg-orange-200 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
+                                type="text"
+                                name="link"
+                                id="link"
+                                value={value.link}
+                                onChange={changeHandler}
+                                required
+                            />
+                            <i className="mt-0 mb-4 text-xs text-gray-700 not-italic">
+                                example: https://www.abv.bg
+                            </i>
+                            <select
+                                className="bg-orange-100 text-gray-800 border-0 rounded-md p-2 mb-4 focus:bg-orange-200 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
+                                id="class"
+                                name="class"
+                                value={value.class}
+                                onChange={changeHandler}
+                                disabled={linkId}
+                                required
+                            >
+                                <option value="">{t("selectClass")}</option>
+                                <option value="class1">{t("class1")}</option>
+                                <option value="class2">{t("class2")}</option>
+                                <option value="class3">{t("class3")}</option>
+                                <option value="class4">{t("class4")}</option>
+                            </select>
 
-                        <select
-                            className="bg-orange-100 text-gray-800 border-0 rounded-md p-2 mb-4 focus:bg-orange-200 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
-                            id="gender"
-                            name="subject"
-                            onChange={changeHandler}
-                            disabled={!value.class || linkId}
-                            required
-                        >
-                            {linkId && (
-                                <option value={value.subject}>
-                                    {nameVisual}
-                                </option>
-                            )}
-                            {!linkId && !selectedClassSubject ? (
-                                <option value="">{t("chooseSubject")}</option>
-                            ) : (
-                                selectedClassSubject?.subjects.map((sub) => (
-                                    <option value={sub.name} key={sub._id}>
-                                        {/* {sub.visualizationName} */}
-                                        {t(sub.name)}
+                            <select
+                                className="bg-orange-100 text-gray-800 border-0 rounded-md p-2 mb-4 focus:bg-orange-200 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
+                                id="subject"
+                                name="subject"
+                                onChange={changeHandler}
+                                disabled={!value.class || linkId}
+                                required
+                            >
+                                {linkId && (
+                                    <option value={value.subject}>
+                                        {nameVisual}
                                     </option>
-                                ))
-                            )}
-                        </select>
+                                )}
+                                {!linkId && !selectedClassSubject ? (
+                                    <option value="">
+                                        {t("chooseSubject")}
+                                    </option>
+                                ) : (
+                                    selectedClassSubject?.subjects.map(
+                                        (sub) => (
+                                            <option
+                                                value={sub.name}
+                                                key={sub._id}
+                                            >
+                                                {/* {sub.visualizationName} */}
+                                                {t(sub.name)}
+                                            </option>
+                                        ),
+                                    )
+                                )}
+                            </select>
 
-                        <button className="bg-gradient-to-br from-green-600 to-emerald-400 text-white font-bold py-2 px-4 rounded-md mt-4 hover:bg-green-700 hover:to-emerald-500 transition ease-in-out duration-150">
-                            {linkId ? t("editLink") : t("createLink")}
-                        </button>
-                    </form>
+                            <button className="bg-gradient-to-br from-green-600 to-emerald-400 text-white font-bold py-2 px-4 rounded-md mt-4 hover:bg-green-700 hover:to-emerald-500 transition ease-in-out duration-150">
+                                {linkId ? t("editLink") : t("createLink")}
+                            </button>
+                        </form>
+                    </div>
                 </div>
-            </div>
+            )}
         </>
     );
 }

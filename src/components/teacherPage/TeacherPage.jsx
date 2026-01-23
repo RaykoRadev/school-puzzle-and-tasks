@@ -2,13 +2,17 @@ import { useContext, useEffect, useState } from "react";
 import { Link, NavLink, Outlet, useLocation, useParams } from "react-router";
 import { UserContext } from "../../context/userContext";
 import { useTranslation } from "react-i18next";
+import parseDate from "../../utils/parseDate";
+import ExpiredSub from "../expiredSub/ExpiredSub";
 
 export default function TeacherPage() {
-    const { username } = useContext(UserContext);
+    const { username, subscriptionExpiresAt, status } = useContext(UserContext);
     const [isOpen, setIsOpen] = useState(false);
     const [pageTitle, setPageTitle] = useState("");
     const { t } = useTranslation();
     const pathname = useLocation().pathname;
+
+    const remainingTime = parseDate(subscriptionExpiresAt);
 
     useEffect(() => {
         if (pathname.includes("students-list")) {
@@ -93,6 +97,11 @@ export default function TeacherPage() {
                             placeholder="Search..."
                             className="hidden sm:block px-4 py-2 border rounded-lg"
                         /> */}
+                        <div className="hidden md:flex w-90 h-10 mr-3 items-center justify-center font-bold text-green-600 text-lg">
+                            {t(`subExpAt`)}
+                            {t(`subExpAt1`)}
+                            {remainingTime}
+                        </div>
                         <div className="w-10 h-10 mr-3 flex items-center justify-center font-bold text-green-600 text-lg">
                             {username}
                         </div>
@@ -101,7 +110,7 @@ export default function TeacherPage() {
 
                 {/* Content */}
                 <main className="p-6 space-y-6 flex-1 bg-orange-200">
-                    <Outlet />
+                    {status === "expired" ? <ExpiredSub /> : <Outlet />}
                 </main>
             </div>
         </div>

@@ -84,5 +84,11 @@
     "invalidUsernameOrPassword": "Invalid username or code!",
     "expSession": "Expired session!",
     "noLogs": "There is no logs",
+    "subExpired": "Subscription expired. Please renew access.",
+    "subTeachExpired": "Teacher subscription expired.",
+    "subExpAt": "Subscription ",
+    "subExpAt1": "expired at:  ",
+    "notFound": "Page not Found",
+    "teacherSubExp": "The service is temporary disable. Please contact your teacher.",
     "": ""
 }

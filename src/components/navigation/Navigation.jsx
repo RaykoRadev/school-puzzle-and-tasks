@@ -62,7 +62,7 @@ export default function Navigation() {
                         </Link>
                     )}
                     {role === "student" && (
-                        <Link to={`/links/${teacherId}/${classId}`}>
+                        <Link to={`/links/${teacherId._id}/${classId}`}>
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 width={28}

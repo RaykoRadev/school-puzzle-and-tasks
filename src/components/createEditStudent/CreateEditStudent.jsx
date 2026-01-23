@@ -11,6 +11,7 @@ import {
 } from "../../hooks/useRequestHook";
 import { toast } from "sonner";
 import { useTranslation } from "react-i18next";
+import ExpiredSub from "../expiredSub/ExpiredSub";
 
 const initValues = {
     username: "",
@@ -19,7 +20,8 @@ const initValues = {
 };
 
 export default function CreateEditStudent() {
-    const { _id, accessToken, role, classesIds } = useContext(UserContext);
+    const { _id, accessToken, role, classesIds, status } =
+        useContext(UserContext);
     const [value, setValues] = useState(initValues);
     const [result, setResult] = useState(false);
     const [student, setStudent] = useState({});
@@ -108,86 +110,90 @@ export default function CreateEditStudent() {
 
     return (
         <>
-            <div className="flex flex-1 flex-col items-center justify-center dark">
-                <div className="w-full max-w-md bg-orange-300 rounded-lg shadow-md p-6">
-                    <h2 className="text-2xl font-bold text-green-600 mb-4">
-                        {t("createStudent")}
-                    </h2>
-                    <form action={submitHandler} className="flex flex-col">
-                        <input
-                            placeholder={t("studentName")}
-                            className="bg-orange-100 text-gray-800 border-0 rounded-md p-2 mb-4 focus:bg-orange-200 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
-                            type="text"
-                            name="username"
-                            value={value.username}
-                            onChange={changeHandler}
-                        />
-                        {value.code && (
-                            <div className="flex gap-2 w-full">
-                                <input
-                                    placeholder={t("code")}
-                                    className="flex-1 bg-orange-100 text-gray-800 border-0 rounded-md p-2 mb-4 focus:bg-orange-200 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
-                                    type="text"
-                                    name="code"
-                                    value={value.code}
-                                    onChange={changeHandler}
-                                />
-                                <button
-                                    type="button"
-                                    onClick={generator}
-                                    className="bg-gradient-to-br from-green-600 to-emerald-400 text-white font-bold py-2 px-4 rounded-md p-2 mb-4 hover:bg-green-700 hover:to-emerald-500 transition ease-in-out duration-150"
-                                >
-                                    {t("generateCode")}
-                                </button>
-                            </div>
+            {status === "expired" ? (
+                <ExpiredSub />
+            ) : (
+                <div className="flex flex-1 flex-col items-center justify-center dark">
+                    <div className="w-full max-w-md bg-orange-300 rounded-lg shadow-md p-6">
+                        <h2 className="text-2xl font-bold text-green-600 mb-4">
+                            {t("createStudent")}
+                        </h2>
+                        <form action={submitHandler} className="flex flex-col">
+                            <input
+                                placeholder={t("studentName")}
+                                className="bg-orange-100 text-gray-800 border-0 rounded-md p-2 mb-4 focus:bg-orange-200 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
+                                type="text"
+                                name="username"
+                                value={value.username}
+                                onChange={changeHandler}
+                            />
+                            {value.code && (
+                                <div className="flex gap-2 w-full">
+                                    <input
+                                        placeholder={t("code")}
+                                        className="flex-1 bg-orange-100 text-gray-800 border-0 rounded-md p-2 mb-4 focus:bg-orange-200 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
+                                        type="text"
+                                        name="code"
+                                        value={value.code}
+                                        onChange={changeHandler}
+                                    />
+                                    <button
+                                        type="button"
+                                        onClick={generator}
+                                        className="bg-gradient-to-br from-green-600 to-emerald-400 text-white font-bold py-2 px-4 rounded-md p-2 mb-4 hover:bg-green-700 hover:to-emerald-500 transition ease-in-out duration-150"
+                                    >
+                                        {t("generateCode")}
+                                    </button>
+                                </div>
+                            )}
+                            <select
+                                className="bg-orange-100 text-gray-800 border-0 rounded-md p-2 mb-4 focus:bg-orange-200 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
+                                id="gender"
+                                name="class"
+                                value={value.class}
+                                onChange={changeHandler}
+                            >
+                                <option value="">{t("selectClass")}</option>
+                                <option value="class1">{t("class1")}</option>
+                                <option value="class2">{t("class2")}</option>
+                                <option value="class3">{t("class3")}</option>
+                                <option value="class4">{t("class4")}</option>
+                            </select>
+
+                            <button className="bg-gradient-to-br from-green-600 to-emerald-400 text-white font-bold py-2 px-4 rounded-md mt-4 hover:bg-green-700 hover:to-emerald-500 transition ease-in-out duration-150">
+                                {studentId
+                                    ? `${t("editStudent")}`
+                                    : `${t("createStudent")}`}
+                            </button>
+                        </form>
+
+                        {/* From Uiverse.io by themrsami */}
+                        {result && (
+                            <>
+                                <h2 className="mt-6 text-green-600 font-bold text-xl">
+                                    {t("studentCreated")}:
+                                </h2>
+                                <div className="mt-4">
+                                    <label
+                                        className="text-gray-800"
+                                        htmlFor="title"
+                                    >
+                                        {`Name: ${student?.username}`}
+                                    </label>
+                                </div>
+                                <div className="mt-4 flex flex-row space-x-2">
+                                    <label
+                                        className="text-gray-800"
+                                        htmlFor="themes"
+                                    >
+                                        {`Code: ${student?.code}`}
+                                    </label>
+                                </div>
+                            </>
                         )}
-                        <select
-                            className="bg-orange-100 text-gray-800 border-0 rounded-md p-2 mb-4 focus:bg-orange-200 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
-                            id="gender"
-                            name="class"
-                            value={value.class}
-                            onChange={changeHandler}
-                        >
-                            <option value="">{t("selectClass")}</option>
-                            <option value="class1">{t("class1")}</option>
-                            <option value="class2">{t("class2")}</option>
-                            <option value="class3">{t("class3")}</option>
-                            <option value="class4">{t("class4")}</option>
-                        </select>
-
-                        <button className="bg-gradient-to-br from-green-600 to-emerald-400 text-white font-bold py-2 px-4 rounded-md mt-4 hover:bg-green-700 hover:to-emerald-500 transition ease-in-out duration-150">
-                            {studentId
-                                ? `${t("editStudent")}`
-                                : `${t("createStudent")}`}
-                        </button>
-                    </form>
-
-                    {/* From Uiverse.io by themrsami */}
-                    {result && (
-                        <>
-                            <h2 className="mt-6 text-green-600 font-bold text-xl">
-                                {t("studentCreated")}:
-                            </h2>
-                            <div className="mt-4">
-                                <label
-                                    className="text-gray-800"
-                                    htmlFor="title"
-                                >
-                                    {`Name: ${student?.username}`}
-                                </label>
-                            </div>
-                            <div className="mt-4 flex flex-row space-x-2">
-                                <label
-                                    className="text-gray-800"
-                                    htmlFor="themes"
-                                >
-                                    {`Code: ${student?.code}`}
-                                </label>
-                            </div>
-                        </>
-                    )}
+                    </div>
                 </div>
-            </div>
+            )}
         </>
     );
 }
