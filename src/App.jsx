@@ -18,6 +18,7 @@ import IsTeacher from "./guards/isTeacher/IsTeacher";
 import IsStudent from "./guards/isStudent/IsStudent";
 import CreateEditLink from "./components/createLink/CreateEditLink";
 import "./i18n";
+import NotFound from "./components/notFound/NotFound";
 
 function App() {
     return (
@@ -86,6 +87,7 @@ function App() {
                             <Route path=":subjectId" element={<LinksList />} />
                         </Route>
                     </Route>
+                    <Route path="*" element={<NotFound />} />
                 </Routes>
                 <footer className="bg-transperant p-4 text-center text-sm text-gray-700 bg-orange-100 backdrop-blur-md">
                     © 2026 All rights reserved. Created by{" "}
