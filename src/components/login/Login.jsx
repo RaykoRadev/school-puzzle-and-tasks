@@ -46,12 +46,14 @@ export default function Login() {
                         className="bg-orange-100 text-gray-800 border-0 rounded-md p-2 mb-4 focus:bg-orange-200 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
                         type="text"
                         name="username"
+                        id="username"
                     />
                     <input
                         placeholder={t("code")}
                         className="bg-orange-100 text-gray-800 border-0 rounded-md p-2 mb-4 focus:bg-orange-200 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
                         type="password"
                         name="code"
+                        id="code"
                     />
 
                     <button
