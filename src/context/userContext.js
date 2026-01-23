@@ -8,6 +8,8 @@ export const UserContext = createContext({
     teacherId: "",
     classId: "",
     classesIds: {},
+    status: "",
+    subscriptionExpiresAt: "",
     setLocalStorageData(data) {},
     removeLocalStorageData() {},
 });
