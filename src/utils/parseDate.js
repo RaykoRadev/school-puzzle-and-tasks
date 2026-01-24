@@ -8,7 +8,7 @@ export default function parseDate(initDates) {
     let workingArr = initDates;
     if (workingArr.length === 0) {
         return [i18n.t("noLogs")];
-    } else if (workingArr.length > 10) {
+    } else if (workingArr?.length > 10) {
         workingArr = workingArr.slice(0, 10);
     }
     return workingArr.map((s) => {
