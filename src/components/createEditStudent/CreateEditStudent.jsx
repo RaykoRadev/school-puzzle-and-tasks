@@ -116,10 +116,13 @@ export default function CreateEditStudent() {
                 <div className="flex flex-1 flex-col items-center justify-center dark">
                     <div className="w-full max-w-md bg-orange-300 rounded-lg shadow-md p-6">
                         <h2 className="text-2xl font-bold text-green-600 mb-4">
-                            {t("createStudent")}
+                            {studentId
+                                ? `${t("editStudent")}`
+                                : `${t("createStudent")}`}
                         </h2>
                         <form action={submitHandler} className="flex flex-col">
                             <input
+                                autoFocus={!studentId}
                                 placeholder={t("studentName")}
                                 className="bg-orange-100 text-gray-800 border-0 rounded-md p-2 mb-4 focus:bg-orange-200 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
                                 type="text"
