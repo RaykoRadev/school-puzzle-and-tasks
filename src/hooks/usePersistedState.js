@@ -13,7 +13,7 @@ export default function usePersistedState(stateKey, initstate) {
     });
 
     const setPersistedState = (data) => {
-        if (data?.teacherId) {
+        if (typeof data?.teacherId === "object") {
             data.status = data.teacherId.subscriptionStatus;
             data.teacherId = data.teacherId._id;
         }

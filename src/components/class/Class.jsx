@@ -65,7 +65,7 @@ export default function Class() {
                                 <NavLink
                                     onClick={() => setIsOpen(false)}
                                     to={`/links/${
-                                        role === "teacher" ? _id : teacherId._id
+                                        role === "teacher" ? _id : teacherId
                                     }/${data?.classes[0].classId}/${sub._id}`}
                                     className={({ isActive }) =>
                                         `block py-3 px-6 text-gray-700 hover:bg-green-300 ${

@@ -5,10 +5,13 @@ import { useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
 
 export default function StudentsProfile() {
-    const { username, avatar, role, _id } = useContext(UserContext);
+    const { username, avatar, role, _id, teacherId, classId } =
+        useContext(UserContext);
     const [modal, setShowModal] = useState(false);
     const { t } = useTranslation();
     const navigate = useNavigate();
+
+    console.log(teacherId);
 
     const avatarModalHandler = () => {
         setShowModal(false);
@@ -18,7 +21,9 @@ export default function StudentsProfile() {
             <div className="w-full md:w-1/2 md:mx-auto flex flex-col md:flex-row items-center justify-center text-center ">
                 <div className="bg-orange-200 border-2 border-emerald-400 rounded-lg flex flex-col md:flex-row items-center justify-center px-14 py-7 relative">
                     <svg
-                        onClick={() => navigate(-1)}
+                        onClick={() =>
+                            navigate(`/links/${teacherId}/${classId}`)
+                        }
                         id="closeIcon"
                         xmlns="http://www.w3.org/2000/svg"
                         className="w-4 h-4 cursor-pointer fill-gray-400 hover:fill-green-700 absolute top-2 right-2"
