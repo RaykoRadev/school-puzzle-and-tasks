@@ -6,7 +6,7 @@ import Spinner from "../spinner/Spinner";
 import { useTranslation } from "react-i18next";
 
 export default function Login() {
-    // const [userData, setuserData] = useState({});
+    const [initValue, setInitvalue] = useState({ username: "" });
     const pathname = useResolvedPath().pathname.split("/");
     const { setLocalStorageData } = useContext(UserContext);
     const { t } = useTranslation();
@@ -20,6 +20,13 @@ export default function Login() {
     } else {
         role = "student";
     }
+
+    const changeHandler = (e) => {
+        setInitvalue((state) => ({
+            ...state,
+            [e.target.name]: e.target.value,
+        }));
+    };
 
     const { mutate, isPending } = useLogin(role, setLocalStorageData, navigate);
 
@@ -46,8 +53,10 @@ export default function Login() {
                         placeholder={t("username")}
                         className="bg-orange-100 text-gray-800 border-0 rounded-md p-2 mb-4 focus:bg-orange-200 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
                         type="text"
+                        value={initValue.username}
                         name="username"
                         id="username"
+                        onChange={changeHandler}
                     />
                     <input
                         placeholder={t("code")}
