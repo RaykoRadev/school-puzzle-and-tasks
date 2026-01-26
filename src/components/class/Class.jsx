@@ -15,7 +15,7 @@ export default function Class() {
         useContext(UserContext);
     const classId = useParams().classId;
 
-    const variablId = teacherId !== undefined ? teacherId._id : _id;
+    const variablId = teacherId !== undefined ? teacherId : _id;
 
     //? Probably there is a way to be avoided the request using cash or something like that
 

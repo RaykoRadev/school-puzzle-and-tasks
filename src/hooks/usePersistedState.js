@@ -13,6 +13,11 @@ export default function usePersistedState(stateKey, initstate) {
     });
 
     const setPersistedState = (data) => {
+        if (data?.teacherId) {
+            data.status = data.teacherId.subscriptionStatus;
+            data.teacherId = data.teacherId._id;
+        }
+
         const persistedData = JSON.stringify(data);
 
         localStorage.setItem(stateKey, persistedData);
