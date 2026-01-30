@@ -21,8 +21,6 @@ export default function LinksList() {
         setShowModal(false);
     };
 
-    console.log(subject.links);
-
     return (
         <div className="py-4 mx-auto lg:max-w-6xl md:max-w-4xl max-w-xl">
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 sm:gap-6 gap-4">

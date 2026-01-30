@@ -8,7 +8,7 @@ import { useTranslation } from "react-i18next";
 export default function ModalCodeEdit({ onClose }) {
     const { accessToken } = useContext(UserContext);
     const navigate = useNavigate();
-    const { mutate, isPending } = useCodeEdit(accessToken, navigate);
+    const { mutate } = useCodeEdit(accessToken, navigate);
     const { t } = useTranslation();
 
     const submitHandler = async (formData) => {

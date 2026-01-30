@@ -1,7 +1,6 @@
 import { useContext, useState } from "react";
 import parseDate from "../../../utils/parseDate";
 import { UserContext } from "../../../context/userContext";
-import visualizeClassName from "../../../utils/visualizeClassName";
 import DeleteModal from "../../deleteModal/DeleteModal";
 import { Link } from "react-router";
 import { useTranslation } from "react-i18next";

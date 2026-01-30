@@ -1,7 +1,6 @@
 import { useContext } from "react";
 import { Link } from "react-router";
 import { UserContext } from "../../context/userContext";
-import visualizeClassName from "../../utils/visualizeClassName";
 import Spinner from "../spinner/Spinner";
 import { useAllClass } from "../../hooks/useRequestHook";
 import { toast } from "sonner";
@@ -13,8 +12,6 @@ export default function AllClasses() {
         useContext(UserContext);
 
     const { t } = useTranslation();
-
-    console.log("status: ", status);
 
     //todo if there is no accesstoken to load some greeetings and to not make the request for classes
 

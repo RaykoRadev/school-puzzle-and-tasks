@@ -1,7 +1,6 @@
 import { useContext, useState } from "react";
-import { Link, NavLink, Outlet, useParams } from "react-router";
+import { NavLink, Outlet, useParams } from "react-router";
 import { UserContext } from "../../context/userContext";
-import visualizeClassName from "../../utils/visualizeClassName";
 import { useOneClass } from "../../hooks/useRequestHook";
 import Spinner from "../spinner/Spinner";
 import { toast } from "sonner";

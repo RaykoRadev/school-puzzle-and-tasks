@@ -13,7 +13,6 @@ export default function Login() {
     const navigate = useNavigate();
 
     let role = "";
-    // console.log(pathname[1]);
 
     if (pathname.includes("teacher")) {
         role = "teacher";

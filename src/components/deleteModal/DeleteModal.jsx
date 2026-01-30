@@ -13,13 +13,8 @@ export default function DeleteModal({
     const { accessToken, _id } = useContext(UserContext);
     const { t } = useTranslation();
 
-    // const { mutate, isPending } = useDeleteStudent(accessToken, _id, itemId);
     const studentDel = useDeleteStudent(accessToken, _id, itemId);
     const linkDel = useDeleteLink(accessToken, classId, subjectId, itemId);
-    // if (itemType === "student") {
-    //     studentDel.mutate();
-    // } else if (itemType === "link") {
-    // }
 
     return (
         <div className="backdrop" onClick={onClose}>

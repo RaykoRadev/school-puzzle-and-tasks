@@ -4,7 +4,6 @@ import fetchRequest from "../api/apiCalls";
 import revertObject from "../utils/revertObject";
 import { toast } from "sonner";
 import i18n from "../i18n";
-import NotFound from "../components/notFound/NotFound";
 
 export const useStudentsList = (accessToken) =>
     useQuery({

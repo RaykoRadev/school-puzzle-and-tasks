@@ -1,5 +1,3 @@
-import { useContext } from "react";
-import { UserContext } from "../context/userContext";
 import { toast } from "sonner";
 import i18n from "../i18n";
 
@@ -12,7 +10,6 @@ export default async function fetchRequest(
     accessToken,
     data,
 ) {
-    // const { removeLocalStorageData } = useContext(UserContext);
     const options = {
         method,
         headers: {},

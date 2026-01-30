@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { Link, NavLink, Outlet, useLocation, useParams } from "react-router";
+import { NavLink, Outlet, useLocation } from "react-router";
 import { UserContext } from "../../context/userContext";
 import { useTranslation } from "react-i18next";
 import parseDate from "../../utils/parseDate";

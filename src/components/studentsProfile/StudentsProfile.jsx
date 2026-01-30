@@ -11,8 +11,6 @@ export default function StudentsProfile() {
     const { t } = useTranslation();
     const navigate = useNavigate();
 
-    console.log(teacherId);
-
     const avatarModalHandler = () => {
         setShowModal(false);
     };
